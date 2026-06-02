@@ -128,7 +128,7 @@ export function FeaturedWork() {
 
                   {/* Tech tags */}
                   <div className="flex flex-wrap gap-1.5">
-                    {project.tech.map((t) => (
+                    {Array.from(new Set(project.tech)).map((t) => (
                       <span
                         key={t}
                         className="px-2.5 py-1 text-[10px] uppercase tracking-[0.10em] border border-border rounded-sm text-muted-foreground"

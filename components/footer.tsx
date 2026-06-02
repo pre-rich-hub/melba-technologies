@@ -1,26 +1,27 @@
 "use client"
 
-import { Github, Linkedin, Twitter } from "lucide-react"
+import { Facebook, Instagram, Linkedin, Send } from "lucide-react"
 import Link from "next/link"
 import { MelbaMark } from "@/components/logo"
 
 const footerLinks = {
   Services: [
     { name: "Custom Development", href: "/services/custom-development" },
-    { name: "Web Development",    href: "/services/web-development"    },
+    { name: "Web Development", href: "/services/web-development" },
     { name: "Mobile Development", href: "/services/mobile-development" },
   ],
   Company: [
-    { name: "About",   href: "/about"   },
-    { name: "Work",    href: "/work"    },
+    { name: "About", href: "/about" },
+    { name: "Work", href: "/work" },
     { name: "Contact", href: "/contact" },
   ],
 }
 
 const socials = [
-  { name: "Twitter",  icon: Twitter,  href: "#" },
-  { name: "LinkedIn", icon: Linkedin, href: "#" },
-  { name: "GitHub",   icon: Github,   href: "#" },
+  { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/profile.php?id=61590083957934" },
+  { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/melbatechI" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/123224009/" },
+  { name: "Telegram", icon: Send, href: "https://t.me/melbatechnologies" },
 ]
 
 export function Footer() {
@@ -50,6 +51,8 @@ export function Footer() {
                 <a
                   key={s.name}
                   href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={s.name}
                   className="w-9 h-9 rounded-sm border border-border flex items-center justify-center text-muted-foreground hover:text-ember hover:border-ember/40 transition-colors duration-300"
                 >
