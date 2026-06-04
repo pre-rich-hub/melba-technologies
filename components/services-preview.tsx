@@ -2,13 +2,13 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { Code2, Globe, TabletSmartphone, ArrowUpRight } from "lucide-react"
+import { Code2, Globe, TabletSmartphone, ArrowUpRight, Sparkles, Palette, Cloud } from "lucide-react"
 import Link from "next/link"
 
 const services = [
   {
     icon: Code2,
-    title: "Custom Development",
+    title: "Custom Software Development",
     description: "Bespoke full-stack software built to your exact specifications. No templates, no shortcuts, no handoffs.",
     href: "/services/custom-development",
   },
@@ -24,10 +24,28 @@ const services = [
     description: "Cross-platform iOS and Android apps built with Flutter and React Native — native performance from a single codebase.",
     href: "/services/mobile-development",
   },
+  {
+    icon: Sparkles,
+    title: "AI Automation & AI Solutions",
+    description: "AI agents, workflow automation, chatbots, and intelligent business systems that transform how businesses operate.",
+    href: "/services/ai-automation-solutions",
+  },
+  {
+    icon: Palette,
+    title: "Product Design",
+    description: "User experience design, interface design, wireframing, prototyping, and scalable design systems.",
+    href: "/services/product-design",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps Solutions",
+    description: "Cloud infrastructure, CI/CD pipelines, automated deployment, monitoring, and high-availability architecture.",
+    href: "/services/cloud-devops-solutions",
+  },
 ]
 
 export function ServicesPreview() {
-  const ref      = useRef(null)
+  const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (

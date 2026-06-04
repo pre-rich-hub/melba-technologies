@@ -2,12 +2,12 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { Code2, Globe, TabletSmartphone, ArrowUpRight } from "lucide-react"
+import { Code2, Globe, TabletSmartphone, ArrowUpRight, Sparkles, Palette, Cloud } from "lucide-react"
 
 const services = [
   {
     icon: Code2,
-    title: "Custom Development",
+    title: "Custom Software Development",
     description:
       "Bespoke full-stack software built to your exact specifications — from greenfield products to legacy modernisation. No templates, no shortcuts.",
     features: ["Full-Stack", "API Development", "Clean Architecture"],
@@ -26,10 +26,31 @@ const services = [
       "Cross-platform iOS and Android apps built with Flutter and React Native — native performance without the cost of two separate codebases.",
     features: ["Flutter", "React Native", "App Store Launch"],
   },
+  {
+    icon: Sparkles,
+    title: "AI Automation & AI Solutions",
+    description:
+      "AI agents, workflow automation, chatbots, and intelligent business systems that transform how businesses operate.",
+    features: ["AI Agents", "NLP", "Automation"],
+  },
+  {
+    icon: Palette,
+    title: "Product Design",
+    description:
+      "User experience design, interface design, wireframing, prototyping, and scalable design systems.",
+    features: ["UX/UI", "Prototyping", "Design Systems"],
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps Solutions",
+    description:
+      "Cloud infrastructure, CI/CD pipelines, automated deployment, monitoring, and high-availability architecture.",
+    features: ["AWS/GCP", "CI/CD", "Kubernetes"],
+  },
 ]
 
 export function ServicesSection() {
-  const ref     = useRef(null)
+  const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (

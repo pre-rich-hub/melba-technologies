@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { Toaster } from "sonner"
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] })
@@ -11,7 +12,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: 'Melba Technology | Smart Digital Solutions',
-  description: 'A premium software company specializing in scalable systems, AI-powered platforms, enterprise applications, cloud infrastructure, and custom digital product development.',
+  description: 'A leading software company specializing in scalable systems, AI-powered platforms, enterprise applications, cloud infrastructure, and custom digital product development.',
   icons: {
     icon: '/favicon-white.png',
     apple: '/favicon-white.png',
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className="font-sans antialiased bg-background text-foreground">
         <ThemeProvider
           attribute="class"
@@ -31,6 +32,21 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <Navigation />
           {children}
           <Footer />
+          <Toaster
+            position="bottom-right"
+            theme="dark"
+            toastOptions={{
+              style: {
+                background: 'var(--card)',
+                border: '1px solid var(--border)',
+                color: 'var(--foreground)',
+              },
+              className: "font-sans",
+              success: {
+                icon: <div className="w-2 h-2 rounded-full bg-ember animate-pulse" />,
+              }
+            }}
+          />
           {process.env.NODE_ENV === 'production' && <Analytics />}
         </ThemeProvider>
       </body>

@@ -8,7 +8,7 @@ export function MelbaMark({ className, size = 36 }: { className?: string; size?:
       width={size}
       height={size}
       className={className}
-      style={{ filter: "var(--logo-filter)" }}
+      style={{ filter: "var(--logo-filter)", height: "auto" }}
       priority
     />
   )

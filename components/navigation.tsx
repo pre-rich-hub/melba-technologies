@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import {
   Menu, X, ChevronDown,
   Code2, Globe, TabletSmartphone,
+  Sparkles, Palette, Cloud,
   ArrowUpRight,
 } from "lucide-react"
 import Link from "next/link"
@@ -40,9 +41,12 @@ const navLinks: NavLink[] = [
     dropdown: {
       columns: 2,
       items: [
-        { name: "Custom Development", href: "/services/custom-development", description: "Bespoke full-stack software built to your spec", icon: Code2 },
-        { name: "Web Development",    href: "/services/web-development",    description: "High-performance web apps and SaaS platforms",   icon: Globe },
-        { name: "Mobile Development", href: "/services/mobile-development", description: "iOS and Android apps from a single codebase",    icon: TabletSmartphone },
+        { name: "Custom Software Development", href: "/services/custom-development", description: "Bespoke full-stack software built to your spec", icon: Code2 },
+        { name: "Web Development", href: "/services/web-development", description: "High-performance web apps and SaaS platforms", icon: Globe },
+        { name: "Mobile Development", href: "/services/mobile-development", description: "iOS and Android apps from a single codebase", icon: TabletSmartphone },
+        { name: "AI & Automation", href: "/services/ai-automation-solutions", description: "Intelligent agents and workflow automation", icon: Sparkles },
+        { name: "Product Design", href: "/services/product-design", description: "Human-centric UX/UI and design systems", icon: Palette },
+        { name: "Cloud & DevOps", href: "/services/cloud-devops-solutions", description: "Resilient infrastructure and CI/CD pipelines", icon: Cloud },
       ],
       cta: { label: "View all services", href: "/services" },
     },
@@ -67,8 +71,8 @@ function DropdownPanel({
       {isActive && (
         <motion.div
           initial={{ opacity: 0, y: 8, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0,  scale: 1    }}
-          exit={  { opacity: 0, y: 8,  scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 8, scale: 0.97 }}
           transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
           className={`
             absolute top-[calc(100%+14px)] left-1/2 -translate-x-1/2
@@ -152,9 +156,8 @@ function MobileNavItem({
     return (
       <Link
         href={link.href}
-        className={`text-2xl font-semibold tracking-tight transition-colors ${
-          isActive(link.href) ? "text-ember" : "text-[oklch(0.97_0.005_90)] hover:text-ember"
-        }`}
+        className={`text-2xl font-semibold tracking-tight transition-colors ${isActive(link.href) ? "text-ember" : "text-[oklch(0.97_0.005_90)] hover:text-ember"
+          }`}
       >
         {link.name}
       </Link>
@@ -165,9 +168,8 @@ function MobileNavItem({
     <div className="w-full">
       <button
         onClick={() => setExpanded(!expanded)}
-        className={`flex items-center gap-2 text-2xl font-semibold tracking-tight transition-colors ${
-          isActive(link.href) ? "text-ember" : "text-[oklch(0.97_0.005_90)] hover:text-ember"
-        }`}
+        className={`flex items-center gap-2 text-2xl font-semibold tracking-tight transition-colors ${isActive(link.href) ? "text-ember" : "text-[oklch(0.97_0.005_90)] hover:text-ember"
+          }`}
       >
         {link.name}
         <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
@@ -210,7 +212,7 @@ function MobileNavItem({
 
 /* ─── Navigation ────────────────────────────────────────────────────────── */
 export function Navigation() {
-  const [isScrolled, setIsScrolled]       = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -249,11 +251,10 @@ export function Navigation() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? "bg-background/92 backdrop-blur-xl border-b border-border py-4"
-            : "py-7"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+          ? "bg-background/92 backdrop-blur-xl border-b border-border py-4"
+          : "py-7"
+          }`}
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="flex items-center justify-between">
@@ -277,11 +278,10 @@ export function Navigation() {
                 >
                   {link.dropdown ? (
                     <button
-                      className={`flex items-center gap-1 px-3 py-2 text-sm rounded-sm transition-colors duration-200 relative group ${
-                        isActive(link.href) || activeDropdown === link.name
-                          ? "text-foreground bg-muted/50"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
-                      }`}
+                      className={`flex items-center gap-1 px-3 py-2 text-sm rounded-sm transition-colors duration-200 relative group ${isActive(link.href) || activeDropdown === link.name
+                        ? "text-foreground bg-muted/50"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                        }`}
                       aria-expanded={activeDropdown === link.name}
                     >
                       {link.name}
@@ -298,11 +298,10 @@ export function Navigation() {
                   ) : (
                     <Link
                       href={link.href}
-                      className={`px-3 py-2 text-sm rounded-sm transition-colors duration-200 relative inline-block ${
-                        isActive(link.href)
-                          ? "text-foreground bg-muted/50"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
-                      }`}
+                      className={`px-3 py-2 text-sm rounded-sm transition-colors duration-200 relative inline-block ${isActive(link.href)
+                        ? "text-foreground bg-muted/50"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                        }`}
                     >
                       {link.name}
                       {isActive(link.href) && (

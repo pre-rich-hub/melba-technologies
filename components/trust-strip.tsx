@@ -17,14 +17,14 @@ const stack = [
 ]
 
 const domains = [
-  { label: "Custom Development", desc: "Full-stack software built to spec — web apps, SaaS platforms, internal tools" },
-  { label: "Web Development",    desc: "Fast, SEO-ready web apps with clean architecture and Core Web Vitals focus"   },
-  { label: "Mobile Development", desc: "Cross-platform iOS and Android apps from a single Flutter or React Native codebase" },
-  { label: "Product Design",     desc: "UX design, prototyping, and design systems that scale with your product"     },
+  { label: "Custom Software Development", desc: "Full-stack software built to spec — web apps, SaaS platforms, internal tools" },
+  { label: "AI & Automation", desc: "Intelligent agents, LLM integration, and automated business workflows" },
+  { label: "Product Design", desc: "UX/UI design, prototyping, and scalable design systems for complex products" },
+  { label: "Cloud & DevOps", desc: "Resilient cloud infrastructure, CI/CD, and automated deployment strategies" },
 ]
 
 export function TrustStrip() {
-  const ref      = useRef(null)
+  const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-60px" })
 
   return (

@@ -3,16 +3,44 @@
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react"
+import { toast } from "sonner"
 import { Input } from "@/components/ui/input"
 
 export function ContactSection() {
-  const ref      = useRef(null)
+  const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        toast.success("Message sent successfully!", {
+          description: "We'll get back to you within 24 hours.",
+        })
+        setForm({ name: "", email: "", company: "", message: "" })
+      } else {
+        throw new Error(data.error || "Failed to send message")
+      }
+    } catch (error) {
+      toast.error("Failed to send message", {
+        description: "Please try again or email us directly.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const inputClass =
@@ -119,10 +147,11 @@ export function ContactSection() {
 
             <button
               type="submit"
-              className="inline-flex items-center gap-2.5 w-full justify-center px-8 py-4 text-sm font-semibold rounded-sm bg-ember text-cream hover:bg-ember-light transition-colors duration-300 glow group"
+              disabled={isSubmitting}
+              className="inline-flex items-center gap-2.5 w-full justify-center px-8 py-4 text-sm font-semibold rounded-sm bg-ember text-cream hover:bg-ember-light transition-colors duration-300 glow group disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Send Message
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              {isSubmitting ? "Sending..." : "Send Message"}
+              <ArrowRight className={`h-4 w-4 ${isSubmitting ? "hidden" : "group-hover:translate-x-1"} transition-transform`} />
             </button>
           </motion.form>
 
@@ -140,9 +169,9 @@ export function ContactSection() {
 
               <div className="space-y-7">
                 {[
-                  { icon: Mail,  label: "Email",        value: "hello@nexus.dev",   href: "mailto:hello@nexus.dev"    },
-                  { icon: Phone, label: "Phone",        value: "+1 (555) 123-4567",  href: "tel:+15551234567"          },
-                  { icon: MapPin,label: "Headquarters", value: "100 Innovation Drive, San Francisco CA 94107", href: null },
+                  { icon: Mail, label: "Email", value: "hellomelbatechnology@gmail.com", href: "mailto:hellomelbatechnology@gmail.com" },
+                  { icon: Phone, label: "Phone", value: "+251941318298", href: "tel:+251941318298" },
+                  { icon: MapPin, label: "Headquarters", value: "Addis Ababa, Ethiopia", href: null },
                 ].map(({ icon: Icon, label, value, href }) => (
                   <div key={label} className="flex items-start gap-5">
                     <div className="w-10 h-10 rounded-sm border border-border flex items-center justify-center flex-shrink-0">

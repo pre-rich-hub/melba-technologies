@@ -6,9 +6,12 @@ import { MelbaMark } from "@/components/logo"
 
 const footerLinks = {
   Services: [
-    { name: "Custom Development", href: "/services/custom-development" },
+    { name: "Custom Software Development", href: "/services/custom-development" },
     { name: "Web Development", href: "/services/web-development" },
     { name: "Mobile Development", href: "/services/mobile-development" },
+    { name: "AI Automation & Solutions", href: "/services/ai-automation-solutions" },
+    { name: "Product Design", href: "/services/product-design" },
+    { name: "Cloud & DevOps Solutions", href: "/services/cloud-devops-solutions" },
   ],
   Company: [
     { name: "About", href: "/about" },

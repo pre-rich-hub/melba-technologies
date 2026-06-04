@@ -1,4 +1,4 @@
-import { LucideIcon, Code2, Globe, TabletSmartphone } from "lucide-react"
+import { LucideIcon, Code2, Globe, TabletSmartphone, Sparkles, Palette, Cloud } from "lucide-react"
 
 export interface Service {
   slug: string
@@ -16,7 +16,7 @@ export const services: Service[] = [
   {
     slug: "custom-development",
     icon: Code2,
-    title: "Custom Development",
+    title: "Custom Software Development",
     tagline: "Your vision. Zero compromise.",
     description:
       "Bespoke full-stack software built to your exact specifications — from greenfield products to legacy modernisation. No templates, no shortcuts, no handoffs.",
@@ -83,7 +83,79 @@ export const services: Service[] = [
       "App Store and Play Store optimised: ASO, screenshots, and metadata strategy included",
       "OTA updates via CodePush or Shorebird — ship fixes without waiting on app review",
     ],
-    relatedWork: ["iron-pulse", "hora-tours"],
+    relatedWork: [],
+  },
+  {
+    slug: "ai-automation-solutions",
+    icon: Sparkles,
+    title: "AI Automation & AI Solutions",
+    tagline: "Intelligent systems. Effortless scale.",
+    description:
+      "AI agents, workflow automation, chatbots, and intelligent business systems that transform how businesses operate, compete, and grow in the digital age.",
+    process: [
+      { step: "01", title: "AI Readiness Assessment", description: "Evaluating your data infrastructure and identifying high-impact AI opportunities within your current workflows." },
+      { step: "02", title: "Data Strategy & Prep", description: "Structured and unstructured data processing, vector database setup, and RAG (Retrieval-Augmented Generation) design." },
+      { step: "03", title: "Agentic Build", description: "Developing custom AI agents, fine-tuning LLMs, and building intelligent connectors to your existing software ecosystem." },
+      { step: "04", title: "Safety & Reliability", description: "Prompt engineering, hallucination mitigation, guardrail implementation, and edge-case testing for production stability." },
+      { step: "05", title: "Scalable Deployment", description: "Auto-scaling infrastructure for AI workloads, monitoring for drift, and continuous feedback loop integration." },
+    ],
+    technologies: ["Python", "LangChain", "OpenAI", "Pinecone", "TensorFlow", "PyTorch"],
+    benefits: [
+      "Automate 70% of repetitive workflows with agentic AI",
+      "Deploy custom-trained models that process your unique business logic",
+      "Reduce operational costs while increasing response speed and accuracy",
+      "Future-proof your architecture for the next wave of AI capabilities",
+      "Private and secure LLM implementations — your data never leaves your control",
+    ],
+    relatedWork: [],
+  },
+  {
+    slug: "product-design",
+    icon: Palette,
+    title: "Product Design",
+    tagline: "Human-centric. Pixel-perfect.",
+    description:
+      "User experience design, interface design, wireframing, prototyping, and scalable design systems that make complex software feel effortless.",
+    process: [
+      { step: "01", title: "User Research", description: "Stakeholder interviews, user personas, and empathy mapping to define the problem space and user needs." },
+      { step: "02", title: "UX Architecture", description: "Information architecture, user flows, and low-fidelity wireframing to establish the structure and logic of the product." },
+      { step: "03", title: "Visual Identity", description: "Defining color theory, typography, and visual language that aligns with your brand and appeals to your target audience." },
+      { step: "04", title: "Interactive Prototype", description: "High-fidelity prototypes that simulate real user interactions for testing and stakeholder alignment before build." },
+      { step: "05", title: "Design System", description: "Building a scalable library of components and tokens that ensure consistency across all present and future features." },
+    ],
+    technologies: ["Figma", "Adobe XD", "Principle", "Lottie", "Storybook", "React"],
+    benefits: [
+      "Higher user retention with intuitive, friction-free UX flows",
+      "Design systems that reduce development time by up to 40% over time",
+      "Accessible by design — WCAG 2.1 compliance baked into every component",
+      "Pixel-precise specifications and assets ready for developer handover",
+      "Consistency across web, mobile, and desktop products",
+    ],
+    relatedWork: [],
+  },
+  {
+    slug: "cloud-devops-solutions",
+    icon: Cloud,
+    title: "Cloud & DevOps Solutions",
+    tagline: "Resilience. Scale. Security.",
+    description:
+      "Cloud infrastructure, CI/CD pipelines, automated deployment, monitoring, and high-availability architecture built for limitless scale.",
+    process: [
+      { step: "01", title: "Infrastructure Audit", description: "Reviewing current cloud usage, identifying bottlenecks, security risks, and cost-saving opportunities." },
+      { step: "02", title: "Architecture Design", description: "Designing multi-region, containerised, or serverless architectures based on specific scale and compliance requirements." },
+      { step: "03", title: "CI/CD Implementation", description: "Building automated pipelines for testing, security scanning, and zero-downtime deployment (Blue/Green, Canary)." },
+      { step: "04", title: "Security Hardening", description: "IAM policy least privilege, encryption at rest and in transit, and automated threat detection and response." },
+      { step: "05", title: "Observability & Ops", description: "Setting up real-time monitoring, alerting, error tracking, and automated scaling policies for hands-off stability." },
+    ],
+    technologies: ["AWS", "Terraform", "Kubernetes", "Docker", "GitHub Actions", "Prometheus"],
+    benefits: [
+      "99.99% uptime with self-healing, multi-region architectures",
+      "Ship code faster with automated testing and deployment pipelines",
+      "Reduce cloud spend by up to 30% through automated resource management",
+      "Enterprise-grade security and compliance (SOC2/GDPR) ready infrastructure",
+      "Scale from 1 to 1M users ohne manual intervention",
+    ],
+    relatedWork: [],
   },
 ]
 

@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
 import { ArrowRight, Mail, MapPin, Phone, ChevronDown } from "lucide-react"
+import { toast } from "sonner"
 import { PageHero } from "@/components/shared/page-hero"
 
 
@@ -16,13 +17,44 @@ const faqs = [
 ]
 
 export default function ContactPage() {
-  const formRef  = useRef(null)
-  const faqRef   = useRef(null)
-  const formInView = useInView(formRef,  { once: true, margin: "-60px" })
-  const faqInView  = useInView(faqRef,   { once: true, margin: "-60px" })
+  const formRef = useRef(null)
+  const faqRef = useRef(null)
+  const formInView = useInView(formRef, { once: true, margin: "-60px" })
+  const faqInView = useInView(faqRef, { once: true, margin: "-60px" })
 
-  const [form, setForm] = useState({ name: "", email: "", company: "", budget: "", message: "" })
+  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" })
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        toast.success("Message sent successfully!", {
+          description: "We'll get back to you within 24 hours.",
+        })
+        setForm({ name: "", email: "", company: "", message: "" })
+      } else {
+        throw new Error(data.error || "Failed to send message")
+      }
+    } catch (error) {
+      toast.error("Failed to send message", {
+        description: "Please try again or email us directly.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   const inputClass = "w-full bg-input border border-border focus:border-ember rounded-sm px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ember/15 transition-colors duration-300"
 
@@ -48,32 +80,20 @@ export default function ContactPage() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-2xl font-bold mb-8">Start the Conversation</h2>
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Your Name</label>
-                    <input type="text" placeholder="John Doe" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} />
+                    <input type="text" required placeholder="John Doe" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} />
                   </div>
                   <div>
                     <label className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Email Address</label>
-                    <input type="email" placeholder="john@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />
+                    <input type="email" required placeholder="john@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />
                   </div>
                 </div>
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Company</label>
-                    <input type="text" placeholder="Your Company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className={inputClass} />
-                  </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Budget Range</label>
-                    <select value={form.budget} onChange={(e) => setForm({ ...form, budget: e.target.value })} className={inputClass}>
-                      <option value="">Select a range</option>
-                      <option value="50k-150k">$50K – $150K</option>
-                      <option value="150k-500k">$150K – $500K</option>
-                      <option value="500k-1m">$500K – $1M</option>
-                      <option value="1m+">$1M+</option>
-                    </select>
-                  </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Company</label>
+                  <input type="text" placeholder="Your Company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className={inputClass} />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Tell Us About Your Project</label>
@@ -81,10 +101,11 @@ export default function ContactPage() {
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2.5 w-full justify-center px-8 py-4 text-sm font-semibold rounded-sm bg-ember text-cream hover:bg-ember-light transition-colors duration-300 glow group"
+                  disabled={isSubmitting}
+                  className="inline-flex items-center gap-2.5 w-full justify-center px-8 py-4 text-sm font-semibold rounded-sm bg-ember text-cream hover:bg-ember-light transition-colors duration-300 glow group disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  Send Message
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                  <ArrowRight className={`h-4 w-4 ${isSubmitting ? "hidden" : "group-hover:translate-x-1"} transition-transform`} />
                 </button>
                 <p className="text-xs text-muted-foreground/60 text-center">
                   We typically respond within 24 hours. No spam, ever.
@@ -104,9 +125,9 @@ export default function ContactPage() {
                 <h3 className="text-xs uppercase tracking-[0.16em] text-muted-foreground mb-7">Direct Contact</h3>
                 <div className="space-y-6">
                   {[
-                    { icon: Mail,   label: "Email",    value: "hello@melbatech.com",       href: "mailto:hello@melbatech.com" },
-                    { icon: Phone,  label: "Phone",    value: "+1 (415) 555-0147",         href: "tel:+14155550147"        },
-                    { icon: MapPin, label: "HQ",       value: "San Francisco, California", href: null                     },
+                    { icon: Mail, label: "Email", value: "hellomelbatechnology@gmail.com", href: "mailto:hellomelbatechnology@gmail.com" },
+                    { icon: Phone, label: "Phone", value: "+251941318298", href: "tel:+251941318298" },
+                    { icon: MapPin, label: "HQ", value: "Addis Ababa, Ethiopia", href: null },
                   ].map(({ icon: Icon, label, value, href }) => (
                     <div key={label} className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded-sm border border-border flex items-center justify-center flex-shrink-0">
@@ -141,9 +162,9 @@ export default function ContactPage() {
                 <h3 className="text-xs uppercase tracking-[0.16em] text-muted-foreground mb-6">Discovery Process</h3>
                 <div className="space-y-5">
                   {[
-                    { n: "01", title: "Submit your brief",    desc: "Use this form or email us directly."       },
-                    { n: "02", title: "Discovery call",       desc: "45-minute call to understand your goals."  },
-                    { n: "03", title: "Proposal & proposal",  desc: "Detailed scope, timeline, and fixed quote." },
+                    { n: "01", title: "Submit your brief", desc: "Use this form or email us directly." },
+                    { n: "02", title: "Discovery call", desc: "45-minute call to understand your goals." },
+                    { n: "03", title: "Proposal & proposal", desc: "Detailed scope, timeline, and fixed quote." },
                   ].map((s) => (
                     <div key={s.n} className="flex gap-4">
                       <span className="text-xs font-bold text-ember/60 tabular-nums mt-0.5 flex-shrink-0">{s.n}</span>
