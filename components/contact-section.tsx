@@ -66,8 +66,8 @@ export function ContactSection() {
           </p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.92] text-balance">
-              Ready to Build<br />
-              <span className="gradient-text">Something Great?</span>
+              Build your next<br />
+              <span className="gradient-text">digital product with us.</span>
             </h2>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
               {"Let's discuss your project. Our team is ready to turn your vision into reality."}

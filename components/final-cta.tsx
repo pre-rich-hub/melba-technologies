@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export function FinalCta() {
-  const ref      = useRef(null)
+  const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (
@@ -28,9 +28,8 @@ export function FinalCta() {
           transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.90] mb-8"
         >
-          <span className="block text-balance text-foreground">Ready to Build</span>
-          <span className="block text-balance gradient-text">Something</span>
-          <span className="block text-balance text-foreground">Exceptional?</span>
+          <span className="block text-balance text-foreground">Ready to modernize your business</span>
+          <span className="block text-balance gradient-text">with digital systems?</span>
         </motion.h2>
 
         {/* Sub */}
@@ -40,7 +39,7 @@ export function FinalCta() {
           transition={{ duration: 0.8, delay: 0.28 }}
           className="text-base text-muted-foreground max-w-lg mx-auto mb-12 leading-relaxed"
         >
-          Tell us about your project and we will schedule a free discovery call within 24 hours.
+          We turn ideas into maintainable production systems.
         </motion.p>
 
         {/* CTAs */}

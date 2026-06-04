@@ -6,23 +6,25 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 interface PageCtaProps {
-  title?:     string
-  subtitle?:  string
-  primaryLabel?:   string
-  primaryHref?:    string
+  title?: string
+  highlight?: string
+  subtitle?: string
+  primaryLabel?: string
+  primaryHref?: string
   secondaryLabel?: string
-  secondaryHref?:  string
+  secondaryHref?: string
 }
 
 export function PageCta({
-  title       = "Ready to Build Something Exceptional?",
-  subtitle    = "Tell us about your project and we will schedule a free discovery call within 24 hours.",
-  primaryLabel   = "Start a Project",
-  primaryHref    = "/contact",
+  title = "Ready to Build Something Exceptional?",
+  highlight = "Exceptional",
+  subtitle = "Tell us about your project and we will schedule a free discovery call within 24 hours.",
+  primaryLabel = "Start a Project",
+  primaryHref = "/contact",
   secondaryLabel = "View Our Work",
-  secondaryHref  = "/work",
+  secondaryHref = "/work",
 }: PageCtaProps) {
-  const ref      = useRef(null)
+  const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (
@@ -43,11 +45,11 @@ export function PageCta({
             className="max-w-xl"
           >
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[0.92] mb-5 text-balance">
-              {title.split("Exceptional").length > 1 ? (
+              {highlight && title.split(highlight).length > 1 ? (
                 <>
-                  {title.split("Exceptional")[0]}
-                  <span className="gradient-text">Exceptional</span>
-                  {title.split("Exceptional")[1]}
+                  {title.split(highlight)[0]}
+                  <span className="gradient-text">{highlight}</span>
+                  {title.split(highlight)[1]}
                 </>
               ) : (
                 title

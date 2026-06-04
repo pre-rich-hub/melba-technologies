@@ -284,8 +284,9 @@ export default function AboutPage() {
       </section>
 
       <PageCta
-        title="Ready to Build Something Exceptional?"
-        subtitle="Partner with a studio that treats your codebase like a long-term investment."
+        title="Ready to modernize your business with digital systems?"
+        highlight="digital systems?"
+        subtitle="We turn ideas into maintainable production systems."
         secondaryLabel="See Our Work"
         secondaryHref="/work"
       />

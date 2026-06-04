@@ -62,10 +62,10 @@ export default function ContactPage() {
     <main>
       <PageHero
         eyebrow="Get In Touch"
-        title="Let's Build"
-        highlighted="Something"
-        titleAfter="Great."
-        description="Tell us about your project. We respond within 24 hours and schedule a no-obligation discovery call to understand your goals."
+        title="Build your next"
+        highlighted="digital product"
+        titleAfter="with us."
+        description="Tell us about your project. We’ll review your requirements and respond within 24 hours with clear next steps, including scope discussion and timeline estimation."
       />
 
       {/* Form + Info */}
