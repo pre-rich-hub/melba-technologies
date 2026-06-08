@@ -38,13 +38,13 @@ const expertise = [
 ]
 
 const metrics = [
-  { value: "40+", label: "Engineers"  },
-  { value: "15",  label: "Countries"  },
-  { value: "24/7",label: "Support"    },
+  { value: "40+", label: "Engineers" },
+  { value: "15", label: "Countries" },
+  { value: "24/7", label: "Support" },
 ]
 
 export function AboutSection() {
-  const ref      = useRef(null)
+  const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (
@@ -80,12 +80,26 @@ export function AboutSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            <p className="text-base text-muted-foreground leading-relaxed mb-12 text-pretty">
+            <p className="text-base text-muted-foreground leading-relaxed mb-8 text-pretty">
               Founded by engineers with a passion for excellence, Nexus has grown into a global
               software studio serving startups and Fortune 500 companies alike. We combine deep
               technical expertise with strategic thinking to deliver solutions that drive real,
               measurable business impact.
             </p>
+
+            <div className="mb-12 pl-5 border-l border-border">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground font-medium mb-2">
+                The Name Behind the Mission
+              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed text-pretty">
+                The name <span className="text-foreground font-medium">Melba</span> comes from the{" "}
+                <span className="text-foreground">Oromo Gadaa System</span>, one of
+                Africa&apos;s most respected indigenous systems of leadership and knowledge transfer.
+                In the Gadaa tradition, Melba symbolizes{" "}
+                <span className="text-foreground/70">growth, preparation, responsibility, leadership</span>,
+                and the passing of knowledge from one generation to the next.
+              </p>
+            </div>
 
             <div className="space-y-8">
               {values.map((value, i) => (

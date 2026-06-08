@@ -140,6 +140,23 @@ export default function AboutPage() {
                 </p>
               </div>
 
+              {/* Name origin callout */}
+              <div className="rounded-sm border border-border bg-card/40 p-6">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-semibold mb-3">
+                  The Name Melba
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  The name <span className="text-foreground font-medium">Melba</span> comes from the{" "}
+                  <span className="text-foreground">Oromo Gadaa System</span> — one of
+                  Africa&apos;s most respected indigenous systems of leadership and knowledge transfer.
+                  In the Gadaa tradition, Melba symbolizes{" "}
+                  <span className="text-foreground/70">
+                    growth, preparation, responsibility, leadership
+                  </span>
+                  , and the passing of knowledge from one generation to the next.
+                </p>
+              </div>
+
               <div className="pt-8 grid grid-cols-2 gap-8 border-t border-border">
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-ember font-bold mb-2">Philosophy</p>

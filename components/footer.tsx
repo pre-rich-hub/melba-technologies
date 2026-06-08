@@ -1,6 +1,6 @@
 "use client"
 
-import { Facebook, Instagram, Linkedin, Send, Twitter, Mail, Phone, MapPin } from "lucide-react"
+import { Facebook, Instagram, Linkedin, Send, Mail, Phone, MapPin } from "lucide-react"
 import Link from "next/link"
 import { MelbaMark } from "@/components/logo"
 
@@ -21,11 +21,11 @@ const footerLinks = {
 }
 
 const socials = [
-  { name: "X", icon: Twitter, href: "https://x.com/melbatechX" },
+  { name: "X", icon: null, href: "https://x.com/melbatechX" },
   { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/profile.php?id=61590083957934" },
   { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/melbatechI" },
   { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/123224009/" },
-  { name: "Telegram", icon: Send, href: "https://t.me/melbatechnologies" },
+  { name: "Telegram", icon: Send, href: "https://t.me/melbatechT" },
 ]
 
 export function Footer() {
@@ -60,7 +60,11 @@ export function Footer() {
                   aria-label={s.name}
                   className="w-8 h-8 rounded-sm border border-border flex items-center justify-center text-muted-foreground hover:text-ember hover:border-ember/40 transition-colors duration-300"
                 >
-                  <s.icon className="w-3.5 h-3.5" />
+                  {s.icon ? (
+                    <s.icon className="w-3.5 h-3.5" />
+                  ) : (
+                    <span className="text-[13px] font-bold leading-none" aria-hidden>𝕏</span>
+                  )}
                 </a>
               ))}
             </div>
