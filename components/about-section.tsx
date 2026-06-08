@@ -48,12 +48,8 @@ export function AboutSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (
-    <section id="about" className="relative py-32 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 right-0 w-[600px] h-[500px] rounded-full bg-ember/6 blur-[140px]" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10" ref={ref}>
+    <section id="about" className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8" ref={ref}>
 
         {/* Header */}
         <motion.div
@@ -62,12 +58,12 @@ export function AboutSection() {
           transition={{ duration: 0.8 }}
           className="mb-20"
         >
-          <p className="text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
             About Nexus
           </p>
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.92] text-balance">
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[0.92] text-balance">
             Engineering the Future,<br />
-            <span className="gradient-text">One Solution</span> at a Time
+            <span className="text-ember">One Solution</span> at a Time
           </h2>
           <div className="mt-12 h-px bg-border" />
         </motion.div>
@@ -129,26 +125,23 @@ export function AboutSection() {
             transition={{ duration: 0.8, delay: 0.25 }}
             className="relative"
           >
-            <div className="rounded-sm border border-border bg-card/60 p-8 overflow-hidden">
-              {/* Decorative ember corner */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-ember/10 to-transparent pointer-events-none" />
-
-              <h3 className="text-sm uppercase tracking-[0.16em] text-muted-foreground mb-2">
+            <div className="rounded-md border border-border bg-card/40 p-8 overflow-hidden">
+              <h3 className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground mb-2">
                 Our Tech Stack
               </h3>
-              <p className="text-2xl font-bold mb-8">
+              <p className="text-2xl font-semibold mb-8">
                 Industry-leading technologies.<br />
-                <span className="gradient-text">Zero compromise.</span>
+                <span className="text-ember">Zero compromise.</span>
               </p>
 
               <div className="flex flex-wrap gap-2.5">
                 {expertise.map((tech, i) => (
                   <motion.span
                     key={tech}
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
                     transition={{ duration: 0.35, delay: 0.4 + i * 0.045 }}
-                    className="px-3.5 py-2 text-xs border border-border rounded-sm text-muted-foreground hover:border-ember/50 hover:text-ember transition-colors duration-300 cursor-default"
+                    className="font-mono px-3.5 py-2 text-xs border border-border rounded-md text-muted-foreground hover:border-ember/50 hover:text-ember transition-colors duration-300 cursor-default"
                   >
                     {tech}
                   </motion.span>
@@ -159,8 +152,8 @@ export function AboutSection() {
               <div className="mt-10 pt-8 border-t border-border grid grid-cols-3 gap-4">
                 {metrics.map((m) => (
                   <div key={m.label} className="text-center">
-                    <div className="text-3xl font-bold gradient-text leading-none mb-1">{m.value}</div>
-                    <div className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{m.label}</div>
+                    <div className="text-3xl font-semibold text-ember leading-none mb-1">{m.value}</div>
+                    <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{m.label}</div>
                   </div>
                 ))}
               </div>
@@ -170,19 +163,19 @@ export function AboutSection() {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-5 -right-5 px-5 py-4 rounded-sm glass glow-sm"
+              className="absolute -top-5 -right-5 px-5 py-4 rounded-md glass"
             >
-              <div className="text-xl font-bold gradient-text leading-none">99.9%</div>
-              <div className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground mt-1">Uptime SLA</div>
+              <div className="text-xl font-semibold text-ember leading-none">99.9%</div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mt-1">Uptime SLA</div>
             </motion.div>
 
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-5 -left-5 px-5 py-4 rounded-sm glass glow-sm"
+              className="absolute -bottom-5 -left-5 px-5 py-4 rounded-md glass"
             >
-              <div className="text-xl font-bold gradient-text leading-none">ISO</div>
-              <div className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground mt-1">27001 Certified</div>
+              <div className="text-xl font-semibold text-ember leading-none">ISO</div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mt-1">27001 Certified</div>
             </motion.div>
           </motion.div>
         </div>

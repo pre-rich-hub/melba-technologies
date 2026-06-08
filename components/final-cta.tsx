@@ -12,24 +12,19 @@ export function FinalCta() {
   return (
     <section
       ref={ref}
-      className="relative py-36 overflow-hidden border-t border-border"
+      className="relative py-24 md:py-28 lg:py-32 overflow-hidden border-t border-border"
     >
-      {/* Ambient glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full bg-ember/8 blur-[180px]" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 text-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 text-center">
 
         {/* Headline */}
         <motion.h2
           initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.90] mb-8"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-[-0.03em] leading-[0.90] mb-8"
         >
           <span className="block text-balance text-foreground">Ready to modernize your business</span>
-          <span className="block text-balance gradient-text">with digital systems?</span>
+          <span className="block text-balance text-ember">with digital systems?</span>
         </motion.h2>
 
         {/* Sub */}
@@ -51,14 +46,14 @@ export function FinalCta() {
         >
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2.5 px-10 py-4 text-sm font-semibold rounded-sm bg-ember text-cream hover:bg-ember-light transition-colors duration-300 glow group"
+            className="inline-flex items-center gap-2.5 px-10 py-4 text-sm font-semibold rounded-md bg-ember text-cream hover:bg-ember-light transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background group"
           >
             Start a Project
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
             href="/work"
-            className="inline-flex items-center gap-2.5 px-10 py-4 text-sm font-medium rounded-sm border border-border text-foreground hover:border-ember/50 hover:text-ember transition-colors duration-300"
+            className="inline-flex items-center gap-2.5 px-10 py-4 text-sm font-medium rounded-md border border-border text-foreground hover:border-ember/50 hover:text-ember transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             View Our Work
           </Link>
@@ -69,7 +64,7 @@ export function FinalCta() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.65 }}
-          className="mt-14 text-[11px] uppercase tracking-[0.18em] text-muted-foreground/75"
+          className="mt-14 text-[11px] uppercase tracking-[0.18em] text-muted-foreground/75 font-mono"
         >
           Every system engineered to production standard &nbsp;&middot;&nbsp; No exceptions
         </motion.p>

@@ -23,12 +23,9 @@ export function FeaturedWork() {
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (
-    <section id="work" className="relative py-32 overflow-hidden" style={{ background: "var(--section-alt)" }}>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full bg-ember/5 blur-[160px]" />
-      </div>
+    <section id="work" className="relative py-16 md:py-20 lg:py-24 overflow-hidden" style={{ background: "var(--section-alt)" }}>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10" ref={ref}>
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8" ref={ref}>
 
         {/* Header */}
         <motion.div
@@ -37,13 +34,13 @@ export function FeaturedWork() {
           transition={{ duration: 0.8 }}
           className="mb-20"
         >
-          <p className="text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
             Selected Work
           </p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.92] text-balance">
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[0.92] text-balance">
               Work That<br />
-              <span className="gradient-text">Defines</span> Industries
+              <span className="text-ember">Defines</span> Industries
             </h2>
             <div className="lg:text-right">
               <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mb-5">
@@ -71,8 +68,8 @@ export function FeaturedWork() {
               transition={{ duration: 0.7, delay: i * 0.12 }}
               className="flex flex-col"
             >
-              <div className="group relative flex flex-col rounded-sm border border-border bg-card/60 hover:bg-card/90 overflow-hidden flex-1 transition-colors duration-500">
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-ember/4 to-transparent pointer-events-none" />
+              <div className="group relative flex flex-col rounded-md border border-border bg-card/40 hover:bg-card/80 overflow-hidden flex-1 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+
 
                 {/* Screenshot thumbnail */}
                 <div className="relative h-[210px] overflow-hidden flex-shrink-0 border-b border-border">
@@ -91,7 +88,7 @@ export function FeaturedWork() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1.5 text-[10px] uppercase tracking-[0.10em] font-medium rounded-sm border bg-background/80 backdrop-blur-sm border-border text-muted-foreground hover:text-ember hover:border-ember/40 transition-all duration-200 opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0"
+                    className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1.5 text-[10px] uppercase tracking-[0.10em] font-medium rounded-md border bg-background/80 backdrop-blur-sm border-border text-muted-foreground hover:text-ember hover:border-ember/40 transition-all duration-200 opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0"
                   >
                     <ExternalLink className="w-2.5 h-2.5" />
                     {project.domain}
@@ -131,7 +128,7 @@ export function FeaturedWork() {
                     {Array.from(new Set(project.tech)).map((t) => (
                       <span
                         key={t}
-                        className="px-2.5 py-1 text-[10px] uppercase tracking-[0.10em] border border-border rounded-sm text-muted-foreground"
+                        className="px-2.5 py-1 text-[10px] uppercase tracking-[0.10em] border border-border rounded-md text-muted-foreground"
                       >
                         {t}
                       </span>

@@ -31,14 +31,14 @@ export default function WorkPage() {
       />
 
       {/* Filter tabs */}
-      <section className="py-10 border-b border-border" style={{ background: "var(--section-alt)" }}>
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="py-8 border-b border-border" style={{ background: "var(--section-alt)" }}>
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-2">
             {allTags.map((tag) => (
               <button
                 key={tag}
                 onClick={() => setActiveTag(tag)}
-                className={`px-4 py-2 text-xs uppercase tracking-[0.14em] rounded-sm border transition-colors duration-300 ${
+                className={`font-mono px-4 py-2 text-xs uppercase tracking-[0.14em] rounded-md border transition-colors duration-300 ${
                   activeTag === tag
                     ? "bg-ember text-cream border-ember"
                     : "border-border text-muted-foreground hover:border-ember/40 hover:text-ember"
@@ -52,8 +52,8 @@ export default function WorkPage() {
       </section>
 
       {/* Grid */}
-      <section className="py-16" ref={gridRef}>
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="py-16 md:py-20 lg:py-24" ref={gridRef}>
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map((project, i) => (
               <motion.div
@@ -63,10 +63,7 @@ export default function WorkPage() {
                 transition={{ duration: 0.6, delay: Math.min(i * 0.07, 0.5) }}
                 className="flex flex-col"
               >
-                <div className="group relative flex flex-col rounded-sm border border-border bg-card/60 hover:bg-card/90 overflow-hidden flex-1 transition-colors duration-500">
-                  {/* Hover wash */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-ember/5 to-transparent" />
-
+                <div className="group relative flex flex-col rounded-md border border-border bg-card/40 hover:bg-card/80 overflow-hidden flex-1 transition-colors duration-500">
                   {/* Screenshot thumbnail */}
                   <div className="relative h-[180px] overflow-hidden flex-shrink-0 border-b border-border">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -83,7 +80,7 @@ export default function WorkPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 text-[9px] uppercase tracking-[0.10em] font-medium rounded-sm border bg-background/80 backdrop-blur-sm border-border text-muted-foreground hover:text-ember hover:border-ember/40 transition-colors duration-200 opacity-0 group-hover:opacity-100"
+                      className="font-mono absolute top-3 right-3 flex items-center gap-1 px-2 py-1 text-[9px] uppercase tracking-[0.10em] font-medium rounded-md border bg-background/80 backdrop-blur-sm border-border text-muted-foreground hover:text-ember hover:border-ember/40 transition-colors duration-200 opacity-0 group-hover:opacity-100"
                     >
                       <ExternalLink className="w-2.5 h-2.5" />
                       Live Site
@@ -94,7 +91,7 @@ export default function WorkPage() {
                     {/* Header row */}
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <span className="text-[10px] uppercase tracking-[0.20em] font-medium text-ember/80">{project.industry}</span>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.20em] font-medium text-ember/80">{project.industry}</span>
                       </div>
                       <div className="w-7 h-7 rounded-full border border-border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
                         <ArrowUpRight className="w-3 h-3 text-ember" />
@@ -102,11 +99,11 @@ export default function WorkPage() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-bold mb-1.5 group-hover:text-ember transition-colors duration-300">
+                    <h3 className="text-xl font-semibold mb-1.5 group-hover:text-ember transition-colors duration-300">
                       {project.title}
                     </h3>
 
-                    <p className="text-[10px] text-ember/80 uppercase tracking-[0.12em] mb-4 font-medium">{project.category}</p>
+                    <p className="font-mono text-[10px] text-ember/80 uppercase tracking-[0.12em] mb-4 font-medium">{project.category}</p>
 
                     {/* Tagline */}
                     <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
@@ -116,13 +113,13 @@ export default function WorkPage() {
                     {/* Tech tags */}
                     <div className="flex flex-wrap gap-1.5">
                       {project.technologies.slice(0, 4).map((t) => (
-                        <span key={t} className="px-2.5 py-1 text-[10px] uppercase tracking-[0.10em] border border-border rounded-sm text-muted-foreground">
+                        <span key={t} className="font-mono px-2.5 py-1 text-[10px] uppercase tracking-[0.10em] border border-border rounded-md text-muted-foreground">
                           {t}
                         </span>
                       ))}
                     </div>
                   </Link>
-
+                  {/* Bottom sweep */}
                   <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-ember transition-all duration-700 ease-out" />
                 </div>
               </motion.div>

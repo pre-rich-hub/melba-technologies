@@ -56,7 +56,7 @@ export default function ContactPage() {
     }
   }
 
-  const inputClass = "w-full bg-input border border-border focus:border-ember rounded-sm px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ember/15 transition-colors duration-300"
+  const inputClass = "w-full bg-input border border-border focus:border-ember rounded-md px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ember/15 transition-colors duration-300"
 
   return (
     <main>
@@ -69,8 +69,8 @@ export default function ContactPage() {
       />
 
       {/* Form + Info */}
-      <section className="py-24" ref={formRef}>
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="py-16 md:py-20 lg:py-24" ref={formRef}>
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
 
             {/* Form */}
@@ -79,30 +79,30 @@ export default function ContactPage() {
               animate={formInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-2xl font-bold mb-8">Start the Conversation</h2>
+              <h2 className="text-2xl font-semibold mb-8">Start the Conversation</h2>
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Your Name</label>
+                    <label className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Your Name</label>
                     <input type="text" required placeholder="John Doe" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} />
                   </div>
                   <div>
-                    <label className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Email Address</label>
+                    <label className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Email Address</label>
                     <input type="email" required placeholder="john@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Company</label>
+                  <label className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Company</label>
                   <input type="text" placeholder="Your Company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className={inputClass} />
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Tell Us About Your Project</label>
+                  <label className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Tell Us About Your Project</label>
                   <textarea rows={6} placeholder="Describe your project goals, timeline, and key requirements..." value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${inputClass} resize-none`} />
                 </div>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2.5 w-full justify-center px-8 py-4 text-sm font-semibold rounded-sm bg-ember text-cream hover:bg-ember-light transition-colors duration-300 glow group disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="inline-flex items-center gap-2.5 w-full justify-center px-8 py-4 text-sm font-semibold rounded-md bg-ember text-cream hover:bg-ember-light transition-colors duration-300 group disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                   <ArrowRight className={`h-4 w-4 ${isSubmitting ? "hidden" : "group-hover:translate-x-1"} transition-transform`} />
@@ -121,8 +121,8 @@ export default function ContactPage() {
               className="space-y-8"
             >
               {/* Direct contact */}
-              <div className="rounded-sm border border-border bg-card/60 p-8">
-                <h3 className="text-xs uppercase tracking-[0.16em] text-muted-foreground mb-7">Direct Contact</h3>
+              <div className="rounded-md border border-border bg-card/40 p-8">
+                <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground mb-7">Direct Contact</h3>
                 <div className="space-y-6">
                   {[
                     { icon: Mail, label: "Email", value: "hellomelbatechnology@gmail.com", href: "mailto:hellomelbatechnology@gmail.com" },
@@ -130,11 +130,11 @@ export default function ContactPage() {
                     { icon: MapPin, label: "HQ", value: "Addis Ababa, Ethiopia", href: null },
                   ].map(({ icon: Icon, label, value, href }) => (
                     <div key={label} className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-sm border border-border flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-md border border-border flex items-center justify-center flex-shrink-0">
                         <Icon className="w-4 h-4 text-ember" />
                       </div>
                       <div>
-                        <p className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-1">{label}</p>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-1">{label}</p>
                         {href ? (
                           <a href={href} className="text-sm text-foreground hover:text-ember transition-colors">{value}</a>
                         ) : (
@@ -147,10 +147,10 @@ export default function ContactPage() {
               </div>
 
               {/* Status */}
-              <div className="rounded-sm border border-ember/25 bg-ember/5 p-6">
+              <div className="rounded-md border border-ember/25 bg-ember/5 p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="w-2 h-2 rounded-full bg-ember animate-pulse" />
-                  <span className="text-xs uppercase tracking-[0.16em] text-ember font-medium">Quick Response</span>
+                  <span className="font-mono text-xs uppercase tracking-[0.16em] text-ember font-medium">Quick Response</span>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   We respond to every inquiry within 24 hours. No automated replies — a real engineer reads every message.
@@ -158,8 +158,8 @@ export default function ContactPage() {
               </div>
 
               {/* Discovery process */}
-              <div className="rounded-sm border border-border bg-card/60 p-8">
-                <h3 className="text-xs uppercase tracking-[0.16em] text-muted-foreground mb-6">Discovery Process</h3>
+              <div className="rounded-md border border-border bg-card/40 p-8">
+                <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground mb-6">Discovery Process</h3>
                 <div className="space-y-5">
                   {[
                     { n: "01", title: "Submit your brief", desc: "Use this form or email us directly." },
@@ -167,7 +167,7 @@ export default function ContactPage() {
                     { n: "03", title: "Proposal & proposal", desc: "Detailed scope, timeline, and fixed quote." },
                   ].map((s) => (
                     <div key={s.n} className="flex gap-4">
-                      <span className="text-xs font-bold text-ember/60 tabular-nums mt-0.5 flex-shrink-0">{s.n}</span>
+                      <span className="font-mono text-xs font-bold text-ember/60 tabular-nums mt-0.5 flex-shrink-0">{s.n}</span>
                       <div>
                         <p className="text-sm font-semibold mb-0.5">{s.title}</p>
                         <p className="text-xs text-muted-foreground">{s.desc}</p>
@@ -182,16 +182,16 @@ export default function ContactPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24" ref={faqRef}>
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="py-16 md:py-20 lg:py-24" ref={faqRef}>
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={faqInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="mb-14"
           >
-            <p className="text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">FAQ</p>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[0.92]">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">FAQ</p>
+            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[0.92]">
               Common Questions
             </h2>
           </motion.div>

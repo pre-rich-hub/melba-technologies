@@ -49,12 +49,9 @@ export function ServicesPreview() {
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (
-    <section id="services" className="relative py-32 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-ember/6 blur-[140px]" />
-      </div>
+    <section id="services" className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10" ref={ref}>
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8" ref={ref}>
 
         {/* Header */}
         <motion.div
@@ -63,17 +60,17 @@ export function ServicesPreview() {
           transition={{ duration: 0.8 }}
           className="mb-20"
         >
-          <p className="text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
             What We Do
           </p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.92] text-balance">
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[0.92] text-balance">
               Services Built<br />
-              for <span className="gradient-text">Tomorrow</span>
+              for <span className="text-ember">Tomorrow</span>
             </h2>
             <div className="lg:text-right">
               <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mb-5">
-                Three focused capabilities. Each one practised deeply, not spread thin.
+                Six connected capabilities covering the full journey from product strategy to deployment.
               </p>
               <Link
                 href="/services"
@@ -88,7 +85,7 @@ export function ServicesPreview() {
         </motion.div>
 
         {/* Grid — 3 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-sm overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-md overflow-hidden">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -98,12 +95,12 @@ export function ServicesPreview() {
             >
               <Link
                 href={service.href}
-                className="group relative flex flex-col bg-card/60 hover:bg-card/90 p-8 transition-colors duration-500 overflow-hidden h-full"
+                className="group relative flex flex-col bg-card/40 hover:bg-card/80 p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden h-full"
               >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-ember/5 to-transparent" />
+
 
                 <div className="relative z-10 flex flex-col h-full">
-                  <div className="w-12 h-12 rounded-sm border border-border flex items-center justify-center mb-7 group-hover:border-ember/40 transition-colors duration-500">
+                  <div className="w-12 h-12 rounded-md border border-border flex items-center justify-center mb-7 group-hover:border-ember/60 transition-colors duration-500">
                     <service.icon className="w-5 h-5 text-muted-foreground group-hover:text-ember transition-colors duration-500" />
                   </div>
 
@@ -116,11 +113,12 @@ export function ServicesPreview() {
                     {service.description}
                   </p>
 
-                  <div className="mt-6 text-[11px] uppercase tracking-[0.14em] text-ember/70 font-medium group-hover:text-ember transition-colors duration-300">
+                  <div className="mt-6 font-mono text-[11px] uppercase tracking-[0.14em] text-ember/70 font-medium group-hover:text-ember transition-colors duration-300">
                     Learn more
                   </div>
                 </div>
 
+                {/* Bottom sweep */}
                 <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-ember transition-all duration-700 ease-out" />
               </Link>
             </motion.div>

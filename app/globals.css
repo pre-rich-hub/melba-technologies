@@ -1,4 +1,4 @@
-/* v2 — ember brand system */
+/* v3 — refined ember brand system */
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
@@ -22,7 +22,7 @@
   --secondary:            oklch(0.94 0.005 260);
   --secondary-foreground: oklch(0.10 0.008 260);
   --muted:                oklch(0.95 0.005 260);
-  --muted-foreground:     oklch(0.45 0.01 90);
+  --muted-foreground:     oklch(0.40 0.01 90);
   --accent:               oklch(0.62 0.20 35);
   --accent-foreground:    oklch(0.97 0.005 90);
   --destructive:          oklch(0.577 0.245 27.325);
@@ -40,41 +40,67 @@
 
   /* ── Extended brand tokens ── */
   --ember:       oklch(0.62 0.20 35);
-  --ember-light: oklch(0.72 0.18 40);
+  --ember-light: oklch(0.68 0.20 37);
   --ember-dim:   oklch(0.40 0.14 35);
   --cream:       oklch(0.97 0.01 90);
   --ink:         oklch(1 0 0);
   --section-alt: oklch(0.985 0.003 90);
+
+  /* ── Surface hierarchy (light) ── */
+  --surface-hover: oklch(0.96 0.005 260);
+  --border-subtle: oklch(0.90 0.008 260);
 }
 
 .dark {
   color-scheme: dark;
   --logo-filter: brightness(0) invert(1);
-  --section-alt: oklch(0.10 0.008 260);
-  --background:           oklch(0.07 0.008 260);
-  --foreground:           oklch(0.97 0.005 90);
-  --card:                 oklch(0.10 0.008 260);
-  --card-foreground:      oklch(0.97 0.005 90);
-  --popover:              oklch(0.09 0.008 260);
-  --popover-foreground:   oklch(0.97 0.005 90);
+
+  /* ── Softer near-black system (not pure #000) ── */
+  --background:           oklch(0.10 0.003 260);   /* ~#0f0f10 */
+  --foreground:           oklch(0.98 0.003 90);     /* ~#fafafa */
+
+  --card:                 oklch(0.13 0.004 260);    /* ~#161618 — visible against bg */
+  --card-foreground:      oklch(0.98 0.003 90);
+
+  --popover:              oklch(0.12 0.004 260);
+  --popover-foreground:   oklch(0.98 0.003 90);
+
   --primary:              oklch(0.62 0.20 35);
-  --primary-foreground:   oklch(0.97 0.005 90);
-  --secondary:            oklch(0.14 0.01 260);
-  --secondary-foreground: oklch(0.97 0.005 90);
-  --muted:                oklch(0.15 0.01 260);
-  --muted-foreground:     oklch(0.72 0.01 90);
+  --primary-foreground:   oklch(0.98 0.003 90);
+
+  --secondary:            oklch(0.16 0.005 260);
+  --secondary-foreground: oklch(0.98 0.003 90);
+
+  --muted:                oklch(0.18 0.005 260);    /* hover surfaces */
+  --muted-foreground:     oklch(0.80 0.005 260);    /* ~#d4d4d4 — improved contrast */
+
   --accent:               oklch(0.62 0.20 35);
-  --accent-foreground:    oklch(0.97 0.005 90);
+  --accent-foreground:    oklch(0.98 0.003 90);
+
   --destructive:          oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.97 0.005 90);
-  --border:               oklch(0.22 0.01 260);
-  --input:                oklch(0.15 0.01 260);
+  --destructive-foreground: oklch(0.98 0.003 90);
+
+  --border:               oklch(0.24 0.005 260);    /* ~#27272a — visible but quiet */
+  --input:                oklch(0.18 0.005 260);
   --ring:                 oklch(0.62 0.20 35);
+
+  --section-alt:          oklch(0.11 0.003 260);    /* ~#121214 */
+
+  /* ── Extended dark tokens ── */
+  --ember:       oklch(0.62 0.20 35);
+  --ember-light: oklch(0.68 0.20 37);
+  --ember-dim:   oklch(0.40 0.14 35);
+  --cream:       oklch(0.98 0.003 90);
+  --ink:         oklch(0.10 0.003 260);
+
+  /* ── Surface hierarchy ── */
+  --surface-hover: oklch(0.16 0.004 260);   /* ~#1a1a1c */
+  --border-subtle: oklch(0.20 0.004 260);   /* ~#1f1f22 */
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback', system-ui, sans-serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --font-sans: var(--font-geist-sans), 'Geist', system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), 'Geist Mono', monospace;
 
   --color-background:          var(--background);
   --color-foreground:          var(--foreground);
@@ -109,6 +135,10 @@
   --color-ink:         var(--ink);
   --color-section-alt: var(--section-alt);
 
+  /* Surface hierarchy */
+  --color-surface-hover: var(--surface-hover);
+  --color-border-subtle: var(--border-subtle);
+
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 4px);
@@ -127,7 +157,7 @@
   }
 }
 
-/* ── Marquee animations (JS-driven RAF loop in component; CSS fallback below) ── */
+/* ── Marquee animations ── */
 @keyframes marquee-ltr {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -137,34 +167,19 @@
   to   { transform: translateX(0); }
 }
 
-/* ── Global animations ── */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-16px); }
-}
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; }
-  50%       { opacity: 0.9; }
-}
-
-.animate-float      { animation: float 6s ease-in-out infinite; }
-.animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
-
-/* ── Gradient text — ember warm ── */
-.gradient-text {
-  background: linear-gradient(135deg, oklch(0.72 0.18 40), oklch(0.55 0.22 30));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ── Glass effect ── */
 .glass {
-  background: oklch(1 0 0 / 0.75);
+  background: color-mix(in srgb, var(--card) 75%, transparent);
   backdrop-filter: blur(20px);
-  border: 1px solid oklch(0.85 0.01 260 / 0.55);
+  border: 1px solid var(--border);
 }
-
-/* ── Glow ── */
-.glow    { box-shadow: 0 0 40px oklch(0.62 0.20 35 / 0.35); }
-.glow-sm { box-shadow: 0 0 20px oklch(0.62 0.20 35 / 0.20); }

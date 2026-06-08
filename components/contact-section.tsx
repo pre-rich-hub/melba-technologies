@@ -44,15 +44,11 @@ export function ContactSection() {
   }
 
   const inputClass =
-    "bg-card/50 border-border focus:border-ember hover:border-border/80 h-12 rounded-sm text-sm transition-colors duration-300"
+    "bg-card/40 border-border focus:border-ember hover:border-border/80 h-12 rounded-md text-sm transition-colors duration-300"
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-ember/8 blur-[130px]" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10" ref={ref}>
+    <section id="contact" className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8" ref={ref}>
 
         {/* Header */}
         <motion.div
@@ -61,13 +57,13 @@ export function ContactSection() {
           transition={{ duration: 0.8 }}
           className="mb-20"
         >
-          <p className="text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
             Get Started
           </p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.92] text-balance">
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[0.92] text-balance">
               Build your next<br />
-              <span className="gradient-text">digital product with us.</span>
+              <span className="text-ember">digital product with us.</span>
             </h2>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
               {"Let's discuss your project. Our team is ready to turn your vision into reality."}
@@ -88,7 +84,7 @@ export function ContactSection() {
           >
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
-                <label htmlFor="name" className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">
+                <label htmlFor="name" className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">
                   Your Name <span className="text-ember">*</span>
                 </label>
                 <Input
@@ -102,7 +98,7 @@ export function ContactSection() {
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">
+                <label htmlFor="email" className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">
                   Email Address <span className="text-ember">*</span>
                 </label>
                 <Input
@@ -118,7 +114,7 @@ export function ContactSection() {
             </div>
 
             <div>
-              <label htmlFor="company" className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">
+              <label htmlFor="company" className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">
                 Company
               </label>
               <Input
@@ -132,7 +128,7 @@ export function ContactSection() {
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">
+              <label htmlFor="message" className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">
                 Tell Us About Your Project
               </label>
               <textarea
@@ -141,14 +137,14 @@ export function ContactSection() {
                 placeholder="Describe your project goals, timeline, and any specific requirements..."
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full rounded-sm bg-card/50 border border-border focus:border-ember hover:border-border/80 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ember/15 transition-colors duration-300 resize-none"
+                className="w-full rounded-md bg-card/50 border border-border focus:border-ember hover:border-border/80 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ember/15 transition-colors duration-300 resize-none"
               />
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-2.5 w-full justify-center px-8 py-4 text-sm font-semibold rounded-sm bg-ember text-cream hover:bg-ember-light transition-colors duration-300 glow group disabled:opacity-70 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-2.5 w-full justify-center px-8 py-4 text-sm font-semibold rounded-md bg-ember text-cream hover:bg-ember-light transition-colors duration-300 group disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {isSubmitting ? "Sending..." : "Send Message"}
               <ArrowRight className={`h-4 w-4 ${isSubmitting ? "hidden" : "group-hover:translate-x-1"} transition-transform`} />
@@ -162,8 +158,8 @@ export function ContactSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="space-y-6"
           >
-            <div className="rounded-sm border border-border bg-card/60 p-8">
-              <h3 className="text-xs uppercase tracking-[0.16em] text-muted-foreground mb-7">
+            <div className="rounded-md border border-border bg-card/40 p-8">
+              <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground mb-7">
                 Contact Information
               </h3>
 
@@ -174,11 +170,11 @@ export function ContactSection() {
                   { icon: MapPin, label: "Headquarters", value: "Addis Ababa, Ethiopia", href: null },
                 ].map(({ icon: Icon, label, value, href }) => (
                   <div key={label} className="flex items-start gap-5">
-                    <div className="w-10 h-10 rounded-sm border border-border flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 rounded-md border border-border flex items-center justify-center flex-shrink-0">
                       <Icon className="w-4 h-4 text-ember" />
                     </div>
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-1">{label}</p>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-1">{label}</p>
                       {href ? (
                         <a href={href} className="text-sm text-foreground hover:text-ember transition-colors duration-300">
                           {value}
@@ -193,10 +189,10 @@ export function ContactSection() {
             </div>
 
             {/* Quick-response card */}
-            <div className="rounded-sm border border-ember/25 bg-ember/5 p-6">
+            <div className="rounded-md border border-ember/25 bg-ember/5 p-6">
               <div className="flex items-center gap-3 mb-3">
                 <span className="w-2 h-2 rounded-full bg-ember animate-pulse" />
-                <span className="text-xs uppercase tracking-[0.16em] text-ember font-medium">Quick Response</span>
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-ember font-medium">Quick Response</span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 We typically respond within 24 hours. For urgent inquiries, please call us directly.

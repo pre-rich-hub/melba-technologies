@@ -35,12 +35,8 @@ export function TestimonialsSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (
-    <section id="testimonials" className="relative py-32 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 right-0 w-[600px] h-[600px] rounded-full bg-ember/6 blur-[130px]" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10" ref={ref}>
+    <section id="testimonials" className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8" ref={ref}>
 
         {/* Header */}
         <motion.div
@@ -49,13 +45,13 @@ export function TestimonialsSection() {
           transition={{ duration: 0.8 }}
           className="mb-20"
         >
-          <p className="text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
             Client Perspectives
           </p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.92] text-balance">
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[0.92] text-balance">
               In Their<br />
-              <span className="gradient-text">Own Words</span>
+              <span className="text-ember">Own Words</span>
             </h2>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
               The measure of our work is the confidence clients place in us — project after project.
@@ -65,18 +61,15 @@ export function TestimonialsSection() {
         </motion.div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-border rounded-sm overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-border rounded-md overflow-hidden">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.author}
               initial={{ opacity: 0, y: 28 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.12 }}
-              className="group relative bg-card/60 hover:bg-card/90 p-8 transition-colors duration-500 overflow-hidden"
+              className="group relative bg-card/40 hover:bg-card/80 p-8 transition-colors duration-500 overflow-hidden"
             >
-              {/* Ember hover wash */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-ember/5 to-transparent" />
-
               {/* Opening mark */}
               <span className="block text-5xl font-bold text-ember/25 leading-none mb-4 select-none">&ldquo;</span>
 
@@ -85,7 +78,7 @@ export function TestimonialsSection() {
               </p>
 
               <div className="flex items-center gap-4 relative z-10">
-                <div className="w-10 h-10 rounded-sm bg-ember/15 border border-ember/20 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-md bg-ember/15 border border-ember/20 flex items-center justify-center flex-shrink-0">
                   <span className="text-xs font-semibold text-ember">{t.initials}</span>
                 </div>
                 <div>
@@ -95,8 +88,7 @@ export function TestimonialsSection() {
                   </div>
                 </div>
               </div>
-
-              {/* Bottom accent */}
+              {/* Bottom sweep */}
               <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-ember transition-all duration-700 ease-out" />
             </motion.div>
           ))}

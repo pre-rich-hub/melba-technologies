@@ -14,7 +14,7 @@ export function ThemeToggle() {
   // Render a size-stable placeholder until mounted to avoid layout shift
   if (!mounted) {
     return (
-      <div className="w-9 h-9 rounded-sm border border-border bg-transparent flex-shrink-0" />
+      <div className="w-9 h-9 rounded-md border border-border bg-transparent flex-shrink-0" />
     )
   }
 
@@ -26,7 +26,7 @@ export function ThemeToggle() {
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       whileTap={{ scale: 0.88 }}
       className={`
-        relative w-9 h-9 rounded-sm border flex items-center justify-center
+        relative w-9 h-9 rounded-md border flex items-center justify-center
         overflow-hidden flex-shrink-0
         transition-colors duration-300
         ${isDark

@@ -30,17 +30,17 @@ export function TrustStrip() {
   return (
     <section
       ref={ref}
-      className="relative py-16 border-y border-border/60 overflow-hidden"
+      className="relative py-14 md:py-16 border-y border-border/60 overflow-hidden"
       style={{ background: "var(--section-alt)" }}
     >
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
         {/* Label */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-10"
+          className="text-center text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70 font-mono mb-10"
         >
           Core Engineering Stack
         </motion.p>
@@ -55,10 +55,10 @@ export function TrustStrip() {
           {stack.map((tech, i) => (
             <motion.span
               key={tech}
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.35, delay: 0.1 + i * 0.04 }}
-              className="px-3.5 py-1.5 text-xs border border-border/70 rounded-sm text-muted-foreground/90 hover:border-ember/30 hover:text-ember/80 transition-colors duration-300 cursor-default"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.35, delay: 0.1 + i * 0.015 }}
+              className="px-3.5 py-1.5 text-xs border border-border/70 rounded-md text-muted-foreground/90 hover:border-ember/30 hover:text-ember/80 transition-colors duration-300 cursor-default"
             >
               {tech}
             </motion.span>
@@ -74,7 +74,7 @@ export function TrustStrip() {
         />
 
         {/* Domain expertise */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border/40 rounded-sm overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border/40 rounded-md overflow-hidden">
           {domains.map((domain, i) => (
             <motion.div
               key={domain.label}

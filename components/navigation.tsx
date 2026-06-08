@@ -79,13 +79,12 @@ function DropdownPanel({
             z-50 origin-top
             bg-background/96 backdrop-blur-2xl
             border border-border/70
-            rounded-sm shadow-[0_8px_48px_-8px_oklch(0_0_0/0.22)]
+            rounded-md shadow-[0_8px_48px_-8px_oklch(0_0_0/0.22)]
             overflow-hidden
             ${isTwoCols ? "w-[620px]" : "w-[340px]"}
           `}
         >
-          {/* Top accent line */}
-          <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-ember to-transparent opacity-70" />
+
 
           <div className={`p-3 ${isTwoCols ? "grid grid-cols-2 gap-1" : "flex flex-col gap-0.5"}`}>
             {dropdown.items.map((item) => (
@@ -99,7 +98,7 @@ function DropdownPanel({
               <div className="p-3">
                 <Link
                   href={dropdown.cta.href}
-                  className="flex items-center justify-between w-full px-4 py-2.5 rounded-sm text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors duration-200 group"
+                  className="flex items-center justify-between w-full px-4 py-2.5 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors duration-200 group"
                 >
                   <span>{dropdown.cta.label}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
@@ -118,9 +117,9 @@ function DropdownItem({ item }: { item: DropdownItem }) {
   return (
     <Link
       href={item.href}
-      className="group flex items-start gap-3.5 px-4 py-3.5 rounded-sm hover:bg-muted/50 transition-colors duration-150"
+      className="group flex items-start gap-3.5 px-4 py-3.5 rounded-md hover:bg-muted/50 transition-colors duration-150"
     >
-      <div className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-sm border border-border/60 bg-muted/30 flex items-center justify-center group-hover:border-ember/40 group-hover:bg-ember/8 transition-all duration-200">
+      <div className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-md border border-border/60 bg-muted/30 flex items-center justify-center group-hover:border-ember/40 group-hover:bg-ember/8 transition-all duration-200">
         <Icon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-ember transition-colors duration-200" />
       </div>
       <div className="min-w-0">
@@ -129,7 +128,7 @@ function DropdownItem({ item }: { item: DropdownItem }) {
             {item.name}
           </span>
           {item.badge && (
-            <span className="px-1.5 py-0.5 text-[9px] uppercase tracking-[0.1em] font-semibold bg-ember/15 text-ember rounded-sm leading-none">
+            <span className="px-1.5 py-0.5 text-[9px] uppercase tracking-[0.1em] font-semibold bg-ember/15 text-ember rounded-md leading-none">
               {item.badge}
             </span>
           )}
@@ -156,7 +155,7 @@ function MobileNavItem({
     return (
       <Link
         href={link.href}
-        className={`text-2xl font-semibold tracking-tight transition-colors ${isActive(link.href) ? "text-ember" : "text-[oklch(0.97_0.005_90)] hover:text-ember"
+        className={`text-2xl font-semibold tracking-tight transition-colors ${isActive(link.href) ? "text-ember" : "text-foreground hover:text-ember"
           }`}
       >
         {link.name}
@@ -168,7 +167,7 @@ function MobileNavItem({
     <div className="w-full">
       <button
         onClick={() => setExpanded(!expanded)}
-        className={`flex items-center gap-2 text-2xl font-semibold tracking-tight transition-colors ${isActive(link.href) ? "text-ember" : "text-[oklch(0.97_0.005_90)] hover:text-ember"
+        className={`flex items-center gap-2 text-2xl font-semibold tracking-tight transition-colors ${isActive(link.href) ? "text-ember" : "text-foreground hover:text-ember"
           }`}
       >
         {link.name}
@@ -193,10 +192,10 @@ function MobileNavItem({
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-sm hover:bg-white/5 transition-colors group"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-md hover:bg-white/5 transition-colors group"
                   >
                     <Icon className="w-4 h-4 text-ember/60 group-hover:text-ember transition-colors" />
-                    <span className="text-sm font-medium text-[oklch(0.85_0.005_90)] group-hover:text-[oklch(0.97_0.005_90)] transition-colors">
+                    <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                       {item.name}
                     </span>
                   </Link>
@@ -252,11 +251,11 @@ export function Navigation() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? "bg-background/92 backdrop-blur-xl border-b border-border py-4"
-          : "py-7"
+          ? "bg-background/95 backdrop-blur-lg border-b border-border py-3"
+          : "py-5"
           }`}
       >
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
 
             {/* Logo */}
@@ -278,7 +277,7 @@ export function Navigation() {
                 >
                   {link.dropdown ? (
                     <button
-                      className={`flex items-center gap-1 px-3 py-2 text-sm rounded-sm transition-colors duration-200 relative group ${isActive(link.href) || activeDropdown === link.name
+                      className={`flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors duration-200 relative group ${isActive(link.href) || activeDropdown === link.name
                         ? "text-foreground bg-muted/50"
                         : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                         }`}
@@ -298,7 +297,7 @@ export function Navigation() {
                   ) : (
                     <Link
                       href={link.href}
-                      className={`px-3 py-2 text-sm rounded-sm transition-colors duration-200 relative inline-block ${isActive(link.href)
+                      className={`px-3 py-2 text-sm rounded-md transition-colors duration-200 relative inline-block ${isActive(link.href)
                         ? "text-foreground bg-muted/50"
                         : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                         }`}
@@ -336,7 +335,7 @@ export function Navigation() {
               <ThemeToggle />
               <Link
                 href="/contact"
-                className="inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-sm bg-ember text-cream hover:bg-ember-light transition-colors duration-300"
+                className="inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-md bg-ember text-cream hover:bg-ember-light transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 Start a Project
               </Link>
@@ -365,7 +364,7 @@ export function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-[oklch(0.05_0.008_260/0.98)] backdrop-blur-xl pt-24 lg:hidden overflow-y-auto"
+            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl pt-24 lg:hidden overflow-y-auto"
           >
             <nav className="flex flex-col items-center gap-6 p-8">
               {navLinks.map((link, i) => (
@@ -381,7 +380,7 @@ export function Navigation() {
               ))}
               <Link
                 href="/contact"
-                className="mt-4 inline-flex items-center px-8 py-4 text-base font-medium rounded-sm bg-ember text-cream"
+                className="mt-4 inline-flex items-center px-8 py-4 text-base font-medium rounded-md bg-ember text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 Start a Project
               </Link>

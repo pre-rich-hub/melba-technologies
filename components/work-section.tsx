@@ -28,13 +28,13 @@ type Accent = "ember" | "neutral" | "dark"
 
 const cardBg: Record<Accent, string> = {
   ember:   "bg-ember border-ember/35",
-  neutral: "bg-[oklch(0.94_0.005_260)] border-[oklch(0.82_0.01_260)]",
-  dark:    "bg-[oklch(0.90_0.006_260)] border-[oklch(0.78_0.008_260)]",
+  neutral: "bg-card/40 border-border",
+  dark:    "bg-card/30 border-border/80",
 }
 const categoryColor: Record<Accent, string> = {
   ember:   "text-cream/50",
-  neutral: "text-ember/80",
-  dark:    "text-ember/80",
+  neutral: "text-muted-foreground",
+  dark:    "text-muted-foreground",
 }
 const titleColor: Record<Accent, string> = {
   ember:   "text-cream",
@@ -43,8 +43,8 @@ const titleColor: Record<Accent, string> = {
 }
 const arrowColor: Record<Accent, string> = {
   ember:   "border-cream/25 text-cream",
-  neutral: "border-ember/45 text-ember",
-  dark:    "border-ember/45 text-ember",
+  neutral: "border-ember/40 text-ember",
+  dark:    "border-ember/40 text-ember",
 }
 const accentLine: Record<Accent, string> = {
   ember:   "bg-cream/30",
@@ -67,7 +67,7 @@ function ProjectCard({ title, category, accent, wide, index }: CardProps) {
   return (
     <div
       className={`
-        group relative flex-shrink-0 border rounded-sm overflow-hidden cursor-pointer select-none
+        group relative flex-shrink-0 border rounded-md overflow-hidden cursor-pointer select-none
         transition-all duration-700 hover:scale-[1.018] hover:z-10
         ${wide ? "w-[420px]" : "w-[300px]"} h-[260px]
         ${cardBg[accent]}
@@ -89,11 +89,11 @@ function ProjectCard({ title, category, accent, wide, index }: CardProps) {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-between h-full p-7">
-        <span className={`text-[10px] uppercase tracking-[0.20em] font-medium ${categoryColor[accent]}`}>
+        <span className={`font-mono text-[10px] uppercase tracking-[0.20em] font-medium ${categoryColor[accent]}`}>
           {category}
         </span>
 
-        <h3 className={`font-bold leading-none tracking-tight text-balance text-4xl ${titleColor[accent]}`}>
+        <h3 className={`font-semibold leading-none tracking-tight text-balance text-4xl ${titleColor[accent]}`}>
           {title}
         </h3>
 
@@ -176,8 +176,8 @@ function MarqueeRow({
   return (
     <div className="relative w-full overflow-hidden">
       {/* Edge fade masks */}
-      <div className="pointer-events-none absolute left-0 top-0 h-full w-28 z-10 bg-gradient-to-r from-white to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-28 z-10 bg-gradient-to-l from-white to-transparent" />
+      <div className="pointer-events-none absolute left-0 top-0 h-full w-28 z-10 bg-gradient-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-28 z-10 bg-gradient-to-l from-background to-transparent" />
 
       {/* Track — no CSS transition/animation; RAF drives transform directly */}
       <div ref={trackRef} className="flex gap-4 w-max" style={{ willChange: "transform" }}>
@@ -197,28 +197,22 @@ export function WorkSection() {
   return (
     <section
       id="work"
-      className="relative py-28 overflow-hidden"
-      style={{ background: "oklch(1 0 0)" }}
+      className="relative py-16 md:py-20 lg:py-24 overflow-hidden bg-background"
     >
-      {/* Ambient ember glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[450px] rounded-full bg-ember/6 blur-[180px]" />
-      </div>
-
       {/* Header */}
-      <div ref={headerRef} className="mx-auto max-w-7xl px-6 lg:px-10 mb-20">
+      <div ref={headerRef} className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 mb-20">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
             Selected Work
           </p>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.92] text-balance text-foreground">
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[0.92] text-balance text-foreground">
               Work That<br />
-              <span className="gradient-text">Defines</span> Industries
+              <span className="text-ember">Defines</span> Industries
             </h2>
             <div className="lg:max-w-xs">
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
@@ -227,7 +221,7 @@ export function WorkSection() {
               </p>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 text-sm text-foreground hover:text-ember transition-colors duration-300 group font-medium"
+                className="font-mono inline-flex items-center gap-2 text-sm text-foreground hover:text-ember transition-colors duration-300 group font-medium"
               >
                 <span className="border-b border-foreground/20 group-hover:border-ember pb-px transition-colors duration-300">
                   Start a project
@@ -267,12 +261,12 @@ export function WorkSection() {
         initial={{ opacity: 0, y: 14 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, delay: 0.8 }}
-        className="mx-auto max-w-7xl px-6 lg:px-10 mt-16 flex items-center justify-between"
+        className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 mt-16 flex items-center justify-between"
       >
-        <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground/65">
+        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/65">
           8 live projects &mdash; 2024
         </p>
-        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-muted-foreground/65">
+        <div className="font-mono flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-muted-foreground/65">
           <span className="w-1.5 h-1.5 rounded-full bg-ember inline-block" />
           Global Delivery
         </div>
