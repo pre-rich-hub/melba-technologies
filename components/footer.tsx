@@ -10,7 +10,10 @@ const footerLinks = {
     { name: "Web Development", href: "/services/web-development" },
     { name: "Mobile Development", href: "/services/mobile-development" },
     { name: "AI Automation & Solutions", href: "/services/ai-automation-solutions" },
-    { name: "Product Design", href: "/services/product-design" },
+    { name: "UI/UX Design & Branding", href: "/services/ui-ux-design-branding" },
+    { name: "Business Process Automation", href: "/services/business-process-automation" },
+    { name: "Technology Consulting", href: "/services/technology-consulting" },
+    { name: "Maintenance & Support", href: "/services/maintenance-support" },
     { name: "Cloud & DevOps Solutions", href: "/services/cloud-devops-solutions" },
   ],
   Company: [

@@ -29,7 +29,7 @@ export default function ServicesPage() {
         eyebrow="Our Services"
         title="Services Built for"
         highlighted="Tomorrow."
-        description="End-to-end software engineering — from strategy through to production. Six practice areas, one unified standard of quality."
+        description="End-to-end software engineering — from strategy, design, and automation through to production support. One unified standard of quality."
       />
 
       {/* Services grid */}

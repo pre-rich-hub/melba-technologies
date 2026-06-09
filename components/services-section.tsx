@@ -2,7 +2,18 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { Code2, Globe, TabletSmartphone, ArrowUpRight, Sparkles, Palette, Cloud } from "lucide-react"
+import {
+  Code2,
+  Globe,
+  TabletSmartphone,
+  ArrowUpRight,
+  Sparkles,
+  PenTool,
+  Workflow,
+  Lightbulb,
+  ShieldCheck,
+  Cloud,
+} from "lucide-react"
 
 const services = [
   {
@@ -34,11 +45,32 @@ const services = [
     features: ["AI Agents", "NLP", "Automation"],
   },
   {
-    icon: Palette,
-    title: "Product Design",
+    icon: PenTool,
+    title: "UI/UX Design & Branding",
     description:
-      "User experience design, interface design, wireframing, prototyping, and scalable design systems.",
-    features: ["UX/UI", "Prototyping", "Design Systems"],
+      "Brand identity, product design, user research, and scalable design systems for premium digital products.",
+    features: ["Brand Identity", "Product Design", "Design Systems"],
+  },
+  {
+    icon: Workflow,
+    title: "Business Process Automation",
+    description:
+      "Workflow automation, CRM automation, internal tools, and AI-powered operations that remove manual bottlenecks.",
+    features: ["Workflows", "CRM Automation", "Internal Tools"],
+  },
+  {
+    icon: Lightbulb,
+    title: "Technology Consulting",
+    description:
+      "Digital transformation, system architecture, technical audits, and product strategy for high-stakes decisions.",
+    features: ["Architecture", "Audits", "Strategy"],
+  },
+  {
+    icon: ShieldCheck,
+    title: "Maintenance & Support",
+    description:
+      "Monitoring, updates, security patches, enhancements, and performance optimisation after launch.",
+    features: ["Monitoring", "Security", "Performance"],
   },
   {
     icon: Cloud,

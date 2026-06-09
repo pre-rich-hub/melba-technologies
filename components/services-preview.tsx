@@ -2,7 +2,18 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { Code2, Globe, TabletSmartphone, ArrowUpRight, Sparkles, Palette, Cloud } from "lucide-react"
+import {
+  Code2,
+  Globe,
+  TabletSmartphone,
+  ArrowUpRight,
+  Sparkles,
+  PenTool,
+  Workflow,
+  Lightbulb,
+  ShieldCheck,
+  Cloud,
+} from "lucide-react"
 import Link from "next/link"
 
 const services = [
@@ -31,10 +42,28 @@ const services = [
     href: "/services/ai-automation-solutions",
   },
   {
-    icon: Palette,
-    title: "Product Design",
-    description: "User experience design, interface design, wireframing, prototyping, and scalable design systems.",
-    href: "/services/product-design",
+    icon: PenTool,
+    title: "UI/UX Design & Branding",
+    description: "Brand identity, product design, user research, and scalable design systems for premium digital products.",
+    href: "/services/ui-ux-design-branding",
+  },
+  {
+    icon: Workflow,
+    title: "Business Process Automation",
+    description: "Workflow automation, CRM automation, internal tools, and AI-powered operations that remove manual bottlenecks.",
+    href: "/services/business-process-automation",
+  },
+  {
+    icon: Lightbulb,
+    title: "Technology Consulting",
+    description: "Digital transformation, system architecture, technical audits, and product strategy for high-stakes decisions.",
+    href: "/services/technology-consulting",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Maintenance & Support",
+    description: "Monitoring, updates, security patches, enhancements, and performance optimisation after launch.",
+    href: "/services/maintenance-support",
   },
   {
     icon: Cloud,
@@ -70,7 +99,7 @@ export function ServicesPreview() {
             </h2>
             <div className="lg:text-right">
               <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mb-5">
-                Six connected capabilities covering the full journey from product strategy to deployment.
+                Strategy, design, engineering, automation, and support delivered with one standard of care.
               </p>
               <Link
                 href="/services"

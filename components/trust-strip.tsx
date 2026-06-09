@@ -19,7 +19,7 @@ const stack = [
 const domains = [
   { label: "Custom Software Development", desc: "Full-stack software built to spec — web apps, SaaS platforms, internal tools" },
   { label: "AI & Automation", desc: "Intelligent agents, LLM integration, and automated business workflows" },
-  { label: "Product Design", desc: "UX/UI design, prototyping, and scalable design systems for complex products" },
+  { label: "UI/UX Design & Branding", desc: "Brand identity, product design, and scalable design systems for complex products" },
   { label: "Cloud & DevOps", desc: "Resilient cloud infrastructure, CI/CD, and automated deployment strategies" },
 ]
 

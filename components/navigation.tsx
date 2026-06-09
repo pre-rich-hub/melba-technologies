@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import {
   Menu, X, ChevronDown,
   Code2, Globe, TabletSmartphone,
-  Sparkles, Palette, Cloud,
+  Sparkles, PenTool, Workflow, Lightbulb, ShieldCheck, Cloud,
   ArrowUpRight,
 } from "lucide-react"
 import Link from "next/link"
@@ -45,7 +45,10 @@ const navLinks: NavLink[] = [
         { name: "Web Development", href: "/services/web-development", description: "High-performance web apps and SaaS platforms", icon: Globe },
         { name: "Mobile Development", href: "/services/mobile-development", description: "iOS and Android apps from a single codebase", icon: TabletSmartphone },
         { name: "AI & Automation", href: "/services/ai-automation-solutions", description: "Intelligent agents and workflow automation", icon: Sparkles },
-        { name: "Product Design", href: "/services/product-design", description: "Human-centric UX/UI and design systems", icon: Palette },
+        { name: "UI/UX Design & Branding", href: "/services/ui-ux-design-branding", description: "Brand identity, product design, and design systems", icon: PenTool },
+        { name: "Business Process Automation", href: "/services/business-process-automation", description: "Workflow, CRM, and AI-powered operations", icon: Workflow },
+        { name: "Technology Consulting", href: "/services/technology-consulting", description: "Architecture, audits, and product strategy", icon: Lightbulb },
+        { name: "Maintenance & Support", href: "/services/maintenance-support", description: "Monitoring, patches, updates, and optimisation", icon: ShieldCheck },
         { name: "Cloud & DevOps", href: "/services/cloud-devops-solutions", description: "Resilient infrastructure and CI/CD pipelines", icon: Cloud },
       ],
       cta: { label: "View all services", href: "/services" },
