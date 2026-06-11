@@ -47,9 +47,8 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.35 }}
           className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto mb-12 leading-relaxed text-pretty"
         >
-          A software studio crafting custom web and mobile products for ambitious
-          businesses — built to last, delivered without compromise.
-        </motion.p>
+        Building world-class software, intelligent automation, and digital experiences for businesses shaping the future.
+                </motion.p>
 
         {/* CTAs */}
         <motion.div
