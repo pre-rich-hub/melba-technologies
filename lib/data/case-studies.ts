@@ -35,7 +35,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Ethio Origins Tour",
     category: "Tourism Platform",
     industry: "Travel & Hospitality",
-    liveUrl: "https://ethioorigins.com/",
+    liveUrl: "https://ethiooriginstour.com/",
     thumbnail: "/thumbnails/ethio-origins-s.jpg",
     tagline: "Premium UI/UX Design, Advanced SEO Optimization, Multi-language Support, High-Performance Architecture, Responsive Design, Cloudinary Integration, Conversion-Focused Call-to-Actions, Professional Branding & Logo Design, Image & Performance Optimization, and a Modern, Scalable Web Experience.",
     overview: "Ethio Origins Tour presents Ethiopia's remarkable destinations and experiences to international travelers through a refined, trustworthy digital presence. The project brings the company's brand, tourism offering, and inquiry journey together in one polished platform.",
