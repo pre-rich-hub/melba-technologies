@@ -6,6 +6,8 @@ import { ArrowRight, Mail, MapPin, Phone, ChevronDown } from "lucide-react"
 import { toast } from "sonner"
 import { PageHero } from "@/components/shared/page-hero"
 import { contactFaqs as faqs } from "@/lib/data/faqs"
+import { getAttribution } from "@/lib/attribution"
+import { trackEvent } from "@/components/analytics/tracking"
 
 
 export default function ContactPage() {
@@ -14,7 +16,7 @@ export default function ContactPage() {
   const formInView = useInView(formRef, { once: true, margin: "-60px" })
   const faqInView = useInView(faqRef, { once: true, margin: "-60px" })
 
-  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" })
+  const [form, setForm] = useState({ name: "", email: "", company: "", source: "", message: "" })
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -26,7 +28,7 @@ export default function ContactPage() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, ...getAttribution() }),
       })
 
       const data = await response.json()
@@ -35,7 +37,8 @@ export default function ContactPage() {
         toast.success("Message sent successfully!", {
           description: "We'll get back to you within 24 hours.",
         })
-        setForm({ name: "", email: "", company: "", message: "" })
+        trackEvent("generate_lead", { source: form.source || "not_specified" })
+        setForm({ name: "", email: "", company: "", source: "", message: "" })
       } else {
         throw new Error(data.error || "Failed to send message")
       }
@@ -86,6 +89,18 @@ export default function ContactPage() {
                 <div>
                   <label className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Company</label>
                   <input type="text" placeholder="Your Company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className={inputClass} />
+                </div>
+                <div>
+                  <label htmlFor="source" className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">How Did You Find Us?</label>
+                  <select id="source" value={form.source} onChange={(e) => setForm({ ...form, source: e.target.value })} className={inputClass}>
+                    <option value="">Select an option</option>
+                    <option value="ChatGPT / AI assistant">ChatGPT / AI assistant</option>
+                    <option value="Google">Google</option>
+                    <option value="Perplexity">Perplexity</option>
+                    <option value="Referral">Referral</option>
+                    <option value="Social media">Social media</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
                 <div>
                   <label className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Tell Us About Your Project</label>

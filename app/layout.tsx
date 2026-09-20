@@ -6,6 +6,7 @@ import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { Toaster } from "sonner"
 import { JsonLd } from '@/components/seo/json-ld'
+import { Tracking } from '@/components/analytics/tracking'
 import { organizationSchema, websiteSchema } from '@/lib/seo/schema'
 import { SITE } from '@/lib/seo/site'
 import './globals.css'
@@ -83,6 +84,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             }}
           />
           {process.env.NODE_ENV === 'production' && <Analytics />}
+          <Tracking />
         </ThemeProvider>
       </body>
     </html>

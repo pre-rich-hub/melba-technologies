@@ -20,13 +20,19 @@ export async function POST(req: Request) {
       })
     }
 
-    const { name, email, company, message } = data
+    const { name, email, company, message, source, referrer, landingPage, utm_source, utm_medium, utm_campaign, utm_term, utm_content } = data
+    const attribution = [
+      `How they found us: ${source || "not specified"}`,
+      `Referrer: ${referrer || "direct / none"}`,
+      `Landing page: ${landingPage || "unknown"}`,
+      `UTM: source=${utm_source || "-"} medium=${utm_medium || "-"} campaign=${utm_campaign || "-"} term=${utm_term || "-"} content=${utm_content || "-"}`,
+    ].join("\n")
 
     const { data: resData, error } = await resend.emails.send({
       from: 'Melba Technology <onboarding@resend.dev>',
       to: ['hellomelbatechnology@gmail.com'],
       subject: `Project Inquiry from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nMessage:\n${message}`,
+      text: `Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nMessage:\n${message}\n\n--- Lead source ---\n${attribution}`,
     })
 
     if (error) {
