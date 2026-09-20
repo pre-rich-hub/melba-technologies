@@ -9,7 +9,9 @@ import {
   Lightbulb,
   ShieldCheck,
   Cloud,
+  Plane,
 } from "lucide-react"
+import type { Faq } from "@/lib/data/faqs"
 
 export interface Service {
   slug: string
@@ -21,6 +23,11 @@ export interface Service {
   technologies: string[]
   benefits: string[]
   relatedWork: string[]
+  // Optional sections rendered only when present (see components/shared/service-extras.tsx).
+  audience?: string[]
+  included?: string[]
+  pricing?: string
+  faqs?: Faq[]
 }
 
 export const services: Service[] = [
@@ -244,7 +251,57 @@ export const services: Service[] = [
 
 // Services that have their own page but are intentionally not listed on /services or the home page
 // (keeps the existing layouts unchanged). Add entries here to publish a detail page.
-export const unlistedServices: Service[] = []
+export const unlistedServices: Service[] = [
+  {
+    slug: "tour-travel-website-development",
+    icon: Plane,
+    title: "Tour & Travel Website Development",
+    tagline: "Booking-ready websites for tour operators.",
+    description:
+      "Melba Technology builds fast, multilingual websites and booking flows for tour and travel companies in Ethiopia. Every site combines destination and itinerary pages, WhatsApp and live-chat enquiry, SEO and GEO optimization, and payment integration where needed, so international travelers can find you, trust you and book.",
+    process: [
+      { step: "01", title: "Discovery & Itinerary Mapping", description: "We map your destinations, tour types, seasons and traveler markets, then structure itineraries so every tour has a clear, searchable page." },
+      { step: "02", title: "Design & Brand Direction", description: "Cinematic, mobile-first UI/UX built around your destinations, with brand identity and logo work where the brand needs it." },
+      { step: "03", title: "Booking & Enquiry Build", description: "Enquiry and booking flows, WhatsApp and live-chat contact points, multilingual pages, and payment integration where your business needs it." },
+      { step: "04", title: "SEO & GEO Setup", description: "Destination-led page architecture, structured data, fast image delivery and answer-ready content so search engines and AI assistants can find and cite you." },
+      { step: "05", title: "Launch & Support", description: "Production deployment, analytics and enquiry tracking, and a 60-day post-launch support window." },
+    ],
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Cloudinary", "Framer Motion", "Multilingual (i18n)", "Structured Data", "WhatsApp Click-to-Chat"],
+    benefits: [
+      "Trust signals, reviews and clear itineraries that help first-time visitors commit to a private tour",
+      "Multilingual pages so travelers can read your offer in their own language",
+      "WhatsApp and live-chat enquiry that shortens the path from browsing to booking",
+      "SEO and GEO optimization for destination searches and AI-assistant answers",
+      "Fast, mobile-first pages with optimized imagery, even on slower connections",
+    ],
+    audience: [
+      "Ethiopian tour operators and DMCs who sell to international travelers",
+      "Trekking, cultural and historical-route companies that need each itinerary to rank on its own",
+      "Operators with an outdated site who are losing enquiries to better-presented competitors",
+      "New tour brands that need a logo, a brand direction and a website launched together",
+    ],
+    included: [
+      "Destination, tour and itinerary page architecture",
+      "Enquiry or booking flow with WhatsApp and live-chat contact points",
+      "Multilingual support for your key traveler markets",
+      "SEO and GEO foundations: metadata, structured data, sitemap and answer-ready content",
+      "Optimized image galleries and a mobile-first responsive design",
+      "Analytics and enquiry tracking, plus 60 days of post-launch support",
+    ],
+    // TODO(content): add real price ranges here once Melba decides to publish them. Do not invent figures.
+    pricing:
+      "We work on a fixed-scope or time-and-materials basis depending on how clearly the project is defined. After a discovery call you receive a detailed proposal with a line-item breakdown, so you know what each part of the website costs before any work begins.",
+    faqs: [
+      { q: "How much does a website for a tour company cost in Ethiopia?", a: "The price depends on scope: the number of languages, whether you need a booking or payment flow, how many tour and itinerary pages you have, and how much custom design and SEO work is involved. We provide a fixed-scope, line-item proposal after a discovery call rather than a generic price list." },
+      { q: "How long does it take to build a booking website?", a: "Our Hamba Ethiopia Tours platform was delivered in 6 weeks. Timelines depend on the number of tours, languages and integrations, and we confirm a milestone plan before work begins." },
+      { q: "Do you build multilingual websites for tour operators?", a: "Yes. Hamba Ethiopia Tours, for example, runs in English, Spanish and French, and our other tour platforms support multiple languages for international travelers." },
+      { q: "Can visitors contact us on WhatsApp or live chat from the website?", a: "Yes. WhatsApp click-to-chat and live-chat enquiry points are part of the tour websites we build, as on EthioAfro Tours and Gonder Simien Tours." },
+      { q: "Can you add an AI chatbot to my tour website?", a: "Yes. We build AI chatbots and workflow automation, such as answering common traveler questions and qualifying enquiries. See our AI Automation & AI Solutions service for details." },
+      { q: "Will my tour company appear in Google and AI assistants like ChatGPT?", a: "We build the foundations that make it possible: fast pages, structured data, clear destination content and crawler access. No agency can guarantee a specific ranking or AI citation, but we set up tracking so you can measure your visibility." },
+    ],
+    relatedWork: ["hamba-tours", "gonder-simien-tours", "ethioafro-tours", "ethio-origins-tour"],
+  },
+]
 
 export function getServiceBySlug(slug: string): Service | undefined {
   return [...services, ...unlistedServices].find((s) => s.slug === slug)

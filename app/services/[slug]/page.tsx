@@ -6,6 +6,7 @@ import { useRef } from "react"
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import { PageCta } from "@/components/shared/page-cta"
+import { ServiceExtras } from "@/components/shared/service-extras"
 import { services, getServiceBySlug } from "@/lib/data/services"
 import { caseStudies } from "@/lib/data/case-studies"
 import { use } from "react"
@@ -148,6 +149,8 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </section>
+
+      <ServiceExtras service={service} />
 
       {/* Related case studies */}
       {relatedCases.length > 0 && (

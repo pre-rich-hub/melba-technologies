@@ -15,7 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const service = getServiceBySlug(slug)
   if (!service) return {}
   return buildMetadata({
-    title: `${service.title} in Ethiopia`,
+    // Add the location keyword only when the full <title> still fits in 60 characters.
+    title: service.title.length + " in Ethiopia".length + " | Melba Technology".length <= 60 ? `${service.title} in Ethiopia` : service.title,
     description: truncate(service.description),
     path: `/services/${service.slug}`,
   })

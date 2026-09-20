@@ -205,11 +205,9 @@ export default function ContactPage() {
                     className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform duration-300 ${openFaq === i ? "rotate-180" : ""}`}
                   />
                 </button>
-                {openFaq === i && (
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    {faq.a}
-                  </p>
-                )}
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed" hidden={openFaq !== i}>
+                  {faq.a}
+                </p>
               </motion.div>
             ))}
           </div>
