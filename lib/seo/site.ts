@@ -3,7 +3,7 @@
 // Facts mirror the visible footer / contact page (email, phone, address, socials).
 
 export const SITE = {
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://melba.et").replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.melba.et").replace(/\/$/, ""),
   name: "Melba Technology",
   legalName: "Melba Technology",
   shortName: "Melba",

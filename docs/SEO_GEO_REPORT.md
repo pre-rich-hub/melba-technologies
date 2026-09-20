@@ -9,7 +9,7 @@ Branch: `feature/geo-aio-seo`. Nothing here guarantees a ranking or an AI citati
 - Route layouts (server components) export `generateMetadata` and JSON-LD for the client-rendered pages, so those pages were not edited: `app/about`, `app/contact`, `app/services/(index)`, `app/services/[slug]`, `app/work/(index)`, `app/work/[slug]`, `app/blog/(index)`, `app/blog/[slug]`, `app/software-development-company-addis-ababa`.
 - `app/services/page.tsx` and `app/work/page.tsx` moved into `(index)` route groups (URLs unchanged) so listing schema does not leak into detail pages.
 - `app/robots.ts`, `app/sitemap.ts`, `app/llms.txt/route.ts`, `app/llms-full.txt/route.ts` (generated from the data files), `app/opengraph-image.tsx` (social card), `app/not-found.tsx`.
-- `next.config.mjs`: www to apex redirect, optional `NEXT_DIST_DIR`.
+- `next.config.mjs`: optional `NEXT_DIST_DIR`. (The apex to www redirect is a Vercel domain setting, so none is defined in code.)
 - `lib/seo/{site,metadata,schema,llms}.ts`, `components/seo/json-ld.tsx`: single source of truth for entity facts and typed schema helpers.
 - `lib/data/faqs.ts`: contact FAQs moved out of the page (no visual change) so JSON-LD reads the same source.
 - `scripts/seo-check.mjs` runs after `next build` (in `package.json` and `vercel.json`) and fails the build on invalid or incomplete JSON-LD, titles over 60 chars, duplicate titles, descriptions over 160 chars, missing canonical, or a wrong H1 count.

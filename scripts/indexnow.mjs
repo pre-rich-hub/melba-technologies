@@ -1,7 +1,7 @@
 // Pings IndexNow (Bing, Yandex and partners) with every URL in the live sitemap.
 // Run after each production deploy:  npm run indexnow
-// Optional: SITE_URL=https://melba.et node scripts/indexnow.mjs
-const SITE = (process.env.SITE_URL || "https://melba.et").replace(/\/$/, "")
+// Optional: SITE_URL=https://www.melba.et node scripts/indexnow.mjs
+const SITE = (process.env.SITE_URL || "https://www.melba.et").replace(/\/$/, "")
 const KEY = "9baa65b44e0afbbfd8adbf9be3404883" // must match public/9baa65b44e0afbbfd8adbf9be3404883.txt
 
 const xml = await (await fetch(`${SITE}/sitemap.xml`)).text()

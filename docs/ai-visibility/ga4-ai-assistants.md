@@ -3,7 +3,7 @@
 The site sends the events; GA4 channel groups are configured in the GA4 admin UI (they cannot be set from code).
 
 ## 1. Turn on tracking
-Create a GA4 web data stream for `https://melba.et`, copy the Measurement ID (`G-XXXXXXXXXX`) and set `NEXT_PUBLIC_GA_MEASUREMENT_ID` in Vercel (Production). Analytics load only in production and only when this variable is set. There is currently no cookie-consent banner; if you serve EU visitors, add one. The tracker already respects `localStorage["melba-analytics-consent"] = "denied"`.
+Create a GA4 web data stream for `https://www.melba.et`, copy the Measurement ID (`G-XXXXXXXXXX`) and set `NEXT_PUBLIC_GA_MEASUREMENT_ID` in Vercel (Production). Analytics load only in production and only when this variable is set. There is currently no cookie-consent banner; if you serve EU visitors, add one. The tracker already respects `localStorage["melba-analytics-consent"] = "denied"`.
 
 ## 2. Create the channel group
 Admin, Data display, Channel groups, Create new channel group. Name it "Channels with AI Assistants". Add a channel named **AI Assistants** *above* "Referral" with the condition:

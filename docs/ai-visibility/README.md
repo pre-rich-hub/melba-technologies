@@ -10,7 +10,7 @@
 ## Environment variables (set in Vercel)
 | Variable | Purpose |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | Optional; defaults to `https://melba.et` |
+| `NEXT_PUBLIC_SITE_URL` | Optional; defaults to `https://www.melba.et` |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | GA4 Measurement ID |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Search Console verification code |
 | `NEXT_PUBLIC_BING_SITE_VERIFICATION` | Bing Webmaster verification code (`msvalidate.01`) |

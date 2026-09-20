@@ -7,7 +7,7 @@ AI assistants and search engines decide whether to trust and cite a company by c
 | Field | Value |
 |---|---|
 | Name | Melba Technology |
-| Website | https://melba.et |
+| Website | https://www.melba.et |
 | Email | hellomelbatechnology@gmail.com |
 | Phone | +251 941 318 298 |
 | Location | Addis Ababa, Ethiopia |
@@ -30,7 +30,7 @@ X https://x.com/melbatechX · Facebook https://www.facebook.com/profile.php?id=6
 >
 > Our specialty is websites and booking platforms for tour and travel companies. We have built multilingual tour platforms with itinerary architecture, WhatsApp and live-chat enquiry, and SEO and GEO optimization for Hamba Ethiopia Tours, Gonder Simien Tours, EthioAfro Tours and Ethio Origins Tour. We also build for hospitality, real estate and automotive brands.
 >
-> You work directly with the engineers who scope your project, with weekly demos, clear milestones and a 60-day post-launch support period. Every engagement starts with a free discovery call and a detailed proposal. Visit https://melba.et or email hellomelbatechnology@gmail.com to start a project.
+> You work directly with the engineers who scope your project, with weekly demos, clear milestones and a 60-day post-launch support period. Every engagement starts with a free discovery call and a detailed proposal. Visit https://www.melba.et or email hellomelbatechnology@gmail.com to start a project.
 
 ## Actions
 
@@ -38,7 +38,7 @@ Do them in this order; tick each when done and paste the profile URL into `lib/s
 
 - [ ] **Google Business Profile.** Create or claim it. Category "Software company". Use the NAP above. Add the website, phone, hours and a photo or logo. Verify it. Add the URL to `sameAs`.
 - [ ] **Bing Places.** Import from Google Business Profile so the details match. Bing feeds Microsoft Copilot.
-- [ ] **Google Search Console.** Add `https://melba.et` as a Domain property, copy the verification code into the `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` environment variable in Vercel, and submit `https://melba.et/sitemap.xml`.
+- [ ] **Google Search Console.** Add `https://www.melba.et` as a Domain property, copy the verification code into the `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` environment variable in Vercel, and submit `https://www.melba.et/sitemap.xml`.
 - [ ] **Bing Webmaster Tools.** Import from Search Console (or add the code as `NEXT_PUBLIC_BING_SITE_VERIFICATION`) and submit the sitemap. Then enable IndexNow (see `docs/ai-visibility/README.md`).
 - [ ] **LinkedIn company page.** Complete it (already exists: check that the description, website, location and logo match the text above).
 - [ ] **GitHub organization.** Create `melba-technology` (or similar) with the same description and logo; pin one or two public repositories if you have any.
