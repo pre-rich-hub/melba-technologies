@@ -242,6 +242,14 @@ export const services: Service[] = [
   },
 ]
 
+// Services that have their own page but are intentionally not listed on /services or the home page
+// (keeps the existing layouts unchanged). Add entries here to publish a detail page.
+export const unlistedServices: Service[] = []
+
 export function getServiceBySlug(slug: string): Service | undefined {
-  return services.find((s) => s.slug === slug)
+  return [...services, ...unlistedServices].find((s) => s.slug === slug)
+}
+
+export function allServiceSlugs(): string[] {
+  return [...services, ...unlistedServices].map((s) => s.slug)
 }
