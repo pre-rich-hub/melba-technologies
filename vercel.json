@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "buildCommand": "next build",
+  "buildCommand": "next build && node scripts/seo-check.mjs",
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "headers": [
