@@ -70,7 +70,7 @@ export const services: Service[] = [
       "Accessible by default — WCAG 2.1 AA compliance built in, not bolted on",
       "Clean, documented codebase your team can maintain and extend independently",
     ],
-    relatedWork: ["hamba-tours", "hora-tours"],
+    relatedWork: ["hamba-tours", "ethioafro-tours", "gonder-simien-tours", "hora-tours"],
   },
   {
     slug: "mobile-development",

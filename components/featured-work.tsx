@@ -6,7 +6,7 @@ import { ArrowUpRight, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { caseStudies } from "@/lib/data/case-studies"
 
-const featured = caseStudies.slice(0, 3).map(study => ({
+const featured = caseStudies.slice(0, 6).map(study => ({
   slug: study.slug,
   title: study.title,
   category: study.category,
