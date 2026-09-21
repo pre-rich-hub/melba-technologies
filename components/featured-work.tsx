@@ -82,16 +82,17 @@ export function FeaturedWork() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card/50 to-transparent" />
 
-                  {/* Live site chip */}
+                  {/* Live site chip — always visible (no hover on touch devices) */}
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1.5 text-[10px] uppercase tracking-[0.10em] font-medium rounded-md border bg-background/80 backdrop-blur-sm border-border text-muted-foreground hover:text-ember hover:border-ember/40 transition-all duration-200 opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0"
+                    aria-label={`Visit ${project.title} live site (opens in a new tab)`}
+                    className="absolute bottom-3 right-3 z-10 flex items-center gap-2 min-h-10 px-4 py-2 text-xs sm:text-[11px] uppercase tracking-[0.08em] font-bold rounded-md bg-ember text-cream shadow-lg shadow-black/30 ring-1 ring-white/20 hover:bg-ember-light active:scale-95 transition-all duration-200"
                   >
-                    <ExternalLink className="w-2.5 h-2.5" />
-                    {project.domain}
+                    Visit live site
+                    <ExternalLink className="w-3.5 h-3.5" strokeWidth={2.5} />
                   </a>
                 </div>
 
