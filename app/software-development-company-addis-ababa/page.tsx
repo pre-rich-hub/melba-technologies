@@ -12,7 +12,7 @@ import { locationFaqs } from "@/lib/data/faqs"
 import { SITE } from "@/lib/seo/site"
 
 const industries = [
-  { industry: "Tour & travel", build: "Booking-ready, multilingual websites with WhatsApp and live-chat enquiry", work: [["Hamba Ethiopia Tours", "hamba-tours"], ["Gonder Simien Tours", "gonder-simien-tours"], ["EthioAfro Tours", "ethioafro-tours"], ["Ethio Origins Tour", "ethio-origins-tour"]] },
+  { industry: "Tour & travel", build: "Booking-ready, multilingual websites with WhatsApp and live-chat enquiry", work: [["Hamba Ethiopia Tours", "hamba-tours"], ["Gonder Simien Tours", "gonder-simien-tours"], ["EthioAfro Tours", "ethioafro-tours"], ["Ethio Origins Tour", "ethio-origins-tour"], ["Afar Horizon Expeditions", "afar-horizon-expeditions"], ["Simien Ethiopia Tours", "simien-ethiopia-tours"]] },
   { industry: "Real estate", build: "Luxury property listings, advisory booking and CRM integration", work: [["Maison", "maison-real-estate"]] },
   { industry: "Automotive & luxury", build: "Fleet showcases, memberships and real-time booking", work: [["PRESTIGE", "prestige-car-rental"]] },
   { industry: "Hospitality & dining", build: "Menus, reservations and private-dining enquiries", work: [["Aurum", "aurum-restaurant"]] },
