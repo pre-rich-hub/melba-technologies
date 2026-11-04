@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/hero-section"
 import { TrustStrip } from "@/components/trust-strip"
 import { ServicesPreview } from "@/components/services-preview"
 import { FeaturedWork } from "@/components/featured-work"
+import { PartnersSection } from "@/components/partners-section"
 import { WhyChooseUs } from "@/components/why-choose-us"
 import { FinalCta } from "@/components/final-cta"
 import type { Metadata } from "next"
@@ -29,6 +30,7 @@ export default function Home() {
       <TrustStrip />
       <ServicesPreview />
       <FeaturedWork />
+      <PartnersSection />
       <WhyChooseUs />
       <FinalCta />
     </main>
