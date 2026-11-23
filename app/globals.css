@@ -1,105 +1,69 @@
-/* v3 — refined ember brand system */
+/* v4 — light-only "airy studio" system: white canvas, navy ink, ember accent */
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+/* Site is light-only. The variant is kept so shadcn/ui `dark:` classes stay inert. */
 @custom-variant dark (&:is(.dark *));
 
 :root {
   color-scheme: light;
   --logo-filter: brightness(0);
-  /* ── Core brand: white + ember ── */
-  --background:           oklch(1 0 0);            /* pure white */
-  --foreground:           oklch(0.10 0.008 260);   /* near-black */
-  --card:                 oklch(0.97 0.005 90);
-  --card-foreground:      oklch(0.10 0.008 260);
-  --popover:              oklch(0.98 0.003 90);
-  --popover-foreground:   oklch(0.10 0.008 260);
 
-  /* Primary = ember burnt-orange */
-  --primary:              oklch(0.62 0.20 35);
-  --primary-foreground:   oklch(0.97 0.005 90);
+  /* ── Canvas & ink ── */
+  --background:           oklch(1 0 0);              /* pure white */
+  --foreground:           oklch(0.19 0.025 266);     /* navy ink  ~#161a2b */
+  --card:                 oklch(1 0 0);
+  --card-foreground:      oklch(0.19 0.025 266);
+  --popover:              oklch(1 0 0);
+  --popover-foreground:   oklch(0.19 0.025 266);
 
-  --secondary:            oklch(0.94 0.005 260);
-  --secondary-foreground: oklch(0.10 0.008 260);
-  --muted:                oklch(0.95 0.005 260);
-  --muted-foreground:     oklch(0.40 0.01 90);
-  --accent:               oklch(0.62 0.20 35);
-  --accent-foreground:    oklch(0.97 0.005 90);
+  /* Primary = ember burnt-orange (brand) */
+  --primary:              oklch(0.64 0.19 38);
+  --primary-foreground:   oklch(0.99 0 0);
+
+  --secondary:            oklch(0.965 0.006 266);
+  --secondary-foreground: oklch(0.19 0.025 266);
+  --muted:                oklch(0.97 0.005 266);
+  --muted-foreground:     oklch(0.48 0.02 266);
+  --accent:               oklch(0.64 0.19 38);
+  --accent-foreground:    oklch(0.99 0 0);
   --destructive:          oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.97 0.005 90);
-  --border:               oklch(0.85 0.01 260);
-  --input:                oklch(0.94 0.01 260);
-  --ring:                 oklch(0.62 0.20 35);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border:               oklch(0.915 0.008 266);
+  --input:                oklch(0.93 0.008 266);
+  --ring:                 oklch(0.64 0.19 38);
 
-  --chart-1: oklch(0.62 0.20 35);
-  --chart-2: oklch(0.70 0.18 40);
-  --chart-3: oklch(0.50 0.14 35);
+  --chart-1: oklch(0.64 0.19 38);
+  --chart-2: oklch(0.70 0.17 45);
+  --chart-3: oklch(0.52 0.14 38);
   --chart-4: oklch(0.80 0.08 60);
-  --chart-5: oklch(0.40 0.10 35);
-  --radius: 0.5rem;
+  --chart-5: oklch(0.42 0.10 38);
+  --radius: 0.875rem;
 
   /* ── Extended brand tokens ── */
-  --ember:       oklch(0.62 0.20 35);
-  --ember-light: oklch(0.68 0.20 37);
-  --ember-dim:   oklch(0.40 0.14 35);
-  --cream:       oklch(0.97 0.01 90);
-  --ink:         oklch(1 0 0);
-  --section-alt: oklch(0.985 0.003 90);
+  --ember:       oklch(0.64 0.19 38);
+  --ember-light: oklch(0.70 0.18 42);
+  --ember-dim:   oklch(0.45 0.13 38);
+  --ember-soft:  oklch(0.96 0.03 50);   /* tinted chip backgrounds */
+  --cream:       oklch(0.99 0 0);        /* text on ember / ink */
+  --ink:         oklch(0.19 0.025 266);  /* dark pill buttons */
+  --ink-soft:    oklch(0.28 0.03 266);
+  --sky:         oklch(0.95 0.025 250);  /* soft hero sky */
+  --section-alt: oklch(0.982 0.004 266); /* barely-there cool grey */
 
-  /* ── Surface hierarchy (light) ── */
-  --surface-hover: oklch(0.96 0.005 260);
-  --border-subtle: oklch(0.90 0.008 260);
-}
+  /* ── Surfaces ── */
+  --surface-hover: oklch(0.975 0.005 266);
+  --border-subtle: oklch(0.94 0.006 266);
 
-.dark {
-  color-scheme: dark;
-  --logo-filter: brightness(0) invert(1);
-
-  /* ── Softer near-black system (not pure #000) ── */
-  --background:           oklch(0.10 0.003 260);   /* ~#0f0f10 */
-  --foreground:           oklch(0.98 0.003 90);     /* ~#fafafa */
-
-  --card:                 oklch(0.13 0.004 260);    /* ~#161618 — visible against bg */
-  --card-foreground:      oklch(0.98 0.003 90);
-
-  --popover:              oklch(0.12 0.004 260);
-  --popover-foreground:   oklch(0.98 0.003 90);
-
-  --primary:              oklch(0.62 0.20 35);
-  --primary-foreground:   oklch(0.98 0.003 90);
-
-  --secondary:            oklch(0.16 0.005 260);
-  --secondary-foreground: oklch(0.98 0.003 90);
-
-  --muted:                oklch(0.18 0.005 260);    /* hover surfaces */
-  --muted-foreground:     oklch(0.80 0.005 260);    /* ~#d4d4d4 — improved contrast */
-
-  --accent:               oklch(0.62 0.20 35);
-  --accent-foreground:    oklch(0.98 0.003 90);
-
-  --destructive:          oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0.003 90);
-
-  --border:               oklch(0.24 0.005 260);    /* ~#27272a — visible but quiet */
-  --input:                oklch(0.18 0.005 260);
-  --ring:                 oklch(0.62 0.20 35);
-
-  --section-alt:          oklch(0.11 0.003 260);    /* ~#121214 */
-
-  /* ── Extended dark tokens ── */
-  --ember:       oklch(0.62 0.20 35);
-  --ember-light: oklch(0.68 0.20 37);
-  --ember-dim:   oklch(0.40 0.14 35);
-  --cream:       oklch(0.98 0.003 90);
-  --ink:         oklch(0.10 0.003 260);
-
-  /* ── Surface hierarchy ── */
-  --surface-hover: oklch(0.16 0.004 260);   /* ~#1a1a1c */
-  --border-subtle: oklch(0.20 0.004 260);   /* ~#1f1f22 */
+  /* ── Elevation (soft, diffused like the inspiration) ── */
+  --shadow-soft: 0 1px 2px oklch(0.19 0.025 266 / 0.04), 0 8px 24px -12px oklch(0.19 0.025 266 / 0.10);
+  --shadow-lift: 0 2px 4px oklch(0.19 0.025 266 / 0.04), 0 24px 60px -24px oklch(0.19 0.025 266 / 0.22);
+  --shadow-float: 0 30px 80px -30px oklch(0.25 0.06 266 / 0.35), 0 12px 24px -12px oklch(0.19 0.025 266 / 0.12);
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans), 'Geist', system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display: var(--font-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), 'Geist Mono', monospace;
 
   --color-background:          var(--background);
@@ -131,33 +95,52 @@
   --color-ember:       var(--ember);
   --color-ember-light: var(--ember-light);
   --color-ember-dim:   var(--ember-dim);
+  --color-ember-soft:  var(--ember-soft);
   --color-cream:       var(--cream);
   --color-ink:         var(--ink);
+  --color-ink-soft:    var(--ink-soft);
+  --color-sky:         var(--sky);
   --color-section-alt: var(--section-alt);
 
-  /* Surface hierarchy */
+  /* Surfaces */
   --color-surface-hover: var(--surface-hover);
   --color-border-subtle: var(--border-subtle);
 
-  --radius-sm: calc(var(--radius) - 2px);
-  --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) + 4px);
-  --radius-xl: calc(var(--radius) + 8px);
+  --shadow-soft:  var(--shadow-soft);
+  --shadow-lift:  var(--shadow-lift);
+  --shadow-float: var(--shadow-float);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+
+  --animate-marquee: marquee-ltr 40s linear infinite;
+  --animate-float: float-y 6s ease-in-out infinite;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
     scroll-behavior: smooth;
+    background: var(--background);
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: clip;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3 {
+    letter-spacing: -0.025em;
+  }
+  ::selection {
+    background: oklch(0.64 0.19 38 / 0.18);
   }
 }
 
-/* ── Marquee animations ── */
+/* ── Animations ── */
 @keyframes marquee-ltr {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -165,6 +148,59 @@
 @keyframes marquee-rtl {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(4%, -3%, 0) scale(1.06); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Edge-faded marquee track */
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.marquee-track:hover,
+.marquee-track:focus-within {
+  animation-play-state: paused;
+}
+
+/* Soft "sky" backdrop used by the hero, page heroes and final CTA */
+.sky-backdrop {
+  background:
+    radial-gradient(60% 50% at 15% 10%, oklch(0.93 0.04 250 / 0.9), transparent 70%),
+    radial-gradient(50% 45% at 85% 0%, oklch(0.95 0.035 55 / 0.9), transparent 70%),
+    radial-gradient(70% 60% at 50% 100%, oklch(0.98 0.01 266), transparent 70%),
+    linear-gradient(180deg, oklch(0.975 0.012 255) 0%, oklch(1 0 0) 100%);
+}
+.cloud {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(40px);
+  background: white;
+  animation: drift 18s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Dotted pattern (used behind mockups) */
+.dot-grid {
+  background-image: radial-gradient(oklch(0.19 0.025 266 / 0.09) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* ── Glass effect ── */
+.glass {
+  background: color-mix(in srgb, white 90%, transparent);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid oklch(1 0 0 / 0.7);
 }
 
 /* ── Reduced motion ── */
@@ -175,11 +211,4 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* ── Glass effect ── */
-.glass {
-  background: color-mix(in srgb, var(--card) 75%, transparent);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
 }

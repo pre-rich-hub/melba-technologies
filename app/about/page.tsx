@@ -1,9 +1,17 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion } from "framer-motion"
+import { Quote, Gem, Scale, Eye, Telescope, Compass, Globe2 } from "lucide-react"
+import { Reveal, SectionBadge, ScribbleUnderline, SparkDoodle, ScrollRevealText } from "@/components/shared/decor"
 import { PageHero } from "@/components/shared/page-hero"
 import { PageCta } from "@/components/shared/page-cta"
+
+const valueStyles = [
+  { icon: Gem, tint: "from-[oklch(0.95_0.05_55)] to-[oklch(0.90_0.09_45)] text-[oklch(0.52_0.17_40)]" },
+  { icon: Scale, tint: "from-[oklch(0.95_0.03_250)] to-[oklch(0.88_0.07_255)] text-[oklch(0.45_0.14_260)]" },
+  { icon: Eye, tint: "from-[oklch(0.95_0.04_160)] to-[oklch(0.88_0.08_160)] text-[oklch(0.45_0.11_160)]" },
+  { icon: Telescope, tint: "from-[oklch(0.95_0.04_300)] to-[oklch(0.89_0.07_300)] text-[oklch(0.47_0.14_300)]" },
+]
 
 const values = [
   {
@@ -68,17 +76,9 @@ const delivery = [
 ]
 
 
+const EASE = [0.16, 1, 0.3, 1] as const
+
 export default function AboutPage() {
-  const missionRef = useRef(null)
-  const principlesRef = useRef(null)
-  const valuesRef = useRef(null)
-  const deliveryRef = useRef(null)
-
-  const missionInView = useInView(missionRef, { once: true, margin: "-80px" })
-  const principlesInView = useInView(principlesRef, { once: true, margin: "-80px" })
-  const valuesInView = useInView(valuesRef, { once: true, margin: "-80px" })
-  const deliveryInView = useInView(deliveryRef, { once: true, margin: "-80px" })
-
   return (
     <main>
       <PageHero
@@ -88,126 +88,126 @@ export default function AboutPage() {
         description="Melba Technology is inspired by the timeless wisdom of the Oromo Gadaa System — one of Africa’s oldest indigenous systems of leadership, knowledge, unity, and generational progress."
       />
 
-      {/* Heritage & Mission */}
-      <section
-        className="py-16 md:py-20 lg:py-24 border-b border-border relative overflow-hidden"
-        style={{ background: "var(--section-alt)" }}
-        ref={missionRef}
-      >
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
-          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}
-        />
-
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-20 items-start">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={missionInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8 }}
-            >
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-6">Our Legacy</p>
-              <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.05] text-balance mb-8">
-                Bridging Heritage<br />
-                <span className="text-ember">With Innovation.</span>
+      {/* ── Heritage & Mission ── */}
+      <section className="relative overflow-hidden bg-background py-16 md:py-24 lg:py-32">
+        <div className="mx-auto grid max-w-7xl items-start gap-16 px-5 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:px-8">
+          <div>
+            <Reveal><SectionBadge>Our legacy</SectionBadge></Reveal>
+            <Reveal delay={0.08}>
+              <h2 className="relative mt-5 text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl">
+                Bridging heritage{" "}
+                <span className="relative inline-block whitespace-nowrap">
+                  with innovation.
+                  <ScribbleUnderline className="-bottom-2 h-3.5" delay={0.4} />
+                </span>
               </h2>
-              <div className="space-y-6 text-base text-muted-foreground leading-relaxed">
-                <p>
-                  For centuries, the Gadaa System shaped communities through responsibility, innovation, collaboration, and visionary thinking. At Melba Technology, we carry that same spirit into the digital age.
-                </p>
-                <div className="pl-6 border-l-2 border-ember/30">
-                  <p className="italic text-foreground/80 font-medium">
-                    "Rooted in heritage. Built for the future."
-                  </p>
+            </Reveal>
+            <Reveal delay={0.16}>
+              <p className="mt-7 max-w-lg text-base leading-relaxed text-muted-foreground">
+                For centuries, the Gadaa System shaped communities through responsibility, innovation, collaboration, and visionary thinking. At Melba Technology, we carry that same spirit into the digital age.
+              </p>
+            </Reveal>
+
+            {/* Quote card */}
+            <Reveal delay={0.24}>
+              <figure className="sky-backdrop relative mt-10 overflow-hidden rounded-3xl p-8 shadow-soft ring-1 ring-border-subtle">
+                <Quote className="size-9 fill-ember/15 text-ember" strokeWidth={1.5} />
+                <blockquote className="mt-4 text-2xl font-bold leading-snug tracking-tight sm:text-3xl">
+                  Rooted in heritage. Built for the future.
+                </blockquote>
+                <figcaption className="mt-4 text-sm text-muted-foreground">— The Melba promise</figcaption>
+                <SparkDoodle className="absolute right-6 top-6 w-9 text-ember" />
+              </figure>
+            </Reveal>
+          </div>
+
+          <div className="space-y-6">
+            <Reveal delay={0.1}>
+              <p className="text-xl font-medium leading-relaxed text-foreground">
+                We believe technology is more than code and design — it is a tool that connects people, empowers businesses, and builds the future.
+              </p>
+            </Reveal>
+            <Reveal delay={0.16}>
+              <p className="text-base leading-relaxed text-muted-foreground">
+                Rooted in Ethiopian identity and driven by global standards, we create modern digital solutions that help businesses grow, compete, and thrive in a rapidly evolving world.
+              </p>
+            </Reveal>
+            <Reveal delay={0.22}>
+              <p className="text-base leading-relaxed text-muted-foreground">
+                Our mission is to combine the strength of African wisdom with the limitless possibilities of technology. From Ethiopia to the world, Melba Technology exists to build impactful digital experiences that inspire progress, create opportunity, and leave a lasting legacy for the next generation.
+              </p>
+            </Reveal>
+
+            {/* Name origin */}
+            <Reveal delay={0.28}>
+              <div className="rounded-3xl border border-border-subtle bg-white p-7 shadow-soft">
+                <div className="flex items-center gap-3">
+                  <span className="flex size-10 items-center justify-center rounded-xl bg-ember-soft text-lg font-extrabold text-ember">M</span>
+                  <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ink-soft">The name Melba</p>
                 </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={missionInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="space-y-8"
-            >
-              <div className="space-y-6">
-                <p className="text-lg text-foreground/90 leading-relaxed font-medium">
-                  We believe technology is more than code and design — it is a tool that connects people, empowers businesses, and builds the future.
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Rooted in Ethiopian identity and driven by global standards, we create modern digital solutions that help businesses grow, compete, and thrive in a rapidly evolving world.
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Our mission is to combine the strength of African wisdom with the limitless possibilities of technology. From Ethiopia to the world, Melba Technology exists to build impactful digital experiences that inspire progress, create opportunity, and leave a lasting legacy for the next generation.
-                </p>
-              </div>
-
-              {/* Name origin callout */}
-              <div className="rounded-sm border border-border bg-card/40 p-6">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-semibold mb-3">
-                  The Name Melba
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  The name <span className="text-foreground font-medium">Melba</span> comes from the{" "}
-                  <span className="text-foreground">Oromo Gadaa System</span> — one of
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  The name <span className="font-semibold text-foreground">Melba</span> comes from the{" "}
+                  <span className="font-medium text-foreground">Oromo Gadaa System</span> — one of
                   Africa&apos;s most respected indigenous systems of leadership and knowledge transfer.
-                  In the Gadaa tradition, Melba symbolizes{" "}
-                  <span className="text-foreground/70">
-                    growth, preparation, responsibility, leadership
-                  </span>
-                  , and the passing of knowledge from one generation to the next.
+                  In the Gadaa tradition, Melba symbolizes growth, preparation, responsibility, leadership,
+                  and the passing of knowledge from one generation to the next.
                 </p>
               </div>
+            </Reveal>
 
-              <div className="pt-8 grid grid-cols-2 gap-8 border-t border-border">
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-wider text-ember font-semibold mb-2">Philosophy</p>
-                  <p className="text-sm text-foreground/70">Responsibility & Visionary Thinking</p>
-                </div>
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-wider text-ember font-semibold mb-2">Goal</p>
-                  <p className="text-sm text-foreground/70">Global Standards, Local Roots</p>
-                </div>
+            <Reveal delay={0.34}>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {[
+                  { icon: Compass, label: "Philosophy", value: "Responsibility & Visionary Thinking" },
+                  { icon: Globe2, label: "Goal", value: "Global Standards, Local Roots" },
+                ].map(item => (
+                  <div key={item.label} className="flex items-start gap-3 rounded-2xl bg-section-alt p-5 ring-1 ring-border-subtle">
+                    <item.icon className="mt-0.5 size-5 shrink-0 text-ember" />
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">{item.label}</p>
+                      <p className="mt-1 text-sm font-semibold text-foreground">{item.value}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </motion.div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Engineering Principles */}
-      <section className="py-16 md:py-20 lg:py-24" ref={principlesRef}>
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={principlesInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="mb-16"
-          >
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">Engineering Philosophy</p>
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-              <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[0.92]">
-                How We Think
-              </h2>
-              <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
+      {/* ── Engineering principles ── */}
+      <section className="relative bg-section-alt py-16 md:py-24 lg:py-32">
+        <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16 lg:px-8">
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <Reveal><SectionBadge>Engineering philosophy</SectionBadge></Reveal>
+            <ScrollRevealText
+              text="How we think"
+              accent="think"
+              className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
+            />
+            <Reveal delay={0.1}>
+              <p className="mt-5 max-w-sm text-base leading-relaxed text-muted-foreground">
                 Five principles that govern every technical decision we make — from the first design session to the last deployment.
               </p>
-            </div>
-            <div className="mt-12 h-px bg-border" />
-          </motion.div>
+            </Reveal>
+          </div>
 
-          <div className="divide-y divide-border">
+          <div className="space-y-4">
             {principles.map((p, i) => (
               <motion.div
                 key={p.n}
-                initial={{ opacity: 0, x: -16 }}
-                animate={principlesInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.55, delay: i * 0.09 }}
-                className="group flex gap-8 py-8 hover:bg-card/30 transition-colors duration-300 -mx-4 px-4 rounded-md"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: i * 0.05, ease: EASE }}
+                className="group flex gap-5 rounded-3xl border border-border-subtle bg-white p-6 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift sm:gap-7 sm:p-8"
               >
-                <span className="text-xs font-bold text-ember/50 tabular-nums flex-shrink-0 mt-1 group-hover:text-ember transition-colors">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-section-alt text-sm font-bold tabular-nums text-ink-soft ring-1 ring-border-subtle transition-all duration-500 group-hover:bg-ember group-hover:text-white group-hover:ring-ember">
                   {p.n}
                 </span>
                 <div>
-                  <h3 className="font-semibold mb-2 group-hover:text-ember transition-colors duration-300">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">{p.desc}</p>
+                  <h3 className="text-lg font-semibold">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -215,85 +215,82 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
-      <section
-        className="py-16 md:py-20 lg:py-24 border-y border-border"
-        style={{ background: "var(--section-alt)" }}
-        ref={valuesRef}
-      >
+      {/* ── Values ── */}
+      <section className="relative bg-background py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={valuesInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="mb-16"
-          >
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">Our Values</p>
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[0.92]">
-              What We Stand For
-            </h2>
-          </motion.div>
+          <div className="mx-auto max-w-2xl text-center">
+            <Reveal><SectionBadge>Our values</SectionBadge></Reveal>
+            <ScrollRevealText
+              text="What we stand for"
+              accent="stand"
+              className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
+            />
+          </div>
 
-          <div className="grid md:grid-cols-2 gap-px bg-border rounded-md overflow-hidden">
-            {values.map((v, i) => (
-              <motion.div
-                key={v.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={valuesInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="group relative bg-card/40 hover:bg-card/80 p-8 transition-colors duration-500 overflow-hidden"
-              >
-                <div className="flex gap-4 relative z-10">
-                  <div
-                    className="w-[3px] rounded-full bg-ember flex-shrink-0 opacity-60 group-hover:opacity-100 transition-opacity mt-1"
-                    style={{ height: "1.2em" }}
-                  />
-                  <div>
-                    <h3 className="font-semibold mb-2">{v.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{v.description}</p>
+          <div className="mt-10 md:mt-16 grid gap-6 md:grid-cols-2">
+            {values.map((v, i) => {
+              const style = valueStyles[i % valueStyles.length]
+              return (
+                <motion.div
+                  key={v.title}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.7, delay: (i % 2) * 0.1, ease: EASE }}
+                  className="group flex gap-6 rounded-3xl border border-border-subtle bg-white p-7 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift sm:p-8"
+                >
+                  <div className={`flex size-14 shrink-0 items-center justify-center rounded-[1.1rem] bg-gradient-to-br shadow-[inset_0_-6px_12px_rgb(0_0_0/0.06),inset_0_2px_4px_rgb(255_255_255/0.9),0_14px_28px_-14px_rgb(0_0_0/0.25)] transition-transform duration-500 group-hover:rotate-[-6deg] ${style.tint}`}>
+                    <style.icon className="size-6" strokeWidth={1.8} />
                   </div>
-                </div>
-                {/* Bottom sweep */}
-                <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-ember transition-all duration-700 ease-out" />
-              </motion.div>
-            ))}
+                  <div>
+                    <h3 className="text-lg font-semibold">{v.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v.description}</p>
+                  </div>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* How We Deliver */}
-      <section className="py-16 md:py-20 lg:py-24" ref={deliveryRef}>
+      {/* ── How we deliver: connected timeline ── */}
+      <section className="relative bg-section-alt py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={deliveryInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="mb-16"
-          >
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">How We Work</p>
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[0.92]">
-              How We Deliver
-            </h2>
-          </motion.div>
+          <div className="max-w-2xl">
+            <Reveal><SectionBadge>How we work</SectionBadge></Reveal>
+            <ScrollRevealText
+              text="How we deliver"
+              accent="deliver"
+              className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
+            />
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-px bg-border rounded-md overflow-hidden">
+          <div className="relative mt-10 md:mt-16 grid gap-6 md:grid-cols-3">
+            {/* connector line */}
+            <motion.div
+              aria-hidden
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 1.4, ease: "easeInOut" }}
+              className="absolute left-[16%] right-[16%] top-7 hidden h-px origin-left border-t-2 border-dashed border-ember/30 md:block"
+            />
             {delivery.map((d, i) => (
               <motion.div
                 key={d.title}
-                initial={{ opacity: 0, y: 16 }}
-                animate={deliveryInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="group relative bg-card/40 hover:bg-card/80 p-8 transition-colors duration-500 overflow-hidden"
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: 0.2 + i * 0.15, ease: EASE }}
+                className="relative text-center"
               >
-                <div className="relative z-10">
-                  <span className="text-5xl font-bold text-foreground/[0.04] leading-none block mb-5 select-none tabular-nums">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="font-semibold mb-3">{d.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{d.desc}</p>
+                <span className="relative z-10 mx-auto flex size-14 items-center justify-center rounded-full bg-ink text-base font-bold text-white shadow-lift ring-8 ring-section-alt">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="mt-6 rounded-3xl border border-border-subtle bg-white p-7 text-left shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
+                  <h3 className="text-lg font-semibold">{d.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d.desc}</p>
                 </div>
-                {/* Bottom sweep */}
-                <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-ember transition-all duration-700 ease-out" />
               </motion.div>
             ))}
           </div>

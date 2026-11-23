@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Plus_Jakarta_Sans, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { ThemeProvider } from '@/components/theme-provider'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { Toaster } from "sonner"
@@ -11,9 +10,10 @@ import { organizationSchema, websiteSchema } from '@/lib/seo/schema'
 import { SITE } from '@/lib/seo/site'
 import './globals.css'
 
-const geistSans = Geist({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-jakarta",
+  display: "swap",
 })
 
 const geistMono = Geist_Mono({
@@ -56,21 +56,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}>
+    <html lang="en" className="light" style={{ colorScheme: "light" }} data-scroll-behavior="smooth">
+      <body className={`${jakarta.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}>
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          storageKey="melba-theme"
-        >
           <Navigation />
           {children}
           <Footer />
           <Toaster
             position="bottom-right"
-            theme="dark"
+            theme="light"
             toastOptions={{
               style: {
                 background: 'var(--card)',
@@ -85,7 +79,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           />
           {process.env.NODE_ENV === 'production' && <Analytics />}
           <Tracking />
-        </ThemeProvider>
       </body>
     </html>
   )

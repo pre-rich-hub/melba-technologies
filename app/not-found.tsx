@@ -18,10 +18,10 @@ export default function NotFound() {
       />
       <section className="pb-16">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 flex flex-wrap gap-6">
-          <Link href="/services" className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-ember transition-colors">
+          <Link href="/services" className="text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-ember transition-colors">
             Services →
           </Link>
-          <Link href="/work" className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-ember transition-colors">
+          <Link href="/work" className="text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-ember transition-colors">
             Our work →
           </Link>
         </div>

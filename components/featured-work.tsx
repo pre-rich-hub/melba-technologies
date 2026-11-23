@@ -1,147 +1,59 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
-import { ArrowUpRight, ExternalLink } from "lucide-react"
+import { WorkCard } from "@/components/shared/work-card"
+import { SectionBadge, Reveal, ScrollRevealText } from "@/components/shared/decor"
+import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import { caseStudies } from "@/lib/data/case-studies"
 
-const featured = caseStudies.slice(0, 6).map(study => ({
-  slug: study.slug,
-  title: study.title,
-  category: study.category,
-  industry: study.industry,
-  liveUrl: study.liveUrl,
-  domain: new URL(study.liveUrl).hostname.replace('www.', ''),
-  impact: study.tagline,
-  tech: study.technologies,
-  thumbUrl: study.thumbnail,
-}))
+const featured = caseStudies.slice(0, 6)
 
 export function FeaturedWork() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-80px" })
-
   return (
-    <section id="work" className="relative py-16 md:py-20 lg:py-24 overflow-hidden" style={{ background: "var(--section-alt)" }}>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8" ref={ref}>
-
+    <section id="work" className="relative overflow-hidden bg-background py-16 md:py-24 lg:py-32">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
-            Selected Work
-          </p>
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[0.92] text-balance">
-              Work That<br />
-              <span className="text-ember">Defines</span> Industries
-            </h2>
-            <div className="lg:text-right">
-              <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mb-5">
-                From luxury travel to fine dining to real estate — digital platforms built to convert at the highest end of every market.
-              </p>
-              <Link
-                href="/work"
-                className="inline-flex items-center gap-1.5 text-sm text-ember hover:text-ember-light transition-colors duration-300 font-medium"
-              >
-                View all case studies
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
+        <div className="mb-10 flex flex-col gap-6 md:mb-14 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <Reveal>
+              <SectionBadge>Selected work</SectionBadge>
+            </Reveal>
+            <ScrollRevealText
+              text="Work that defines industries"
+              accent="defines"
+              className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
+            />
           </div>
-          <div className="mt-12 h-px bg-border" />
-        </motion.div>
+          <Reveal delay={0.1} className="lg:max-w-xs lg:text-right">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              From luxury travel to fine dining to real estate — digital platforms built to convert at the highest end of every market.
+            </p>
+            <Link
+              href="/work"
+              className="group mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-foreground"
+            >
+              View all case studies
+              <span className="flex size-6 items-center justify-center rounded-full bg-ink text-white transition-transform group-hover:translate-x-0.5">
+                <ArrowUpRight className="size-3.5" />
+              </span>
+            </Link>
+          </Reveal>
+        </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
           {featured.map((project, i) => (
-            <motion.div
-              key={project.slug}
-              initial={{ opacity: 0, y: 28 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: i * 0.12 }}
-              className="flex flex-col"
-            >
-              <div className="group relative flex flex-col rounded-md border border-border bg-card/40 hover:bg-card/80 overflow-hidden flex-1 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-
-
-                {/* Screenshot thumbnail */}
-                <div className="relative h-[210px] overflow-hidden flex-shrink-0 border-b border-border">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={project.thumbUrl}
-                    alt={`${project.title} website preview`}
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/50 to-transparent" />
-
-                  {/* Live site chip — always visible (no hover on touch devices) */}
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    aria-label={`Visit ${project.title} live site (opens in a new tab)`}
-                    className="absolute bottom-3 right-3 z-10 flex items-center gap-2 min-h-10 px-4 py-2 text-xs sm:text-[11px] uppercase tracking-[0.08em] font-bold rounded-md bg-ember text-cream shadow-lg shadow-black/30 ring-1 ring-white/20 hover:bg-ember-light active:scale-95 transition-all duration-200"
-                  >
-                    Visit live site
-                    <ExternalLink className="w-3.5 h-3.5" strokeWidth={2.5} />
-                  </a>
-                </div>
-
-                {/* Content */}
-                <Link href={`/work/${project.slug}`} className="relative z-10 flex flex-col flex-1 p-7">
-
-                  {/* Top row */}
-                  <div className="flex items-start justify-between mb-5">
-                    <span className="text-[10px] uppercase tracking-[0.20em] font-medium text-ember/80">
-                      {project.industry}
-                    </span>
-                    <div className="w-7 h-7 rounded-full border border-border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-1 group-hover:translate-y-0">
-                      <ArrowUpRight className="w-3 h-3 text-ember" />
-                    </div>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="font-bold text-3xl leading-tight tracking-tight mb-2 group-hover:text-ember transition-colors">
-                    {project.title}
-                  </h3>
-
-                  {/* Category */}
-                  <p className="text-[10px] uppercase tracking-[0.14em] mb-4 font-medium text-ember/60">
-                    {project.category}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
-                    {project.impact}
-                  </p>
-
-                  {/* Tech tags */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {Array.from(new Set(project.tech)).map((t) => (
-                      <span
-                        key={t}
-                        className="px-2.5 py-1 text-[10px] uppercase tracking-[0.10em] border border-border rounded-md text-muted-foreground"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </Link>
-
-                {/* Bottom sweep */}
-                <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-ember transition-all duration-700 ease-out" />
-              </div>
-            </motion.div>
+            <WorkCard key={project.slug} project={project} index={i} />
           ))}
+        </div>
+        <div className="mt-8 text-center md:hidden">
+          <Link
+            href="/work"
+            className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-cream shadow-lift"
+          >
+            View all {caseStudies.length} projects
+            <ArrowUpRight className="size-4" />
+          </Link>
         </div>
       </div>
     </section>

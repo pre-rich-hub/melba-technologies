@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ScribbleUnderline, SparkDoodle, SectionBadge } from "@/components/shared/decor"
 
 interface PageHeroProps {
   eyebrow:     string
@@ -11,40 +12,38 @@ interface PageHeroProps {
   dark?:       boolean
 }
 
-export function PageHero({ eyebrow, title, highlighted, titleAfter, description, dark = false }: PageHeroProps) {
+// `dark` is kept for API compatibility; the site is light-only now.
+export function PageHero({ eyebrow, title, highlighted, titleAfter, description }: PageHeroProps) {
   return (
     <section
-      className={`relative pt-32 pb-10 md:pt-36 md:pb-14 overflow-hidden ${dark ? "bg-card/40" : "bg-background"}`}
+      className={`relative overflow-hidden pt-36 pb-14 md:pt-44 md:pb-20 sky-backdrop`}
     >
-      {dark && (
-        <div
-          className="absolute inset-0 opacity-[0.025] pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-          }}
-        />
-      )}
+      <div aria-hidden className="cloud left-[-8%] top-[20%] h-40 w-[32rem] opacity-80" />
+      <div aria-hidden className="cloud right-[-10%] top-[0%] h-36 w-[26rem] opacity-90" style={{ animationDelay: "-7s" }} />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-7"
         >
-          {eyebrow}
-        </motion.p>
+          <SectionBadge>{eyebrow}</SectionBadge>
+        </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[0.92] mb-8 text-balance max-w-4xl text-foreground"
+          className="relative mt-7 mb-7 max-w-4xl text-4xl font-extrabold leading-[1.05] tracking-[-0.03em] text-balance text-foreground sm:text-5xl lg:text-[4rem]"
         >
           {title}{" "}
-          {highlighted && <span className="text-ember">{highlighted}</span>}
+          {highlighted && (
+            <span className="relative inline-block">
+              {highlighted}
+              <ScribbleUnderline className="-bottom-1.5 h-3.5 sm:h-4" delay={0.7} />
+              <SparkDoodle className="absolute -right-9 -top-6 hidden w-8 text-ember sm:block" delay={1} />
+            </span>
+          )}
           {titleAfter && ` ${titleAfter}`}
         </motion.h1>
 
@@ -52,17 +51,10 @@ export function PageHero({ eyebrow, title, highlighted, titleAfter, description,
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.28 }}
-          className="text-base leading-relaxed max-w-2xl text-muted-foreground"
+          className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
           {description}
         </motion.p>
-
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="mt-12 h-px origin-left bg-border"
-        />
       </div>
     </section>
   )

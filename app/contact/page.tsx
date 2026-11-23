@@ -1,8 +1,9 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
-import { ArrowRight, Mail, MapPin, Phone, ChevronDown } from "lucide-react"
+import { motion } from "framer-motion"
+import { useState } from "react"
+import { ArrowRight, ArrowUpRight, Mail, MapPin, Phone, Zap } from "lucide-react"
+import { FaqList } from "@/components/shared/faq-list"
 import { toast } from "sonner"
 import { PageHero } from "@/components/shared/page-hero"
 import { contactFaqs as faqs } from "@/lib/data/faqs"
@@ -11,13 +12,7 @@ import { trackEvent } from "@/components/analytics/tracking"
 
 
 export default function ContactPage() {
-  const formRef = useRef(null)
-  const faqRef = useRef(null)
-  const formInView = useInView(formRef, { once: true, margin: "-60px" })
-  const faqInView = useInView(faqRef, { once: true, margin: "-60px" })
-
   const [form, setForm] = useState({ name: "", email: "", company: "", source: "", message: "" })
-  const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -51,7 +46,21 @@ export default function ContactPage() {
     }
   }
 
-  const inputClass = "w-full bg-input border border-border focus:border-ember rounded-md px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ember/15 transition-colors duration-300"
+  const inputClass = "w-full rounded-xl border border-border-subtle bg-section-alt px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground/70 transition-all duration-300 focus:border-ember focus:bg-white focus:outline-none focus:ring-4 focus:ring-ember/10"
+  const labelClass = "mb-2 block text-sm font-semibold text-foreground"
+  const EASE = [0.16, 1, 0.3, 1] as const
+
+  const channels = [
+    { icon: Mail, label: "Email us", value: "hellomelbatechnology@gmail.com", href: "mailto:hellomelbatechnology@gmail.com" },
+    { icon: Phone, label: "Call us", value: "+251 941 318 298", href: "tel:+251941318298" },
+    { icon: MapPin, label: "Visit us", value: "Addis Ababa, Ethiopia", href: null },
+  ]
+
+  const steps = [
+    { n: "01", title: "Submit your brief", desc: "Use this form or email us directly." },
+    { n: "02", title: "Discovery call", desc: "45-minute call to understand your goals." },
+    { n: "03", title: "Scope & proposal", desc: "Detailed scope, timeline, and fixed quote." },
+  ]
 
   return (
     <main>
@@ -63,35 +72,36 @@ export default function ContactPage() {
         description="Tell us about your project. We’ll review your requirements and respond within 24 hours with clear next steps, including scope discussion and timeline estimation."
       />
 
-      {/* Form + Info */}
-      <section className="py-16 md:py-20 lg:py-24" ref={formRef}>
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16">
-
-            {/* Form */}
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              animate={formInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-2xl font-semibold mb-8">Start the Conversation</h2>
-              <form className="space-y-5" onSubmit={handleSubmit}>
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Your Name</label>
-                    <input type="text" required placeholder="John Doe" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} />
-                  </div>
-                  <div>
-                    <label className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Email Address</label>
-                    <input type="email" required placeholder="john@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />
-                  </div>
+      {/* ── Form + info ── */}
+      <section className="relative z-10 -mt-6 bg-transparent pb-20 md:pb-28">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-6 lg:grid-cols-[1.25fr_1fr] lg:px-8 [&>*]:min-w-0">
+          {/* Form card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
+            className="rounded-[2rem] border border-border-subtle bg-white p-6 shadow-float sm:p-10"
+          >
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Start the conversation</h2>
+            <p className="mt-2 text-sm text-muted-foreground">A few details help us come back with something useful.</p>
+            <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="name" className={labelClass}>Your name</label>
+                  <input id="name" type="text" required placeholder="John Doe" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} />
                 </div>
                 <div>
-                  <label className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Company</label>
-                  <input type="text" placeholder="Your Company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className={inputClass} />
+                  <label htmlFor="email" className={labelClass}>Email address</label>
+                  <input id="email" type="email" required placeholder="john@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />
+                </div>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="company" className={labelClass}>Company</label>
+                  <input id="company" type="text" placeholder="Your company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className={inputClass} />
                 </div>
                 <div>
-                  <label htmlFor="source" className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">How Did You Find Us?</label>
+                  <label htmlFor="source" className={labelClass}>How did you find us?</label>
                   <select id="source" value={form.source} onChange={(e) => setForm({ ...form, source: e.target.value })} className={inputClass}>
                     <option value="">Select an option</option>
                     <option value="ChatGPT / AI assistant">ChatGPT / AI assistant</option>
@@ -102,132 +112,102 @@ export default function ContactPage() {
                     <option value="Other">Other</option>
                   </select>
                 </div>
-                <div>
-                  <label className="font-mono block text-xs uppercase tracking-[0.14em] text-muted-foreground mb-2">Tell Us About Your Project</label>
-                  <textarea rows={6} placeholder="Describe your project goals, timeline, and key requirements..." value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${inputClass} resize-none`} />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="inline-flex items-center gap-2.5 w-full justify-center px-8 py-4 text-sm font-semibold rounded-md bg-ember text-cream hover:bg-ember-light transition-colors duration-300 group disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                  <ArrowRight className={`h-4 w-4 ${isSubmitting ? "hidden" : "group-hover:translate-x-1"} transition-transform`} />
-                </button>
-                <p className="text-xs text-muted-foreground/60 text-center">
-                  We typically respond within 24 hours. No spam, ever.
-                </p>
-              </form>
-            </motion.div>
-
-            {/* Contact info */}
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              animate={formInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="space-y-8"
-            >
-              {/* Direct contact */}
-              <div className="rounded-md border border-border bg-card/40 p-8">
-                <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground mb-7">Direct Contact</h3>
-                <div className="space-y-6">
-                  {[
-                    { icon: Mail, label: "Email", value: "hellomelbatechnology@gmail.com", href: "mailto:hellomelbatechnology@gmail.com" },
-                    { icon: Phone, label: "Phone", value: "+251941318298", href: "tel:+251941318298" },
-                    { icon: MapPin, label: "HQ", value: "Addis Ababa, Ethiopia", href: null },
-                  ].map(({ icon: Icon, label, value, href }) => (
-                    <div key={label} className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-md border border-border flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-4 h-4 text-ember" />
-                      </div>
-                      <div>
-                        <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-1">{label}</p>
-                        {href ? (
-                          <a href={href} className="text-sm text-foreground hover:text-ember transition-colors">{value}</a>
-                        ) : (
-                          <p className="text-sm text-foreground">{value}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
               </div>
-
-              {/* Status */}
-              <div className="rounded-md border border-ember/25 bg-ember/5 p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="w-2 h-2 rounded-full bg-ember animate-pulse" />
-                  <span className="font-mono text-xs uppercase tracking-[0.16em] text-ember font-medium">Quick Response</span>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  We respond to every inquiry within 24 hours. No automated replies — a real engineer reads every message.
-                </p>
+              <div>
+                <label htmlFor="message" className={labelClass}>Tell us about your project</label>
+                <textarea id="message" rows={6} placeholder="Describe your project goals, timeline, and key requirements..." value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${inputClass} resize-none`} />
               </div>
-
-              {/* Discovery process */}
-              <div className="rounded-md border border-border bg-card/40 p-8">
-                <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground mb-6">Discovery Process</h3>
-                <div className="space-y-5">
-                  {[
-                    { n: "01", title: "Submit your brief", desc: "Use this form or email us directly." },
-                    { n: "02", title: "Discovery call", desc: "45-minute call to understand your goals." },
-                    { n: "03", title: "Proposal & proposal", desc: "Detailed scope, timeline, and fixed quote." },
-                  ].map((s) => (
-                    <div key={s.n} className="flex gap-4">
-                      <span className="font-mono text-xs font-bold text-ember/60 tabular-nums mt-0.5 flex-shrink-0">{s.n}</span>
-                      <div>
-                        <p className="text-sm font-semibold mb-0.5">{s.title}</p>
-                        <p className="text-xs text-muted-foreground">{s.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-16 md:py-20 lg:py-24" ref={faqRef}>
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={faqInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="mb-14"
-          >
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">FAQ</p>
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[0.92]">
-              Common Questions
-            </h2>
-          </motion.div>
-          <div className="max-w-3xl divide-y divide-border">
-            {faqs.map((faq, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 12 }}
-                animate={faqInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.07 }}
-                className="py-5"
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-ink px-8 py-4 text-sm font-semibold text-cream shadow-lift transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink-soft disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2"
               >
-                <button
-                  className="w-full flex items-center justify-between gap-4 text-left"
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                {isSubmitting ? "Sending..." : "Send message"}
+                {!isSubmitting && (
+                  <span className="flex size-6 items-center justify-center rounded-full bg-ember transition-transform group-hover:translate-x-0.5">
+                    <ArrowRight className="size-3.5" />
+                  </span>
+                )}
+              </button>
+              <p className="text-center text-xs text-muted-foreground">
+                We typically respond within 24 hours. No spam, ever.
+              </p>
+            </form>
+          </motion.div>
+
+          {/* Info column */}
+          <div className="space-y-5">
+            {channels.map(({ icon: Icon, label, value, href }, i) => {
+              const inner = (
+                <>
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-ember-soft text-ember transition-all duration-300 group-hover:bg-ember group-hover:text-white">
+                    <Icon className="size-5" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">{label}</span>
+                    <span className="mt-0.5 block text-[15px] font-semibold text-foreground [overflow-wrap:anywhere]">{value}</span>
+                  </span>
+                  {href && <ArrowUpRight className="size-5 shrink-0 text-muted-foreground transition-all group-hover:rotate-45 group-hover:text-foreground" />}
+                </>
+              )
+              return (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.3 + i * 0.08, ease: EASE }}
                 >
-                  <span className="text-sm font-semibold">{faq.q}</span>
-                  <ChevronDown
-                    className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform duration-300 ${openFaq === i ? "rotate-180" : ""}`}
-                  />
-                </button>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed" hidden={openFaq !== i}>
-                  {faq.a}
-                </p>
-              </motion.div>
-            ))}
+                  {href ? (
+                    <a href={href} className="group flex items-center gap-4 rounded-2xl border border-border-subtle bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift">{inner}</a>
+                  ) : (
+                    <div className="group flex items-center gap-4 rounded-2xl border border-border-subtle bg-white p-5 shadow-soft">{inner}</div>
+                  )}
+                </motion.div>
+              )
+            })}
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55, ease: EASE }}
+              className="rounded-2xl bg-ink p-6 text-white shadow-lift"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="flex size-8 items-center justify-center rounded-full bg-ember"><Zap className="size-4" /></span>
+                <span className="text-sm font-semibold">Quick response</span>
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-white/70">
+                We respond to every inquiry within 24 hours. No automated replies — a real engineer reads every message.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.65, ease: EASE }}
+              className="rounded-2xl border border-border-subtle bg-white p-6 shadow-soft"
+            >
+              <p className="text-sm font-semibold">What happens next</p>
+              <ol className="relative mt-5 space-y-5">
+                <span aria-hidden className="absolute bottom-3 left-[15px] top-3 border-l-2 border-dashed border-ember/25" />
+                {steps.map((st) => (
+                  <li key={st.n} className="relative flex gap-4">
+                    <span className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full bg-section-alt text-[11px] font-bold text-ink-soft ring-4 ring-white">{st.n}</span>
+                    <div>
+                      <p className="text-sm font-semibold">{st.title}</p>
+                      <p className="text-xs text-muted-foreground">{st.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </motion.div>
           </div>
         </div>
       </section>
+
+      <div className="bg-section-alt">
+        <FaqList faqs={faqs} heading="Common questions" />
+      </div>
     </main>
   )
 }

@@ -21,17 +21,17 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
       {/* Hero */}
       <section className="relative pt-32 pb-16 md:pt-36 md:pb-20 overflow-hidden">
         <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <Link href="/blog" className="font-mono inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-ember transition-colors mb-8">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-ember transition-colors mb-8">
             ← All Articles
           </Link>
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
+          <p className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft shadow-soft before:size-1.5 before:shrink-0 before:rounded-full before:bg-ember before:content-[''] mb-5">
             By Melba Technology · Published {fmt(post.datePublished)} · Last updated {fmt(post.dateModified)}
           </p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[0.95] text-balance max-w-4xl mb-8"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] text-balance max-w-4xl mb-8"
           >
             {post.title}
           </motion.h1>
@@ -63,7 +63,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                       <thead>
                         <tr className="border-b border-border">
                           {section.table.headers.map((h) => (
-                            <th key={h} className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground font-medium py-3 pr-6">{h}</th>
+                            <th key={h} className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground font-medium py-3 pr-6">{h}</th>
                           ))}
                         </tr>
                       </thead>
@@ -100,13 +100,13 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
       {/* Related */}
       <section className="py-12 md:py-14 border-t border-border">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground/50 mb-6">Related</p>
+          <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground/50 mb-6">Related</p>
           <div className="flex flex-wrap gap-3">
             {post.related.map((r) => (
               <Link
                 key={r.href}
                 href={r.href}
-                className="font-mono inline-flex items-center gap-2 px-4 py-2.5 text-sm border border-border rounded-md text-muted-foreground hover:border-ember/40 hover:text-ember transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-4 py-2.5 text-sm border border-border rounded-full text-muted-foreground hover:border-ember/40 hover:text-ember transition-colors duration-300"
               >
                 {r.label}
                 <ArrowUpRight className="w-3.5 h-3.5" />

@@ -10,7 +10,6 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { MelbaMark } from "@/components/logo"
 import type { LucideIcon } from "lucide-react"
 
@@ -80,9 +79,9 @@ function DropdownPanel({
           className={`
             absolute top-[calc(100%+14px)] left-1/2 -translate-x-1/2
             z-50 origin-top
-            bg-background/96 backdrop-blur-2xl
-            border border-border/70
-            rounded-md shadow-[0_8px_48px_-8px_oklch(0_0_0/0.22)]
+            bg-white/95 backdrop-blur-2xl
+            border border-border-subtle
+            rounded-3xl shadow-float
             overflow-hidden
             ${isTwoCols ? "w-[620px]" : "w-[340px]"}
           `}
@@ -101,7 +100,7 @@ function DropdownPanel({
               <div className="p-3">
                 <Link
                   href={dropdown.cta.href}
-                  className="flex items-center justify-between w-full px-4 py-2.5 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors duration-200 group"
+                  className="flex items-center justify-between w-full px-4 py-2.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors duration-200 group"
                 >
                   <span>{dropdown.cta.label}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
@@ -120,10 +119,10 @@ function DropdownItem({ item }: { item: DropdownItem }) {
   return (
     <Link
       href={item.href}
-      className="group flex items-start gap-3.5 px-4 py-3.5 rounded-md hover:bg-muted/50 transition-colors duration-150"
+      className="group flex items-start gap-3.5 px-4 py-3.5 rounded-2xl hover:bg-section-alt transition-colors duration-150"
     >
-      <div className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-md border border-border/60 bg-muted/30 flex items-center justify-center group-hover:border-ember/40 group-hover:bg-ember/8 transition-all duration-200">
-        <Icon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-ember transition-colors duration-200" />
+      <div className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-xl bg-ember-soft flex items-center justify-center group-hover:bg-ember transition-all duration-200">
+        <Icon className="w-4 h-4 text-ember group-hover:text-white transition-colors duration-200" />
       </div>
       <div className="min-w-0">
         <div className="flex items-center gap-2">
@@ -158,10 +157,11 @@ function MobileNavItem({
     return (
       <Link
         href={link.href}
-        className={`text-2xl font-semibold tracking-tight transition-colors ${isActive(link.href) ? "text-ember" : "text-foreground hover:text-ember"
+        className={`flex w-full items-center justify-between border-b border-border-subtle py-4 text-2xl font-semibold tracking-tight transition-colors ${isActive(link.href) ? "text-ember" : "text-foreground hover:text-ember"
           }`}
       >
         {link.name}
+        <ArrowUpRight className="size-5 opacity-40" />
       </Link>
     )
   }
@@ -170,8 +170,9 @@ function MobileNavItem({
     <div className="w-full">
       <button
         onClick={() => setExpanded(!expanded)}
-        className={`flex items-center gap-2 text-2xl font-semibold tracking-tight transition-colors ${isActive(link.href) ? "text-ember" : "text-foreground hover:text-ember"
+        className={`flex w-full items-center justify-between border-b border-border-subtle py-4 text-2xl font-semibold tracking-tight transition-colors ${isActive(link.href) ? "text-ember" : "text-foreground hover:text-ember"
           }`}
+        aria-expanded={expanded}
       >
         {link.name}
         <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
@@ -188,16 +189,16 @@ function MobileNavItem({
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <div className="mt-4 flex flex-col gap-1 pl-2 border-l border-ember/30">
+            <div className="grid grid-cols-1 gap-1 py-3">
               {link.dropdown.items.map((item) => {
                 const Icon = item.icon
                 return (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-md hover:bg-white/5 transition-colors group"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white transition-colors group"
                   >
-                    <Icon className="w-4 h-4 text-ember/60 group-hover:text-ember transition-colors" />
+                    <span className="flex size-8 items-center justify-center rounded-lg bg-ember-soft"><Icon className="w-4 h-4 text-ember" /></span>
                     <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                       {item.name}
                     </span>
@@ -253,13 +254,15 @@ export function Navigation() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? "bg-background/95 backdrop-blur-lg border-b border-border py-3"
-          : "py-5"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? "pt-3" : "pt-5"}`}
       >
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
+          <div
+            className={`flex items-center justify-between rounded-full px-3 py-2 transition-all duration-500 sm:px-4 ${isScrolled
+              ? "glass shadow-lift ring-1 ring-border-subtle"
+              : "border border-transparent"
+              }`}
+          >
 
             {/* Logo */}
             <Link href="/" className="flex items-center group">
@@ -280,9 +283,9 @@ export function Navigation() {
                 >
                   {link.dropdown ? (
                     <button
-                      className={`flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors duration-200 relative group ${isActive(link.href) || activeDropdown === link.name
-                        ? "text-foreground bg-muted/50"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                      className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 relative group ${isActive(link.href) || activeDropdown === link.name
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
                         }`}
                       aria-expanded={activeDropdown === link.name}
                     >
@@ -294,20 +297,20 @@ export function Navigation() {
                         <ChevronDown className="w-3.5 h-3.5 opacity-60" />
                       </motion.span>
                       {isActive(link.href) && (
-                        <span className="absolute bottom-0.5 left-3 right-3 h-[1px] bg-ember rounded-full" />
+                        <motion.span layoutId="nav-dot" className="absolute -bottom-0.5 left-1/2 size-1 -translate-x-1/2 rounded-full bg-ember" />
                       )}
                     </button>
                   ) : (
                     <Link
                       href={link.href}
-                      className={`px-3 py-2 text-sm rounded-md transition-colors duration-200 relative inline-block ${isActive(link.href)
-                        ? "text-foreground bg-muted/50"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                      className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 relative inline-block ${isActive(link.href)
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
                         }`}
                     >
                       {link.name}
                       {isActive(link.href) && (
-                        <span className="absolute bottom-0.5 left-3 right-3 h-[1px] bg-ember rounded-full" />
+                        <motion.span layoutId="nav-dot" className="absolute -bottom-0.5 left-1/2 size-1 -translate-x-1/2 rounded-full bg-ember" />
                       )}
                     </Link>
                   )}
@@ -335,24 +338,25 @@ export function Navigation() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.55 }}
             >
-              <ThemeToggle />
               <Link
                 href="/contact"
-                className="inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-md bg-ember text-cream hover:bg-ember-light transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="group inline-flex items-center gap-2 rounded-full bg-ink py-2 pl-5 pr-2 text-sm font-semibold text-cream transition-all duration-300 hover:bg-ink-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 Start a Project
+                <span className="flex size-7 items-center justify-center rounded-full bg-ember transition-transform duration-300 group-hover:rotate-45">
+                  <ArrowUpRight className="size-3.5" />
+                </span>
               </Link>
             </motion.div>
 
-            {/* Mobile: theme toggle + hamburger */}
+            {/* Mobile: hamburger */}
             <div className="lg:hidden flex items-center gap-2">
-              <ThemeToggle />
               <button
-                className="p-2 text-foreground"
+                className="flex size-10 items-center justify-center rounded-full bg-ink text-cream"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
               >
-                {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
               </button>
             </div>
           </div>
@@ -367,13 +371,13 @@ export function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl pt-24 lg:hidden overflow-y-auto"
+            className="sky-backdrop fixed inset-0 z-40 pt-24 lg:hidden overflow-y-auto"
           >
-            <nav className="flex flex-col items-center gap-6 p-8">
+            <nav className="flex flex-col px-5 pb-10 pt-2 sm:px-8">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.name}
-                  className="w-full flex flex-col items-center"
+                  className="w-full"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.07 }}
@@ -383,7 +387,7 @@ export function Navigation() {
               ))}
               <Link
                 href="/contact"
-                className="mt-4 inline-flex items-center px-8 py-4 text-base font-medium rounded-md bg-ember text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="mt-8 inline-flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-full bg-ink text-cream shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 Start a Project
               </Link>

@@ -30,9 +30,9 @@ export function PageCta({
   return (
     <section
       ref={ref}
-      className="relative py-16 md:py-20 lg:py-24 overflow-hidden border-t border-border"
+      className="relative px-4 py-16 sm:px-6 md:py-20 lg:px-8"
     >
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+      <div className="sky-backdrop relative z-10 mx-auto max-w-7xl overflow-hidden rounded-[2rem] px-6 py-14 shadow-soft ring-1 ring-border-subtle sm:px-10 md:rounded-[2.5rem] md:py-16 lg:px-14">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -40,7 +40,7 @@ export function PageCta({
             transition={{ duration: 0.8 }}
             className="max-w-xl"
           >
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[0.92] mb-5 text-balance">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.08] mb-5 text-balance">
               {highlight && title.split(highlight).length > 1 ? (
                 <>
                   {title.split(highlight)[0]}
@@ -51,27 +51,27 @@ export function PageCta({
                 title
               )}
             </h2>
-            <p className="text-muted-foreground text-sm leading-relaxed">
+            <p className="text-muted-foreground text-base leading-relaxed">
               {subtitle}
             </p>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.15 }}
             className="flex flex-col sm:flex-row gap-4 flex-shrink-0"
           >
             <Link
               href={primaryHref}
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 text-sm font-semibold rounded-md bg-ember text-cream hover:bg-ember-light transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-4 text-sm font-semibold rounded-full bg-ink text-cream shadow-lift hover:bg-ink-soft hover:-translate-y-0.5 transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {primaryLabel}
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href={secondaryHref}
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 text-sm font-medium rounded-md border border-border hover:border-ember/50 hover:text-ember transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-4 text-sm font-semibold rounded-full border border-foreground/15 bg-white/80 hover:border-foreground/40 hover:bg-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {secondaryLabel}
             </Link>

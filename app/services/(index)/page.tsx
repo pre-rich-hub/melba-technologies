@@ -1,7 +1,7 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion } from "framer-motion"
+import { Reveal, SectionBadge, ScrollRevealText } from "@/components/shared/decor"
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import { PageHero } from "@/components/shared/page-hero"
@@ -16,13 +16,9 @@ const methodologySteps = [
   { n: "05", title: "Launch & Beyond",  desc: "We don't disappear post-launch. 60-day hyper-care plus ongoing partnership options for every engagement."                   },
 ]
 
+const EASE = [0.16, 1, 0.3, 1] as const
+
 export default function ServicesPage() {
-  const methodRef  = useRef(null)
-  const servicesRef = useRef(null)
-
-  const methodInView   = useInView(methodRef,   { once: true, margin: "-80px" })
-  const servicesInView = useInView(servicesRef, { once: true, margin: "-80px" })
-
   return (
     <main>
       <PageHero
@@ -32,52 +28,51 @@ export default function ServicesPage() {
         description="End-to-end software engineering — from strategy, design, and automation through to production support. One unified standard of quality."
       />
 
-      {/* Services grid */}
-      <section className="py-16 md:py-20 lg:py-24" ref={servicesRef}>
+      {/* ── Services grid ── */}
+      <section className="bg-background py-14 md:py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-md overflow-hidden">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, i) => (
               <motion.div
                 key={service.slug}
-                initial={{ opacity: 0, y: 20 }}
-                animate={servicesInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
+                initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: (i % 3) * 0.1, ease: EASE }}
               >
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group relative flex flex-col bg-card/40 hover:bg-card/80 p-8 h-full transition-colors duration-500 overflow-hidden"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border-subtle bg-white p-7 shadow-soft transition-all duration-500 hover:-translate-y-1.5 hover:border-ember/25 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember"
                 >
-                  <div className="relative z-10 flex flex-col h-full">
-                    <div className="w-12 h-12 rounded-md border border-border flex items-center justify-center mb-6 group-hover:border-ember/40 transition-colors duration-500">
-                      <service.icon className="w-5 h-5 text-muted-foreground group-hover:text-ember transition-colors duration-500" />
-                    </div>
+                  <span aria-hidden className="pointer-events-none absolute -right-16 -top-16 size-44 rounded-full bg-[radial-gradient(circle,var(--ember-soft),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-                    <h3 className="text-xl font-semibold mb-2 flex items-start justify-between gap-2">
-                      {service.title}
-                      <ArrowUpRight className="w-4 h-4 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-ember flex-shrink-0 mt-1" />
-                    </h3>
-
-                    <p className="font-mono text-xs text-ember/80 uppercase tracking-[0.14em] mb-4 font-medium">{service.tagline}</p>
-
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                      {service.description}
-                    </p>
-
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {service.technologies.slice(0, 4).map((t) => (
-                        <span key={t} className="font-mono px-2.5 py-1 text-[10px] uppercase tracking-[0.10em] border border-border rounded-md text-muted-foreground">
-                          {t}
-                        </span>
-                      ))}
-                      {service.technologies.length > 4 && (
-                        <span className="font-mono px-2.5 py-1 text-[10px] uppercase tracking-[0.10em] border border-border rounded-md text-muted-foreground">
-                          +{service.technologies.length - 4}
-                        </span>
-                      )}
-                    </div>
+                  <div className="relative flex items-start justify-between">
+                    <span className="flex size-12 items-center justify-center rounded-2xl bg-section-alt text-foreground ring-1 ring-border-subtle transition-all duration-500 group-hover:bg-ember group-hover:text-white group-hover:ring-ember">
+                      <service.icon className="size-5" />
+                    </span>
+                    <span className="flex size-9 items-center justify-center rounded-full border border-border-subtle text-muted-foreground transition-all duration-500 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
+                      <ArrowUpRight className="size-4 transition-transform duration-500 group-hover:rotate-45" />
+                    </span>
                   </div>
-                  {/* Bottom sweep */}
-                  <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-ember transition-all duration-700 ease-out" />
+
+                  <h3 className="relative mt-7 text-xl font-bold leading-snug">{service.title}</h3>
+                  <p className="relative mt-1 text-sm font-medium text-ember">{service.tagline}</p>
+                  <p className="relative mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {service.description}
+                  </p>
+
+                  <div className="relative mt-6 flex flex-wrap gap-1.5">
+                    {service.technologies.slice(0, 4).map((t) => (
+                      <span key={t} className="rounded-full bg-section-alt px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+                        {t}
+                      </span>
+                    ))}
+                    {service.technologies.length > 4 && (
+                      <span className="rounded-full bg-section-alt px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+                        +{service.technologies.length - 4}
+                      </span>
+                    )}
+                  </div>
                 </Link>
               </motion.div>
             ))}
@@ -85,35 +80,43 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Methodology */}
-      <section className="py-16 md:py-20 lg:py-24 border-y border-border" style={{ background: "var(--section-alt)" }} ref={methodRef}>
+      {/* ── Methodology timeline ── */}
+      <section className="bg-section-alt py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={methodInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="mb-16"
-          >
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">How We Work</p>
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[0.92] max-w-xl">
-              A Process Designed for Clarity
-            </h2>
-          </motion.div>
+          <div className="mx-auto max-w-2xl text-center">
+            <Reveal><SectionBadge>How we work</SectionBadge></Reveal>
+            <ScrollRevealText
+              text="A process designed for clarity"
+              accent="clarity"
+              className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl"
+            />
+          </div>
 
-          <div className="grid md:grid-cols-5 gap-px bg-border rounded-md overflow-hidden">
+          <div className="relative mt-10 md:mt-16 grid gap-8 md:grid-cols-5 md:gap-5">
+            <motion.div
+              aria-hidden
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 1.6, ease: "easeInOut" }}
+              className="absolute left-[10%] right-[10%] top-7 hidden origin-left border-t-2 border-dashed border-ember/30 md:block"
+            />
             {methodologySteps.map((step, i) => (
               <motion.div
                 key={step.n}
-                initial={{ opacity: 0, y: 16 }}
-                animate={methodInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="bg-card/40 hover:bg-card/80 p-7 transition-colors duration-400 relative overflow-hidden group"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: 0.15 + i * 0.12, ease: EASE }}
+                className="relative flex gap-5 md:block md:text-center"
               >
-                <span className="font-mono text-6xl font-bold text-foreground/[0.04] leading-none block mb-5 select-none tabular-nums">{step.n}</span>
-                <h3 className="text-sm font-semibold mb-2">{step.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
-                {/* Bottom sweep */}
-                <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-ember transition-all duration-700 ease-out" />
+                <span className="relative z-10 flex size-14 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-bold text-white shadow-lift ring-8 ring-section-alt md:mx-auto">
+                  {step.n}
+                </span>
+                <div className="md:mt-6">
+                  <h3 className="text-base font-semibold">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>

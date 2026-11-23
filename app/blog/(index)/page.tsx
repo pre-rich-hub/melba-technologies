@@ -31,9 +31,9 @@ export default function BlogPage() {
               <motion.div key={post.slug} initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: i * 0.1 }}>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group flex flex-col h-full rounded-md border border-border bg-card/40 hover:bg-card/80 p-8 transition-colors duration-500 relative overflow-hidden"
+                  className="group flex flex-col h-full rounded-2xl border border-border rounded-3xl border border-border-subtle bg-white shadow-soft hover:-translate-y-1 hover:shadow-lift p-8 transition-all duration-500 relative overflow-hidden"
                 >
-                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ember/80 font-medium">
+                  <span className="text-[10px] uppercase tracking-[0.16em] text-ember/80 font-medium">
                     Updated {fmt(post.dateModified)}
                   </span>
                   <h2 className="text-2xl font-semibold mt-2 mb-3 group-hover:text-ember transition-colors">{post.title}</h2>

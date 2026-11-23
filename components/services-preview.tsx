@@ -1,7 +1,7 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion } from "framer-motion"
+import { ScrollRevealText, SectionBadge, Reveal } from "@/components/shared/decor"
 import {
   Code2,
   Globe,
@@ -74,85 +74,72 @@ const services = [
 ]
 
 export function ServicesPreview() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-80px" })
-
   return (
-    <section id="services" className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
-
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8" ref={ref}>
-
+    <section id="services" className="relative overflow-hidden bg-section-alt py-16 md:py-24 lg:py-32">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">
-            What We Do
-          </p>
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[0.92] text-balance">
-              Services Built<br />
-              for <span className="text-ember">Tomorrow</span>
-            </h2>
-            <div className="lg:text-right">
-              <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mb-5">
-                Strategy, design, engineering, automation, and support delivered with one standard of care.
-              </p>
-              <Link
-                href="/services"
-                className="inline-flex items-center gap-1.5 text-sm text-ember hover:text-ember-light transition-colors duration-300 font-medium"
-              >
-                Explore all services
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-          <div className="mt-12 h-px bg-border" />
-        </motion.div>
+        <div className="mx-auto max-w-3xl text-center">
+          <Reveal>
+            <SectionBadge>What we do</SectionBadge>
+          </Reveal>
+          <ScrollRevealText
+            text="Services built simple, secure and smart"
+            accent="smart"
+            className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]"
+          />
+          <Reveal delay={0.1}>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+              Strategy, design, engineering, automation and support — delivered by one team with one standard of care.
+            </p>
+          </Reveal>
+        </div>
 
-        {/* Grid — 3 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-md overflow-hidden">
+        {/* Grid */}
+        <div className="mt-10 md:mt-16 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.08 }}
+              className={index >= 4 ? "hidden md:block" : undefined}
+              initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.7, delay: (index % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
                 href={service.href}
-                className="group relative flex flex-col bg-card/40 hover:bg-card/80 p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden h-full"
+                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border-subtle bg-white p-6 shadow-soft transition-all duration-500 hover:-translate-y-1.5 md:p-7 hover:border-ember/25 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember"
               >
+                {/* hover glow */}
+                <span aria-hidden className="pointer-events-none absolute -right-16 -top-16 size-44 rounded-full bg-[radial-gradient(circle,var(--ember-soft),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className="w-12 h-12 rounded-md border border-border flex items-center justify-center mb-7 group-hover:border-ember/60 transition-colors duration-500">
-                    <service.icon className="w-5 h-5 text-muted-foreground group-hover:text-ember transition-colors duration-500" />
-                  </div>
-
-                  <h3 className="text-lg font-semibold mb-3 flex items-center justify-between">
-                    {service.title}
-                    <ArrowUpRight className="w-4 h-4 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-ember flex-shrink-0" />
-                  </h3>
-
-                  <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                    {service.description}
-                  </p>
-
-                  <div className="mt-6 font-mono text-[11px] uppercase tracking-[0.14em] text-ember/70 font-medium group-hover:text-ember transition-colors duration-300">
-                    Learn more
-                  </div>
+                <div className="relative flex items-start justify-between">
+                  <span className="flex size-12 items-center justify-center rounded-2xl bg-section-alt text-foreground ring-1 ring-border-subtle transition-all duration-500 group-hover:bg-ember group-hover:text-white group-hover:ring-ember">
+                    <service.icon className="size-5" />
+                  </span>
+                  <span className="flex size-9 items-center justify-center rounded-full border border-border-subtle text-muted-foreground transition-all duration-500 group-hover:rotate-45 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
+                    <ArrowUpRight className="size-4 -rotate-45 transition-transform duration-500 group-hover:rotate-0" />
+                  </span>
                 </div>
 
-                {/* Bottom sweep */}
-                <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-ember transition-all duration-700 ease-out" />
+                <h3 className="relative mt-5 text-lg font-semibold leading-snug md:mt-7">{service.title}</h3>
+                <p className="relative mt-2.5 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {service.description}
+                </p>
               </Link>
             </motion.div>
           ))}
         </div>
+
+        <Reveal className="mt-8 text-center md:mt-12">
+          <Link
+            href="/services"
+            className="group inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-white px-6 py-3 text-sm font-semibold transition-all duration-300 hover:border-foreground/40 hover:shadow-soft"
+          >
+            <span className="md:hidden">View all {services.length} services</span>
+            <span className="hidden md:inline">Explore all services</span>
+            <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </Link>
+        </Reveal>
       </div>
     </section>
   )

@@ -1,207 +1,218 @@
 "use client"
 
 import { notFound } from "next/navigation"
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
-import { ArrowUpRight, ExternalLink } from "lucide-react"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { use, useRef } from "react"
+import { ArrowLeft, ArrowUpRight, ExternalLink, Target, Lightbulb, Building2, Layers, Clock, Globe } from "lucide-react"
 import Link from "next/link"
 import { PageCta } from "@/components/shared/page-cta"
+import { BrowserFrame } from "@/components/shared/device-mockups"
+import { Reveal, SectionBadge, ScribbleUnderline } from "@/components/shared/decor"
+import { WorkCard } from "@/components/shared/work-card"
 import { caseStudies, getCaseStudyBySlug } from "@/lib/data/case-studies"
-import { use } from "react"
+
+const EASE = [0.16, 1, 0.3, 1] as const
 
 export default function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug }   = use(params)
-  const caseStudy  = getCaseStudyBySlug(slug)
+  const { slug } = use(params)
+  const caseStudy = getCaseStudyBySlug(slug)
+
+  const shotRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: shotRef, offset: ["start end", "center center"] })
+  const rotateX = useTransform(scrollYProgress, [0, 1], [22, 0])
+  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1])
 
   if (!caseStudy) notFound()
 
-  const bodyRef  = useRef(null)
-  const bodyInView = useInView(bodyRef, { once: true, margin: "-60px" })
-
-  const otherCases = caseStudies.filter((c) => c.slug !== slug).slice(0, 2)
+  const domain = new URL(caseStudy.liveUrl).hostname.replace("www.", "")
+  const otherCases = caseStudies.filter((c) => c.slug !== slug).slice(0, 3)
+  const meta = [
+    { icon: Building2, label: "Client", value: caseStudy.title },
+    { icon: Layers, label: "Industry", value: caseStudy.industry },
+    { icon: Clock, label: "Timeline", value: caseStudy.timeline },
+    { icon: Globe, label: "Live site", value: domain, href: caseStudy.liveUrl },
+  ]
 
   return (
     <main>
-      {/* Hero */}
-      <section className="relative pt-32 pb-16 md:pt-36 md:pb-20 overflow-hidden bg-background">
-        <div
-          className="absolute inset-0 opacity-[0.4] pointer-events-none"
-          style={{
-            backgroundImage: "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-          }}
-        />
-        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <Link href="/work" className="font-mono inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-ember transition-colors mb-8">
-            ← All Work
-          </Link>
-          <div className="flex flex-wrap gap-3 mb-8">
-            <span className="font-mono px-3 py-1 text-[10px] uppercase tracking-[0.16em] border border-ember/30 text-ember rounded-md">{caseStudy.industry}</span>
-            <span className="font-mono px-3 py-1 text-[10px] uppercase tracking-[0.16em] border border-border text-muted-foreground rounded-md">{caseStudy.category}</span>
-          </div>
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="text-6xl sm:text-7xl lg:text-8xl font-semibold tracking-[-0.03em] leading-[0.90] mb-6 text-foreground"
+      {/* ── Hero ── */}
+      <section className="sky-backdrop relative overflow-hidden pt-32 pb-40 md:pt-40 md:pb-56">
+        <div aria-hidden className="cloud left-[-8%] top-[24%] h-40 w-[32rem] opacity-80" />
+        <div aria-hidden className="cloud right-[-10%] top-[4%] h-36 w-[26rem] opacity-90" style={{ animationDelay: "-7s" }} />
+
+        <div className="relative z-10 mx-auto max-w-5xl px-5 text-center sm:px-6 lg:px-8">
+          <Link
+            href="/work"
+            className="group inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-medium text-muted-foreground shadow-soft ring-1 ring-border-subtle backdrop-blur transition-colors hover:text-foreground"
           >
-            {caseStudy.title}
+            <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
+            All work
+          </Link>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="mt-8 flex flex-wrap justify-center gap-2"
+          >
+            <SectionBadge>{caseStudy.industry}</SectionBadge>
+            <span className="inline-flex items-center rounded-full bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground shadow-soft ring-1 ring-border-subtle">
+              {caseStudy.category}
+            </span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
+            className="mt-6 text-5xl font-extrabold leading-[1.02] tracking-[-0.035em] text-balance sm:text-6xl lg:text-7xl"
+          >
+            <span className="relative inline-block">
+              {caseStudy.title}
+              <ScribbleUnderline className="-bottom-2 h-4" delay={0.8} />
+            </span>
           </motion.h1>
+
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-base text-muted-foreground leading-relaxed max-w-2xl mb-8"
+            transition={{ duration: 0.8, delay: 0.25 }}
+            className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground"
           >
-            {caseStudy.tagline}
+            {caseStudy.overview}
           </motion.p>
-          {caseStudy.liveUrl && (
-            <motion.a
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          >
+            <a
               href={caseStudy.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.35 }}
-              className="font-mono inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-md border border-ember/40 bg-ember/10 text-ember hover:bg-ember hover:text-cream transition-all duration-300"
+              className="group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-4 text-sm font-semibold text-cream shadow-lift transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink-soft"
             >
-              <ExternalLink className="w-3.5 h-3.5" />
-              Visit Live Site
-            </motion.a>
-          )}
-        </div>
-      </section>
-
-      {/* Meta strip */}
-      <section className="border-b border-border" style={{ background: "var(--section-alt)" }}>
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center divide-x divide-border">
-            {[
-              { label: "Client",   value: caseStudy.title    },
-              { label: "Industry", value: caseStudy.industry },
-              { label: "Timeline", value: caseStudy.timeline },
-            ].map((m) => (
-              <div key={m.label} className="px-8 py-5 first:pl-0">
-                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground/60 mb-0.5">{m.label}</p>
-                <p className="text-sm font-semibold">{m.value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Screenshot preview */}
-      {caseStudy.liveUrl && (
-        <section className="py-12 md:py-14 border-b border-border" style={{ background: "var(--section-alt)" }}>
-          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-6">Live Platform</p>
-            <div className="relative rounded-md border border-border overflow-hidden shadow-2xl">
-              {/* Browser chrome bar */}
-              <div className="flex items-center gap-2 px-4 py-3 bg-muted/60 border-b border-border">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-border" />
-                  <div className="w-3 h-3 rounded-full bg-border" />
-                  <div className="w-3 h-3 rounded-full bg-border" />
-                </div>
-                <div className="flex-1 mx-4">
-                  <div className="flex items-center gap-2 px-3 py-1 bg-background/60 rounded-md border border-border max-w-sm mx-auto">
-                    <div className="w-2 h-2 rounded-full bg-ember/60 flex-shrink-0" />
-                    <span className="font-mono text-[11px] text-muted-foreground truncate">{caseStudy.liveUrl.replace(/^https?:\/\//, "")}</span>
-                  </div>
-                </div>
-                <a
-                  href={caseStudy.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono flex items-center gap-1 text-[10px] text-muted-foreground hover:text-ember transition-colors"
-                >
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-              {/* Screenshot */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={caseStudy.thumbnail}
-                alt={`${caseStudy.title} live platform`}
-                className="w-full object-cover object-top"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Body */}
-      <section className="py-16 md:py-20 lg:py-24" ref={bodyRef}>
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={bodyInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">The Challenge</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">{caseStudy.challenge}</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={bodyInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.15 }}
-            >
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">Our Solution</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">{caseStudy.solution}</p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Technologies */}
-      <section className="py-16 md:py-20 lg:py-24 border-b border-border" style={{ background: "var(--section-alt)" }}>
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-8">Technologies Used</p>
-          <div className="flex flex-wrap gap-3">
-            {caseStudy.technologies.map((tech) => (
-              <span key={tech} className="font-mono px-3.5 py-2 text-xs border border-border rounded-md text-muted-foreground hover:border-ember/40 hover:text-ember transition-colors cursor-default">
-                {tech}
+              Visit live site
+              <span className="flex size-6 items-center justify-center rounded-full bg-ember">
+                <ExternalLink className="size-3.5" />
               </span>
-            ))}
-          </div>
+            </a>
+            <Link
+              href="/contact"
+              className="inline-flex items-center rounded-full border border-foreground/15 bg-white/80 px-7 py-4 text-sm font-semibold backdrop-blur transition-all duration-300 hover:border-foreground/40 hover:bg-white"
+            >
+              Start a similar project
+            </Link>
+          </motion.div>
         </div>
       </section>
 
-      {/* More work */}
-      <section className="py-16 md:py-20 lg:py-24">
+      {/* ── Screenshot rising out of the hero ── */}
+      <section className="relative z-10 -mt-28 px-4 sm:px-6 md:-mt-40 lg:px-8">
+        <div ref={shotRef} className="mx-auto max-w-6xl [perspective:1600px]">
+          <motion.div style={{ rotateX, scale }} className="origin-top">
+            <BrowserFrame src={caseStudy.thumbnail} alt={`${caseStudy.title} live platform`} url={domain} priority />
+          </motion.div>
+        </div>
+
+        {/* Meta cards */}
+        <div className="mx-auto mt-8 grid max-w-6xl grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+          {meta.map((m, i) => {
+            const body = (
+              <>
+                <span className="hidden size-10 shrink-0 items-center justify-center rounded-xl bg-ember-soft text-ember sm:flex">
+                  <m.icon className="size-[18px]" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{m.label}</span>
+                  <span className="block text-[13px] font-semibold leading-snug text-foreground [overflow-wrap:anywhere] sm:text-sm">{m.value}</span>
+                </span>
+              </>
+            )
+            return (
+              <motion.div
+                key={m.label}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
+              >
+                {m.href ? (
+                  <a href={m.href} target="_blank" rel="noopener noreferrer" className="flex h-full items-center gap-3 rounded-2xl border border-border-subtle bg-white p-4 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift">
+                    {body}
+                  </a>
+                ) : (
+                  <div className="flex h-full items-center gap-3 rounded-2xl border border-border-subtle bg-white p-4 shadow-soft">{body}</div>
+                )}
+              </motion.div>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* ── Challenge / Solution ── */}
+      <section className="bg-background py-16 md:py-24 lg:py-32">
+        <div className="mx-auto grid max-w-6xl gap-6 px-5 sm:px-6 lg:grid-cols-2 lg:px-8">
+          {[
+            { icon: Target, badge: "The challenge", text: caseStudy.challenge, tone: "bg-white" },
+            { icon: Lightbulb, badge: "Our solution", text: caseStudy.solution, tone: "sky-backdrop" },
+          ].map((b, i) => (
+            <Reveal key={b.badge} delay={i * 0.1} className={`rounded-[2rem] p-8 shadow-soft ring-1 ring-border-subtle sm:p-10 ${b.tone}`}>
+              <div className="flex items-center gap-3">
+                <span className={`flex size-11 items-center justify-center rounded-2xl ${i === 0 ? "bg-section-alt text-foreground" : "bg-ember text-white"}`}>
+                  <b.icon className="size-5" />
+                </span>
+                <h2 className="text-2xl font-bold tracking-tight">{b.badge}</h2>
+              </div>
+              <p className="mt-6 text-base leading-relaxed text-muted-foreground">{b.text}</p>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Deliverables */}
+        <div className="mx-auto mt-16 max-w-6xl px-5 sm:px-6 lg:px-8">
+          <Reveal>
+            <p className="mb-5 text-sm font-semibold text-foreground">What we delivered</p>
+            <div className="flex flex-wrap gap-2.5">
+              {caseStudy.technologies.map((tech, i) => (
+                <motion.span
+                  key={tech}
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: 0.05 + i * 0.05 }}
+                  className="cursor-default rounded-full border border-border-subtle bg-white px-4 py-2 text-sm font-medium shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-ember/40 hover:bg-ember-soft hover:text-ember"
+                >
+                  {tech}
+                </motion.span>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── More work ── */}
+      <section className="bg-section-alt py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-10">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium">More Work</p>
-            <Link href="/work" className="font-mono flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-ember transition-colors">
-              View All <ArrowUpRight className="w-3.5 h-3.5" />
+          <div className="mb-12 flex items-end justify-between gap-4">
+            <div>
+              <Reveal><SectionBadge>More work</SectionBadge></Reveal>
+              <Reveal delay={0.08}>
+                <h2 className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">Keep exploring</h2>
+              </Reveal>
+            </div>
+            <Link href="/work" className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold">
+              View all
+              <span className="flex size-6 items-center justify-center rounded-full bg-ink text-white transition-transform group-hover:translate-x-0.5">
+                <ArrowUpRight className="size-3.5" />
+              </span>
             </Link>
           </div>
-          <div className="grid md:grid-cols-2 gap-5">
-            {otherCases.map((cs) => (
-              <div key={cs.slug} className="group relative flex flex-col rounded-md border border-border bg-card/40 hover:bg-card/80 overflow-hidden transition-colors duration-500">
-                {/* Thumbnail */}
-                {cs.liveUrl && (
-                  <div className="relative h-[140px] overflow-hidden border-b border-border flex-shrink-0">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={cs.thumbnail}
-                      alt={cs.title}
-                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card/50 to-transparent" />
-                  </div>
-                )}
-                <Link href={`/work/${cs.slug}`} className="relative z-10 flex flex-col p-7">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ember/80 font-medium mb-2">{cs.industry}</span>
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-ember transition-colors">{cs.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{cs.tagline}</p>
-                </Link>
-                {/* Bottom sweep */}
-                <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-ember transition-all duration-700 ease-out" />
-              </div>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+            {otherCases.map((cs, i) => (
+              <WorkCard key={cs.slug} project={cs} index={i} />
             ))}
           </div>
         </div>

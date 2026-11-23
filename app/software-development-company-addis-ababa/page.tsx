@@ -44,15 +44,15 @@ export default function LocationPage() {
       <section className="py-16 md:py-20 lg:py-24" ref={ref}>
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="mb-14">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">What We Build</p>
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[0.92]">Services From Our Addis Ababa Studio</h2>
+            <p className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft shadow-soft before:size-1.5 before:shrink-0 before:rounded-full before:bg-ember before:content-[''] mb-5">What We Build</p>
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.08]">Services From Our Addis Ababa Studio</h2>
           </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {all.map((s, i) => (
               <motion.div key={s.slug} initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: i * 0.05 }}>
                 <Link
                   href={`/services/${s.slug}`}
-                  className="group flex flex-col h-full rounded-md border border-border bg-card/40 hover:bg-card/80 p-7 transition-colors duration-500 relative overflow-hidden"
+                  className="group flex flex-col h-full rounded-2xl border border-border rounded-3xl border border-border-subtle bg-white shadow-soft hover:-translate-y-1 hover:shadow-lift p-7 transition-all duration-500 relative overflow-hidden"
                 >
                   <h3 className="text-lg font-semibold mb-2 group-hover:text-ember transition-colors">{s.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{s.tagline}</p>
@@ -68,16 +68,31 @@ export default function LocationPage() {
       <section className="py-16 md:py-20 lg:py-24 border-y border-border" style={{ background: "var(--section-alt)" }}>
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="mb-14">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">Industries</p>
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[0.92] max-w-2xl">Who We Build For</h2>
+            <p className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft shadow-soft before:size-1.5 before:shrink-0 before:rounded-full before:bg-ember before:content-[''] mb-5">Industries</p>
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.08] max-w-2xl">Who We Build For</h2>
           </div>
-          <div className="overflow-x-auto">
+          <div className="space-y-3 md:hidden">
+            {industries.map((row) => (
+              <div key={row.industry} className="rounded-2xl border border-border-subtle bg-white p-5 shadow-soft">
+                <p className="text-base font-semibold">{row.industry}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{row.build}</p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {row.work.map(([name, slug]) => (
+                    <Link key={slug} href={`/work/${slug}`} className="inline-flex items-center gap-1 rounded-full bg-section-alt px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:text-ember">
+                      {name} <ArrowUpRight className="size-3" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="hidden overflow-x-auto rounded-3xl border border-border-subtle bg-white px-6 shadow-soft md:block">
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground font-medium py-3 pr-6">Industry</th>
-                  <th className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground font-medium py-3 pr-6">What we build</th>
-                  <th className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground font-medium py-3">Selected work</th>
+                  <th className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground font-medium py-3 pr-6">Industry</th>
+                  <th className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground font-medium py-3 pr-6">What we build</th>
+                  <th className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground font-medium py-3">Selected work</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
@@ -106,13 +121,13 @@ export default function LocationPage() {
       <section className="py-16 md:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="mb-14">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">How We Work</p>
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[0.92] max-w-2xl">Working With a Local Team</h2>
+            <p className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft shadow-soft before:size-1.5 before:shrink-0 before:rounded-full before:bg-ember before:content-[''] mb-5">How We Work</p>
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.08] max-w-2xl">Working With a Local Team</h2>
           </div>
           <div className="divide-y divide-border max-w-3xl">
             {howWeWork.map((item, i) => (
               <div key={item.title} className="flex gap-8 py-7">
-                <span className="font-mono text-xs font-bold text-ember/50 tabular-nums flex-shrink-0 mt-0.5">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-xs font-bold text-ember/50 tabular-nums flex-shrink-0 mt-0.5">{String(i + 1).padStart(2, "0")}</span>
                 <div>
                   <h3 className="font-semibold mb-1.5">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
@@ -126,8 +141,8 @@ export default function LocationPage() {
       {/* Contact */}
       <section className="py-16 md:py-20 border-t border-border" style={{ background: "var(--section-alt)" }}>
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ember font-medium mb-5">Find Us</p>
-          <h2 className="text-3xl font-semibold tracking-tight leading-[0.92] mb-8">Melba Technology, Addis Ababa</h2>
+          <p className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft shadow-soft before:size-1.5 before:shrink-0 before:rounded-full before:bg-ember before:content-[''] mb-5">Find Us</p>
+          <h2 className="text-3xl font-bold tracking-tight leading-[1.08] mb-8">Melba Technology, Addis Ababa</h2>
           <div className="space-y-5">
             {[
               { icon: MapPin, value: `${SITE.address.locality}, ${SITE.address.country}`, href: null as string | null },
@@ -135,7 +150,7 @@ export default function LocationPage() {
               { icon: Phone, value: SITE.phoneDisplay, href: `tel:${SITE.phone}` },
             ].map(({ icon: Icon, value, href }) => (
               <div key={value} className="flex items-center gap-5">
-                <div className="w-10 h-10 rounded-md border border-border flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-2xl border border-border flex items-center justify-center flex-shrink-0">
                   <Icon className="w-4 h-4 text-ember" />
                 </div>
                 {href ? (

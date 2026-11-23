@@ -1,9 +1,8 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
-import { ArrowUpRight, ExternalLink } from "lucide-react"
-import Link from "next/link"
+import { AnimatePresence, motion } from "framer-motion"
+import { useState } from "react"
+import { WorkCard } from "@/components/shared/work-card"
 import { PageHero } from "@/components/shared/page-hero"
 import { PageCta } from "@/components/shared/page-cta"
 import { caseStudies } from "@/lib/data/case-studies"
@@ -11,9 +10,6 @@ import { caseStudies } from "@/lib/data/case-studies"
 const allTags = ["All", "Luxury", "Tourism", "E-Commerce", "Real Estate", "Hospitality", "Fashion", "Construction"]
 
 export default function WorkPage() {
-  const gridRef  = useRef(null)
-  const isInView = useInView(gridRef, { once: true, margin: "-60px" })
-
   const [activeTag, setActiveTag] = useState("All")
 
   const filtered = activeTag === "All"
@@ -30,21 +26,27 @@ export default function WorkPage() {
         description="From luxury travel platforms to fine dining experiences to real estate powerhouses — digital products that perform at the highest end of every industry."
       />
 
-      {/* Filter tabs */}
-      <section className="py-8 border-b border-border" style={{ background: "var(--section-alt)" }}>
+      {/* Filter pills */}
+      <section className="relative z-30 -mt-6 pb-2 md:sticky md:top-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap gap-2">
+          <div className="mx-auto flex max-w-full flex-wrap justify-center gap-1.5 rounded-3xl bg-white/90 p-1.5 shadow-lift ring-1 ring-border-subtle backdrop-blur md:glass md:w-fit md:flex-nowrap md:rounded-full md:gap-1">
             {allTags.map((tag) => (
               <button
                 key={tag}
                 onClick={() => setActiveTag(tag)}
-                className={`font-mono px-4 py-2 text-xs uppercase tracking-[0.14em] rounded-md border transition-colors duration-300 ${
-                  activeTag === tag
-                    ? "bg-ember text-cream border-ember"
-                    : "border-border text-muted-foreground hover:border-ember/40 hover:text-ember"
+                aria-pressed={activeTag === tag}
+                className={`relative shrink-0 rounded-full px-3.5 py-2 text-[13px] font-medium md:px-4 md:text-sm transition-colors duration-300 ${
+                  activeTag === tag ? "text-white" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                {tag}
+                {activeTag === tag && (
+                  <motion.span
+                    layoutId="work-filter"
+                    className="absolute inset-0 rounded-full bg-ink"
+                    transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                  />
+                )}
+                <span className="relative">{tag}</span>
               </button>
             ))}
           </div>
@@ -52,84 +54,24 @@ export default function WorkPage() {
       </section>
 
       {/* Grid */}
-      <section className="py-16 md:py-20 lg:py-24" ref={gridRef}>
+      <section className="py-14 md:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map((project, i) => (
-              <motion.div
-                key={project.slug}
-                initial={{ opacity: 0, y: 24 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: Math.min(i * 0.07, 0.5) }}
-                className="flex flex-col"
-              >
-                <div className="group relative flex flex-col rounded-md border border-border bg-card/40 hover:bg-card/80 overflow-hidden flex-1 transition-colors duration-500">
-                  {/* Screenshot thumbnail */}
-                  <div className="relative h-[180px] overflow-hidden flex-shrink-0 border-b border-border">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={project.thumbnail}
-                      alt={`${project.title} preview`}
-                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent" />
-                    {/* Live site chip — always visible (no hover on touch devices) */}
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      aria-label={`Visit ${project.title} live site (opens in a new tab)`}
-                      className="font-mono absolute bottom-3 right-3 z-10 flex items-center gap-2 min-h-10 px-4 py-2 text-xs sm:text-[11px] uppercase tracking-[0.08em] font-bold rounded-md bg-ember text-cream shadow-lg shadow-black/30 ring-1 ring-white/20 hover:bg-ember-light active:scale-95 transition-all duration-200"
-                    >
-                      Visit live site
-                      <ExternalLink className="w-3.5 h-3.5" strokeWidth={2.5} />
-                    </a>
-                  </div>
-
-                  <Link href={`/work/${project.slug}`} className="relative z-10 flex flex-col flex-1 p-7">
-                    {/* Header row */}
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <span className="font-mono text-[10px] uppercase tracking-[0.20em] font-medium text-ember/80">{project.industry}</span>
-                      </div>
-                      <div className="w-7 h-7 rounded-full border border-border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
-                        <ArrowUpRight className="w-3 h-3 text-ember" />
-                      </div>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-xl font-semibold mb-1.5 group-hover:text-ember transition-colors duration-300">
-                      {project.title}
-                    </h3>
-
-                    <p className="font-mono text-[10px] text-ember/80 uppercase tracking-[0.12em] mb-4 font-medium">{project.category}</p>
-
-                    {/* Tagline */}
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
-                      {project.tagline}
-                    </p>
-
-                    {/* Tech tags */}
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.technologies.slice(0, 4).map((t) => (
-                        <span key={t} className="font-mono px-2.5 py-1 text-[10px] uppercase tracking-[0.10em] border border-border rounded-md text-muted-foreground">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </Link>
-                  {/* Bottom sweep */}
-                  <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full bg-ember transition-all duration-700 ease-out" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <p className="mb-8 text-sm text-muted-foreground">
+            Showing <span className="font-semibold text-foreground">{filtered.length}</span>{" "}
+            {filtered.length === 1 ? "project" : "projects"}
+            {activeTag !== "All" && <> in <span className="font-semibold text-foreground">{activeTag}</span></>}
+          </p>
+          <motion.div layout className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((project, i) => (
+                <WorkCard key={project.slug} project={project} index={i} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
 
           {filtered.length === 0 && (
-            <div className="text-center py-20">
-              <p className="text-muted-foreground text-sm">No projects in this category yet.</p>
+            <div className="py-20 text-center">
+              <p className="text-sm text-muted-foreground">No projects in this category yet.</p>
             </div>
           )}
         </div>

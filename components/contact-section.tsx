@@ -144,7 +144,7 @@ export function ContactSection() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-2.5 w-full justify-center px-8 py-4 text-sm font-semibold rounded-md bg-ember text-cream hover:bg-ember-light transition-colors duration-300 group disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex items-center gap-2.5 w-full justify-center px-8 py-4 text-sm font-semibold rounded-full bg-ember text-cream hover:bg-ember-light transition-colors duration-300 group disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {isSubmitting ? "Sending..." : "Send Message"}
               <ArrowRight className={`h-4 w-4 ${isSubmitting ? "hidden" : "group-hover:translate-x-1"} transition-transform`} />

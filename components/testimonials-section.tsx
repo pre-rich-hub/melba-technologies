@@ -78,7 +78,7 @@ export function TestimonialsSection() {
               </p>
 
               <div className="flex items-center gap-4 relative z-10">
-                <div className="w-10 h-10 rounded-md bg-ember/15 border border-ember/20 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-ember/15 border border-ember/20 flex items-center justify-center flex-shrink-0">
                   <span className="text-xs font-semibold text-ember">{t.initials}</span>
                 </div>
                 <div>

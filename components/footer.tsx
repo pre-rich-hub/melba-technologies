@@ -33,12 +33,12 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-border">
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 mb-10">
+    <footer className="relative overflow-hidden bg-section-alt">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 pt-16 pb-10 md:pt-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 mb-10 sm:gap-x-8 sm:gap-y-12">
 
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div className="col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex items-center gap-3 mb-6 group">
               <MelbaMark size={40} />
               <div className="leading-none">
@@ -61,7 +61,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.name}
-                  className="w-8 h-8 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-ember hover:border-ember/40 transition-colors duration-300"
+                  className="w-10 h-10 rounded-full bg-white shadow-soft ring-1 ring-border-subtle flex items-center justify-center text-muted-foreground hover:bg-ink hover:text-white hover:ring-ink hover:-translate-y-0.5 transition-all duration-300"
                 >
                   {s.icon ? (
                     <s.icon className="w-3.5 h-3.5" />
@@ -76,15 +76,15 @@ export function Footer() {
           {/* Link columns */}
           {(Object.entries(footerLinks) as [string, { name: string; href: string }[]][]).map(([group, links]) => (
             <div key={group}>
-              <h3 className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground/80 font-mono mb-5">
+              <h3 className="text-sm font-semibold text-foreground mb-5">
                 {group}
               </h3>
-              <ul className="space-y-3.5">
+              <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-ember transition-colors duration-300"
+                      className="text-sm text-muted-foreground hover:text-foreground hover:translate-x-0.5 inline-block transition-all duration-300"
                     >
                       {link.name}
                     </Link>
@@ -95,14 +95,14 @@ export function Footer() {
           ))}
 
           {/* Contact Column */}
-          <div>
-            <h3 className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground/80 font-mono mb-5">
+          <div className="col-span-2 lg:col-span-1">
+            <h3 className="text-sm font-semibold text-foreground mb-5">
               Contact
             </h3>
             <ul className="space-y-3">
               <li>
                 <a href="mailto:hellomelbatechnology@gmail.com" className="group flex items-center gap-3 text-sm text-muted-foreground hover:text-ember transition-all duration-300">
-                  <div className="w-7 h-7 rounded-md border border-border flex items-center justify-center group-hover:border-ember/40 group-hover:bg-ember/5 transition-colors">
+                  <div className="w-8 h-8 rounded-full bg-white shadow-soft ring-1 ring-border-subtle flex items-center justify-center text-ember group-hover:bg-ember group-hover:text-white transition-colors">
                     <Mail className="w-3 h-3" />
                   </div>
                   <span className="truncate">hellomelbatechnology@gmail.com</span>
@@ -110,14 +110,14 @@ export function Footer() {
               </li>
               <li>
                 <a href="tel:+251941318298" className="group flex items-center gap-3 text-sm text-muted-foreground hover:text-ember transition-all duration-300">
-                  <div className="w-7 h-7 rounded-md border border-border flex items-center justify-center group-hover:border-ember/40 group-hover:bg-ember/5 transition-colors">
+                  <div className="w-8 h-8 rounded-full bg-white shadow-soft ring-1 ring-border-subtle flex items-center justify-center text-ember group-hover:bg-ember group-hover:text-white transition-colors">
                     <Phone className="w-3 h-3" />
                   </div>
                   <span>+251 941 318 298</span>
                 </a>
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
-                <div className="w-7 h-7 rounded-md border border-border flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-white shadow-soft ring-1 ring-border-subtle flex items-center justify-center text-ember">
                   <MapPin className="w-3 h-3" />
                 </div>
                 <span>Addis Ababa, Ethiopia</span>
@@ -128,13 +128,16 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-muted-foreground/80 uppercase tracking-[0.12em] font-mono">
+          <p className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} Melba Technology. All rights reserved.
           </p>
-          <p className="text-xs text-muted-foreground/80 uppercase tracking-[0.12em] font-mono">
+          <p className="text-xs text-muted-foreground">
             Built with precision.
           </p>
         </div>
+      </div>
+      <div aria-hidden className="pointer-events-none select-none text-center text-[22vw] font-extrabold leading-[0.75] tracking-[-0.06em] text-foreground/[0.035] lg:text-[16rem]">
+        Melba
       </div>
     </footer>
   )
