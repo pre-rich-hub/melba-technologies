@@ -7,7 +7,7 @@ import { PageHero } from "@/components/shared/page-hero"
 import { PageCta } from "@/components/shared/page-cta"
 import { caseStudies } from "@/lib/data/case-studies"
 
-const allTags = ["All", "Luxury", "Tourism", "E-Commerce", "Real Estate", "Hospitality", "Fashion", "Construction"]
+const allTags = ["All", "Luxury", "Tourism", "E-Commerce", "SaaS", "AI", "Real Estate", "Hospitality", "Fashion", "Construction"]
 
 export default function WorkPage() {
   const [activeTag, setActiveTag] = useState("All")
