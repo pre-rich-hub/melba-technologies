@@ -104,14 +104,12 @@ export function ServicesPreview() {
             >
               <Link
                 href={service.href}
-                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border-subtle bg-white p-6 shadow-soft transition-all duration-500 hover:-translate-y-1.5 md:p-7 hover:border-ember/25 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border-subtle bg-white p-6 shadow-soft transition-all duration-500 hover:-translate-y-1.5 md:p-7 hover:border-foreground/15 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember"
               >
-                {/* hover glow */}
-                <span aria-hidden className="pointer-events-none absolute -right-16 -top-16 size-44 rounded-full bg-[radial-gradient(circle,var(--ember-soft),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                 <div className="relative flex items-start justify-between">
-                  <span className="flex size-12 items-center justify-center rounded-2xl bg-section-alt text-foreground ring-1 ring-border-subtle transition-all duration-500 group-hover:bg-ember group-hover:text-white group-hover:ring-ember">
-                    <service.icon className="size-5" />
+                  <span className="flex size-12 items-center justify-center rounded-2xl bg-section-alt text-foreground ring-1 ring-border-subtle transition-all duration-500 group-hover:bg-white group-hover:ring-foreground/20">
+                    <service.icon className="size-5" strokeWidth={1.75} />
                   </span>
                   <span className="flex size-9 items-center justify-center rounded-full border border-border-subtle text-muted-foreground transition-all duration-500 group-hover:rotate-45 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
                     <ArrowUpRight className="size-4 -rotate-45 transition-transform duration-500 group-hover:rotate-0" />
