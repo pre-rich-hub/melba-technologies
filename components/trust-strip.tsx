@@ -26,25 +26,26 @@ function useIsDesktop() {
 }
 
 /**
- * "Showcase" — on desktop the section pins while the product window slides to
- * the right and tilts in 3D, and the copy fades in on the left.
+ * "Showcase" — on desktop, as the section scrolls into view the product window
+ * slides to the right and tilts in 3D, and the copy fades in on the left.
  */
 export function TrustStrip() {
   const ref = useRef<HTMLElement>(null)
   const desktop = useIsDesktop()
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] })
+  // Animate while the section scrolls into view — no pinning, so the page never "holds" the scroll.
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] })
 
-  const x = useTransform(scrollYProgress, [0, 0.55], ["-34%", "0%"])
-  const rotateY = useTransform(scrollYProgress, [0, 0.55], [0, -18])
-  const rotateX = useTransform(scrollYProgress, [0, 0.55], [0, 6])
-  const scale = useTransform(scrollYProgress, [0, 0.55], [1.08, 0.94])
-  const textOpacity = useTransform(scrollYProgress, [0.25, 0.6], [0, 1])
-  const textX = useTransform(scrollYProgress, [0.25, 0.6], [-40, 0])
+  const x = useTransform(scrollYProgress, [0, 1], ["-34%", "0%"])
+  const rotateY = useTransform(scrollYProgress, [0, 1], [0, -18])
+  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 6])
+  const scale = useTransform(scrollYProgress, [0, 1], [1.08, 0.94])
+  const textOpacity = useTransform(scrollYProgress, [0.35, 0.9], [0, 1])
+  const textX = useTransform(scrollYProgress, [0.35, 0.9], [-40, 0])
 
   return (
-    <section ref={ref} className="relative bg-section-alt lg:h-[220vh]">
+    <section ref={ref} className="relative overflow-hidden bg-section-alt">
       <div className="dot-grid pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_center,#000_20%,transparent_70%)]" />
-      <div className="relative lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center lg:overflow-hidden">
+      <div className="relative lg:flex lg:min-h-screen lg:items-center">
         <div className="relative mx-auto grid w-full max-w-7xl gap-14 px-5 py-20 sm:px-6 md:py-24 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-6 lg:px-8 lg:py-0">
           {/* Copy */}
           <motion.div

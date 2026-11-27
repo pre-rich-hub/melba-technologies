@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowRight, Rocket, Smartphone, ShieldCheck } from "lucide-react"
 import Link from "next/link"
 import { useRef } from "react"
-import { ScribbleUnderline, SparkDoodle, LoopLine, SectionBadge } from "@/components/shared/decor"
+import { ScribbleUnderline, SparkDoodle, LoopLine } from "@/components/shared/decor"
 import { BrowserFrame, AnimatedPhone, FloatingCard } from "@/components/shared/device-mockups"
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -52,15 +52,7 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-5 pb-20 pt-32 sm:px-6 md:pt-36 lg:grid-cols-[1.02fr_1fr] lg:gap-8 lg:px-8 lg:pb-28 lg:pt-40">
         {/* ── Copy ── */}
         <div className="text-center lg:text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: EASE }}
-          >
-            <SectionBadge>Software studio · Addis Ababa</SectionBadge>
-          </motion.div>
-
-          <h1 className="relative mt-7 text-[clamp(2.75rem,6.6vw,5.25rem)] font-extrabold leading-[1.02] tracking-[-0.035em] text-foreground">
+          <h1 className="relative text-[clamp(2.75rem,6.6vw,5.25rem)] font-extrabold leading-[1.02] tracking-[-0.035em] text-foreground">
             <SparkDoodle className="absolute -top-8 right-[8%] hidden w-10 text-ember sm:block lg:right-auto lg:left-[62%]" delay={1.1} />
             <BlurWords text="We Build" delay={0.1} />
             <br className="hidden sm:block" />

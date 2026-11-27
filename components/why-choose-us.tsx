@@ -4,46 +4,36 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { SectionBadge, SparkDoodle, ScribbleUnderline, Reveal } from "@/components/shared/decor"
-import { Shield, Zap, Eye, Users, BarChart3, Globe } from "lucide-react"
-
-/* soft "illustrated" tile tints, one per card */
-const tints = [
-  "from-[oklch(0.95_0.05_55)] to-[oklch(0.90_0.09_45)] text-[oklch(0.52_0.17_40)]",
-  "from-[oklch(0.95_0.03_250)] to-[oklch(0.88_0.07_255)] text-[oklch(0.45_0.14_260)]",
-  "from-[oklch(0.95_0.04_160)] to-[oklch(0.88_0.08_160)] text-[oklch(0.45_0.11_160)]",
-  "from-[oklch(0.95_0.04_300)] to-[oklch(0.89_0.07_300)] text-[oklch(0.47_0.14_300)]",
-  "from-[oklch(0.96_0.05_90)] to-[oklch(0.90_0.10_85)] text-[oklch(0.50_0.12_75)]",
-  "from-[oklch(0.95_0.03_210)] to-[oklch(0.88_0.07_210)] text-[oklch(0.45_0.10_220)]",
-]
+import { Compass, ListChecks, ShieldCheck, Handshake, Gauge, Layers } from "lucide-react"
 
 const advantages = [
   {
-    icon: Zap,
+    icon: Compass,
     title: "Strategic Engineering",
     description: "Every system we design starts with your business model. Technology follows strategy, not the other way around.",
   },
   {
-    icon: Eye,
+    icon: ListChecks,
     title: "Transparent Process",
     description: "Weekly demos, clear milestones, honest timelines. You always know exactly where your project stands.",
   },
   {
-    icon: Shield,
+    icon: ShieldCheck,
     title: "Security-First Architecture",
     description: "Security is a design constraint, not a post-launch audit. We embed it from the first whiteboard session.",
   },
   {
-    icon: Users,
+    icon: Handshake,
     title: "Long-Term Partnership",
     description: "We don't disappear post-launch. Every engagement includes a 60-day support window and ongoing options.",
   },
   {
-    icon: BarChart3,
+    icon: Gauge,
     title: "Performance by Default",
     description: "We obsess over load times, Core Web Vitals, and error rates — because performance is a feature, not a phase.",
   },
   {
-    icon: Globe,
+    icon: Layers,
     title: "Built to Scale",
     description: "Architecture that grows with your business — from first launch to whatever comes next, without rewrites.",
   },
@@ -93,9 +83,8 @@ export function WhyChooseUs() {
               transition={{ duration: 0.7, delay: (i % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="group flex gap-5 sm:block"
             >
-              <div className={`relative flex size-14 shrink-0 items-center justify-center rounded-[1.1rem] sm:size-16 sm:rounded-[1.25rem] bg-gradient-to-br shadow-[inset_0_-6px_12px_rgb(0_0_0/0.06),inset_0_2px_4px_rgb(255_255_255/0.9),0_14px_28px_-14px_rgb(0_0_0/0.25)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-6deg] ${tints[i % tints.length]}`}>
-                <item.icon className="size-7" strokeWidth={1.8} />
-                <span className="absolute -right-1 -top-1 size-3 rounded-full bg-white shadow-soft" />
+              <div className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-border bg-white text-foreground shadow-soft transition-colors duration-300 group-hover:border-ember/40 group-hover:text-ember">
+                <item.icon className="size-5" strokeWidth={1.75} />
               </div>
               <div><h3 className="text-lg font-semibold sm:mt-6">{item.title}</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground sm:mt-2">{item.description}</p></div>
