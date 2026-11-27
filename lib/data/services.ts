@@ -3,7 +3,7 @@ import {
   Code2,
   Globe,
   TabletSmartphone,
-  Sparkles,
+  Bot,
   PenTool,
   Workflow,
   Lightbulb,
@@ -105,7 +105,7 @@ export const services: Service[] = [
   },
   {
     slug: "ai-automation-solutions",
-    icon: Sparkles,
+    icon: Bot,
     title: "AI Automation & AI Solutions",
     tagline: "Intelligent systems. Effortless scale.",
     description:

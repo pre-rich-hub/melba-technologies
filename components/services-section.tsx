@@ -7,7 +7,7 @@ import {
   Globe,
   TabletSmartphone,
   ArrowUpRight,
-  Sparkles,
+  Bot,
   PenTool,
   Workflow,
   Lightbulb,
@@ -38,7 +38,7 @@ const services = [
     features: ["Flutter", "React Native", "App Store Launch"],
   },
   {
-    icon: Sparkles,
+    icon: Bot,
     title: "AI Automation & AI Solutions",
     description:
       "AI agents, workflow automation, chatbots, and intelligent business systems that transform how businesses operate.",

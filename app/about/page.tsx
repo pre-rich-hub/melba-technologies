@@ -1,16 +1,16 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Quote, Gem, Scale, Eye, Telescope, Compass, Globe2 } from "lucide-react"
-import { Reveal, SectionBadge, ScribbleUnderline, SparkDoodle, ScrollRevealText } from "@/components/shared/decor"
+import { Quote, BadgeCheck, Scale, ListChecks, Handshake, Compass, Globe2 } from "lucide-react"
+import { Reveal, ScribbleUnderline, SparkDoodle, ScrollRevealText } from "@/components/shared/decor"
 import { PageHero } from "@/components/shared/page-hero"
 import { PageCta } from "@/components/shared/page-cta"
 
 const valueStyles = [
-  { icon: Gem, tint: "from-[oklch(0.95_0.05_55)] to-[oklch(0.90_0.09_45)] text-[oklch(0.52_0.17_40)]" },
-  { icon: Scale, tint: "from-[oklch(0.95_0.03_250)] to-[oklch(0.88_0.07_255)] text-[oklch(0.45_0.14_260)]" },
-  { icon: Eye, tint: "from-[oklch(0.95_0.04_160)] to-[oklch(0.88_0.08_160)] text-[oklch(0.45_0.11_160)]" },
-  { icon: Telescope, tint: "from-[oklch(0.95_0.04_300)] to-[oklch(0.89_0.07_300)] text-[oklch(0.47_0.14_300)]" },
+  { icon: BadgeCheck },
+  { icon: Scale },
+  { icon: ListChecks },
+  { icon: Handshake },
 ]
 
 const values = [
@@ -92,9 +92,8 @@ export default function AboutPage() {
       <section className="relative overflow-hidden bg-background py-16 md:py-24 lg:py-32">
         <div className="mx-auto grid max-w-7xl items-start gap-16 px-5 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:px-8">
           <div>
-            <Reveal><SectionBadge>Our legacy</SectionBadge></Reveal>
             <Reveal delay={0.08}>
-              <h2 className="relative mt-5 text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl">
+              <h2 className="relative text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl">
                 Bridging heritage{" "}
                 <span className="relative inline-block whitespace-nowrap">
                   with innovation.
@@ -179,11 +178,10 @@ export default function AboutPage() {
       <section className="relative bg-section-alt py-16 md:py-24 lg:py-32">
         <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16 lg:px-8">
           <div className="lg:sticky lg:top-32 lg:self-start">
-            <Reveal><SectionBadge>Engineering philosophy</SectionBadge></Reveal>
             <ScrollRevealText
               text="How we think"
               accent="think"
-              className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
+              className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
             />
             <Reveal delay={0.1}>
               <p className="mt-5 max-w-sm text-base leading-relaxed text-muted-foreground">
@@ -219,11 +217,10 @@ export default function AboutPage() {
       <section className="relative bg-background py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <Reveal><SectionBadge>Our values</SectionBadge></Reveal>
             <ScrollRevealText
               text="What we stand for"
               accent="stand"
-              className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
+              className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
             />
           </div>
 
@@ -239,8 +236,8 @@ export default function AboutPage() {
                   transition={{ duration: 0.7, delay: (i % 2) * 0.1, ease: EASE }}
                   className="group flex gap-6 rounded-3xl border border-border-subtle bg-white p-7 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift sm:p-8"
                 >
-                  <div className={`flex size-14 shrink-0 items-center justify-center rounded-[1.1rem] bg-gradient-to-br shadow-[inset_0_-6px_12px_rgb(0_0_0/0.06),inset_0_2px_4px_rgb(255_255_255/0.9),0_14px_28px_-14px_rgb(0_0_0/0.25)] transition-transform duration-500 group-hover:rotate-[-6deg] ${style.tint}`}>
-                    <style.icon className="size-6" strokeWidth={1.8} />
+                  <div className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-border bg-white text-foreground shadow-soft transition-colors duration-300 group-hover:border-ember/40 group-hover:text-ember">
+                    <style.icon className="size-5" strokeWidth={1.75} />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold">{v.title}</h3>
@@ -257,11 +254,10 @@ export default function AboutPage() {
       <section className="relative bg-section-alt py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <Reveal><SectionBadge>How we work</SectionBadge></Reveal>
             <ScrollRevealText
               text="How we deliver"
               accent="deliver"
-              className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
+              className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
             />
           </div>
 

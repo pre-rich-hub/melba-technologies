@@ -1,13 +1,13 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ScrollRevealText, SectionBadge, Reveal } from "@/components/shared/decor"
+import { ScrollRevealText, Reveal } from "@/components/shared/decor"
 import {
   Code2,
   Globe,
   TabletSmartphone,
   ArrowUpRight,
-  Sparkles,
+  Bot,
   PenTool,
   Workflow,
   Lightbulb,
@@ -36,9 +36,9 @@ const services = [
     href: "/services/mobile-development",
   },
   {
-    icon: Sparkles,
+    icon: Bot,
     title: "AI Automation & AI Solutions",
-    description: "AI agents, workflow automation, chatbots, and intelligent business systems that transform how businesses operate.",
+    description: "Custom AI agents, chatbots and LLM features built into your product — trained on your data and wired into your tools.",
     href: "/services/ai-automation-solutions",
   },
   {
@@ -50,7 +50,7 @@ const services = [
   {
     icon: Workflow,
     title: "Business Process Automation",
-    description: "Workflow automation, CRM automation, internal tools, and AI-powered operations that remove manual bottlenecks.",
+    description: "Internal tools, CRM workflows and system integrations that replace spreadsheets and manual hand-offs in day-to-day operations.",
     href: "/services/business-process-automation",
   },
   {
@@ -79,13 +79,10 @@ export function ServicesPreview() {
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">
-          <Reveal>
-            <SectionBadge>What we do</SectionBadge>
-          </Reveal>
           <ScrollRevealText
             text="Services built simple, secure and smart"
             accent="smart"
-            className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]"
+            className="text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]"
           />
           <Reveal delay={0.1}>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">

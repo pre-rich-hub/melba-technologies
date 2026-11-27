@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import {
   Menu, X, ChevronDown,
   Code2, Globe, TabletSmartphone,
-  Sparkles, PenTool, Workflow, Lightbulb, ShieldCheck, Cloud,
+  Bot, PenTool, Workflow, Lightbulb, ShieldCheck, Cloud,
   ArrowUpRight,
 } from "lucide-react"
 import Link from "next/link"
@@ -43,7 +43,7 @@ const navLinks: NavLink[] = [
         { name: "Custom Software Development", href: "/services/custom-development", description: "Bespoke full-stack software built to your spec", icon: Code2 },
         { name: "Web Development", href: "/services/web-development", description: "High-performance web apps and SaaS platforms", icon: Globe },
         { name: "Mobile Development", href: "/services/mobile-development", description: "iOS and Android apps from a single codebase", icon: TabletSmartphone },
-        { name: "AI & Automation", href: "/services/ai-automation-solutions", description: "Intelligent agents and workflow automation", icon: Sparkles },
+        { name: "AI & Automation", href: "/services/ai-automation-solutions", description: "Intelligent agents and workflow automation", icon: Bot },
         { name: "UI/UX Design & Branding", href: "/services/ui-ux-design-branding", description: "Brand identity, product design, and design systems", icon: PenTool },
         { name: "Business Process Automation", href: "/services/business-process-automation", description: "Workflow, CRM, and AI-powered operations", icon: Workflow },
         { name: "Technology Consulting", href: "/services/technology-consulting", description: "Architecture, audits, and product strategy", icon: Lightbulb },
@@ -121,8 +121,8 @@ function DropdownItem({ item }: { item: DropdownItem }) {
       href={item.href}
       className="group flex items-start gap-3.5 px-4 py-3.5 rounded-2xl hover:bg-section-alt transition-colors duration-150"
     >
-      <div className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-xl bg-ember-soft flex items-center justify-center group-hover:bg-ember transition-all duration-200">
-        <Icon className="w-4 h-4 text-ember group-hover:text-white transition-colors duration-200" />
+      <div className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-xl border border-border bg-white text-foreground shadow-soft flex items-center justify-center transition-colors duration-200 group-hover:border-ember/40 group-hover:text-ember">
+        <Icon className="w-4 h-4" strokeWidth={1.75} />
       </div>
       <div className="min-w-0">
         <div className="flex items-center gap-2">
@@ -198,7 +198,7 @@ function MobileNavItem({
                     href={item.href}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white transition-colors group"
                   >
-                    <span className="flex size-8 items-center justify-center rounded-lg bg-ember-soft"><Icon className="w-4 h-4 text-ember" /></span>
+                    <span className="flex size-8 items-center justify-center rounded-lg border border-border bg-white text-foreground shadow-soft"><Icon className="w-4 h-4" strokeWidth={1.75} /></span>
                     <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                       {item.name}
                     </span>

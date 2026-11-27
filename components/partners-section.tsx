@@ -4,7 +4,7 @@ import { animate, motion, useInView, useMotionValue, useTransform } from "framer
 import { useEffect, useRef } from "react"
 import Link from "next/link"
 import { caseStudies } from "@/lib/data/case-studies"
-import { ScrollRevealText, SectionBadge, Reveal } from "@/components/shared/decor"
+import { ScrollRevealText, Reveal } from "@/components/shared/decor"
 
 const partners = [
   { slug: "hamba-tours", name: "Hamba Ethiopia Tours", logo: "/partners/hamba.png" },
@@ -109,13 +109,10 @@ export function PartnersSection() {
   return (
     <section id="partners" className="relative overflow-hidden bg-background py-14 md:py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 text-center sm:px-6 lg:px-8">
-        <Reveal>
-          <SectionBadge>Our partners</SectionBadge>
-        </Reveal>
         <ScrollRevealText
           text="Brands that trust us to build what matters"
           accent="trust"
-          className="mx-auto mt-5 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl"
+          className="mx-auto max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl"
         />
         <Reveal delay={0.1}>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">

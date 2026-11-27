@@ -3,7 +3,7 @@
 import { notFound } from "next/navigation"
 import { motion } from "framer-motion"
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check, BellRing, Rocket } from "lucide-react"
-import { Reveal, SectionBadge, ScribbleUnderline, LoopLine } from "@/components/shared/decor"
+import { Reveal, ScribbleUnderline, LoopLine } from "@/components/shared/decor"
 import { AnimatedPhone, BrowserFrame, FloatingCard } from "@/components/shared/device-mockups"
 import { WorkCard } from "@/components/shared/work-card"
 import Link from "next/link"
@@ -51,7 +51,6 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
               <span className="flex size-12 items-center justify-center rounded-2xl bg-ember text-white shadow-lift">
                 <Icon className="size-5" />
               </span>
-              <SectionBadge>{service.tagline}</SectionBadge>
             </motion.div>
 
             <motion.h1
@@ -146,9 +145,8 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
       <section className="bg-background py-16 md:py-24 lg:py-32">
         <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16 lg:px-8">
           <div className="lg:sticky lg:top-32 lg:self-start">
-            <Reveal><SectionBadge>Our process</SectionBadge></Reveal>
             <Reveal delay={0.08}>
-              <h2 className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              <h2 className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
                 How we{" "}
                 <span className="relative inline-block">
                   deliver it
@@ -198,8 +196,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
       <section className="bg-section-alt py-16 md:py-24 lg:py-32">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-6 lg:grid-cols-2 lg:px-8 [&>*]:min-w-0">
           <Reveal className="rounded-[2rem] border border-border-subtle bg-white p-8 shadow-soft sm:p-10">
-            <SectionBadge>Technology stack</SectionBadge>
-            <h2 className="mt-5 text-3xl font-bold leading-[1.08] tracking-tight">Industry-leading tools</h2>
+            <h2 className="text-3xl font-bold leading-[1.08] tracking-tight">Industry-leading tools</h2>
             <div className="mt-8 flex flex-wrap gap-2.5">
               {service.technologies.map((tech, i) => (
                 <motion.span
@@ -217,8 +214,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
           </Reveal>
 
           <Reveal delay={0.1} className="rounded-[2rem] border border-border-subtle bg-white p-8 shadow-soft sm:p-10">
-            <SectionBadge>Key benefits</SectionBadge>
-            <h2 className="mt-5 text-3xl font-bold leading-[1.08] tracking-tight">What you gain</h2>
+            <h2 className="text-3xl font-bold leading-[1.08] tracking-tight">What you gain</h2>
             <ul className="mt-8 space-y-4">
               {service.benefits.map((benefit, i) => (
                 <motion.li
@@ -248,9 +244,8 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <Reveal><SectionBadge>Related work</SectionBadge></Reveal>
                 <Reveal delay={0.08}>
-                  <h2 className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">See it in action</h2>
+                  <h2 className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">See it in action</h2>
                 </Reveal>
               </div>
               <Link href="/work" className="group inline-flex items-center gap-1.5 text-sm font-semibold">

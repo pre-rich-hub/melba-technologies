@@ -5,7 +5,7 @@ import { useRef } from "react"
 import Link from "next/link"
 import { ArrowRight, BellRing, CreditCard, Star, Layers, WifiOff, Smartphone, Store } from "lucide-react"
 import { AnimatedPhone, FloatingCard } from "@/components/shared/device-mockups"
-import { LoopLine, SectionBadge, SparkDoodle, ScribbleUnderline, Reveal } from "@/components/shared/decor"
+import { LoopLine, SparkDoodle, ScribbleUnderline, Reveal } from "@/components/shared/decor"
 
 const features = [
   { icon: Layers, title: "One codebase, two platforms", desc: "iOS and Android with Flutter or React Native." },
@@ -23,7 +23,7 @@ export function MobileShowcase() {
   const innerRingRotate = useTransform(ringRotate, v => -v * 1.4)
 
   return (
-    <section ref={ref} id="mobile" className="relative overflow-hidden bg-background py-16 md:py-24 lg:py-32">
+    <section ref={ref} id="mobile" className="relative overflow-hidden bg-section-alt py-16 md:py-24 lg:py-32">
       <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">
         {/* ── Phones ── */}
         <div className="relative order-2 mx-auto flex h-[470px] w-full max-w-[520px] items-center justify-center sm:h-[620px] lg:order-1">
@@ -73,11 +73,8 @@ export function MobileShowcase() {
 
         {/* ── Copy ── */}
         <div className="order-1 lg:order-2">
-          <Reveal>
-            <SectionBadge>Mobile app development</SectionBadge>
-          </Reveal>
           <Reveal delay={0.08}>
-            <h2 className="relative mt-5 text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl">
+            <h2 className="relative text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl">
               Mobile apps your customers{" "}
               <span className="relative inline-block whitespace-nowrap">
                 love to open
@@ -97,8 +94,8 @@ export function MobileShowcase() {
             {features.map((f, i) => (
               <Reveal key={f.title} delay={0.2 + i * 0.07}>
                 <div className="group h-full rounded-2xl border border-border-subtle bg-white p-4 shadow-soft sm:p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
-                  <span className="flex size-10 items-center justify-center rounded-xl bg-ember-soft text-ember transition-transform duration-500 group-hover:rotate-[-8deg] group-hover:scale-110">
-                    <f.icon className="size-[18px]" />
+                  <span className="flex size-10 items-center justify-center rounded-xl border border-border bg-white text-foreground shadow-soft transition-colors duration-300 group-hover:border-ember/40 group-hover:text-ember">
+                    <f.icon className="size-[18px]" strokeWidth={1.75} />
                   </span>
                   <h3 className="mt-3 text-sm font-semibold leading-snug sm:mt-4 sm:text-[15px]">{f.title}</h3>
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{f.desc}</p>

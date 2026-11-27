@@ -1,7 +1,7 @@
 "use client"
 
 import { WorkCard } from "@/components/shared/work-card"
-import { SectionBadge, Reveal, ScrollRevealText } from "@/components/shared/decor"
+import { Reveal, ScrollRevealText } from "@/components/shared/decor"
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import { caseStudies } from "@/lib/data/case-studies"
@@ -15,13 +15,10 @@ export function FeaturedWork() {
         {/* Header */}
         <div className="mb-10 flex flex-col gap-6 md:mb-14 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Reveal>
-              <SectionBadge>Selected work</SectionBadge>
-            </Reveal>
             <ScrollRevealText
               text="Work that defines industries"
               accent="defines"
-              className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
+              className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
             />
           </div>
           <Reveal delay={0.1} className="lg:max-w-xs lg:text-right">

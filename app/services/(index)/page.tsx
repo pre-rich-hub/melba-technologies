@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Reveal, SectionBadge, ScrollRevealText } from "@/components/shared/decor"
+import { Reveal, ScrollRevealText } from "@/components/shared/decor"
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import { PageHero } from "@/components/shared/page-hero"
@@ -84,11 +84,10 @@ export default function ServicesPage() {
       <section className="bg-section-alt py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <Reveal><SectionBadge>How we work</SectionBadge></Reveal>
             <ScrollRevealText
               text="A process designed for clarity"
               accent="clarity"
-              className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl"
+              className="text-4xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl"
             />
           </div>
 

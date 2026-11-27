@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { ArrowRight, ArrowUpRight, Mail, MapPin, Phone, Zap } from "lucide-react"
+import { ArrowRight, ArrowUpRight, Mail, MapPin, Phone, Clock } from "lucide-react"
 import { FaqList } from "@/components/shared/faq-list"
 import { toast } from "sonner"
 import { PageHero } from "@/components/shared/page-hero"
@@ -140,8 +140,8 @@ export default function ContactPage() {
             {channels.map(({ icon: Icon, label, value, href }, i) => {
               const inner = (
                 <>
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-ember-soft text-ember transition-all duration-300 group-hover:bg-ember group-hover:text-white">
-                    <Icon className="size-5" />
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-border bg-white text-foreground shadow-soft transition-colors duration-300 group-hover:border-ember/40 group-hover:text-ember">
+                    <Icon className="size-5" strokeWidth={1.75} />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">{label}</span>
@@ -173,7 +173,7 @@ export default function ContactPage() {
               className="rounded-2xl bg-ink p-6 text-white shadow-lift"
             >
               <div className="flex items-center gap-2.5">
-                <span className="flex size-8 items-center justify-center rounded-full bg-ember"><Zap className="size-4" /></span>
+                <span className="flex size-8 items-center justify-center rounded-lg bg-white/10 ring-1 ring-white/15"><Clock className="size-4" strokeWidth={1.75} /></span>
                 <span className="text-sm font-semibold">Quick response</span>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-white/70">

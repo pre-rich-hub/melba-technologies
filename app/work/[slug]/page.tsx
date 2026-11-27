@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowUpRight, ExternalLink, Target, Lightbulb, Building2, La
 import Link from "next/link"
 import { PageCta } from "@/components/shared/page-cta"
 import { BrowserFrame } from "@/components/shared/device-mockups"
-import { Reveal, SectionBadge, ScribbleUnderline } from "@/components/shared/decor"
+import { Reveal, ScribbleUnderline } from "@/components/shared/decor"
 import { WorkCard } from "@/components/shared/work-card"
 import { caseStudies, getCaseStudyBySlug } from "@/lib/data/case-studies"
 
@@ -48,18 +48,6 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
             <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
             All work
           </Link>
-
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.05 }}
-            className="mt-8 flex flex-wrap justify-center gap-2"
-          >
-            <SectionBadge>{caseStudy.industry}</SectionBadge>
-            <span className="inline-flex items-center rounded-full bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground shadow-soft ring-1 ring-border-subtle">
-              {caseStudy.category}
-            </span>
-          </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
@@ -122,8 +110,8 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
           {meta.map((m, i) => {
             const body = (
               <>
-                <span className="hidden size-10 shrink-0 items-center justify-center rounded-xl bg-ember-soft text-ember sm:flex">
-                  <m.icon className="size-[18px]" />
+                <span className="hidden size-10 shrink-0 items-center justify-center rounded-xl border border-border bg-white text-foreground shadow-soft sm:flex">
+                  <m.icon className="size-[18px]" strokeWidth={1.75} />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{m.label}</span>
@@ -198,9 +186,8 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="mb-12 flex items-end justify-between gap-4">
             <div>
-              <Reveal><SectionBadge>More work</SectionBadge></Reveal>
               <Reveal delay={0.08}>
-                <h2 className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">Keep exploring</h2>
+                <h2 className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">Keep exploring</h2>
               </Reveal>
             </div>
             <Link href="/work" className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold">

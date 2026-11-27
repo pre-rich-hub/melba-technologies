@@ -3,8 +3,8 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { SectionBadge, SparkDoodle, ScribbleUnderline, Reveal } from "@/components/shared/decor"
-import { Compass, ListChecks, ShieldCheck, Handshake, Gauge, Layers } from "lucide-react"
+import { SparkDoodle, ScribbleUnderline, Reveal } from "@/components/shared/decor"
+import { Compass, UserCheck, ShieldCheck, FileCode2, Gauge, Layers } from "lucide-react"
 
 const advantages = [
   {
@@ -13,9 +13,9 @@ const advantages = [
     description: "Every system we design starts with your business model. Technology follows strategy, not the other way around.",
   },
   {
-    icon: ListChecks,
-    title: "Transparent Process",
-    description: "Weekly demos, clear milestones, honest timelines. You always know exactly where your project stands.",
+    icon: UserCheck,
+    title: "Direct Access to Engineers",
+    description: "You work with the people who write your code — no account managers or delivery layers in between.",
   },
   {
     icon: ShieldCheck,
@@ -23,9 +23,9 @@ const advantages = [
     description: "Security is a design constraint, not a post-launch audit. We embed it from the first whiteboard session.",
   },
   {
-    icon: Handshake,
-    title: "Long-Term Partnership",
-    description: "We don't disappear post-launch. Every engagement includes a 60-day support window and ongoing options.",
+    icon: FileCode2,
+    title: "You Own Everything",
+    description: "Clean, documented code and full repository access from day one. No lock-in — your product stays yours.",
   },
   {
     icon: Gauge,
@@ -45,11 +45,8 @@ export function WhyChooseUs() {
       <div className="relative z-10 mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-[0.8fr_1.6fr] lg:gap-16 lg:px-8">
         {/* Heading column */}
         <div className="lg:sticky lg:top-32 lg:self-start">
-          <Reveal>
-            <SectionBadge>Why Melba</SectionBadge>
-          </Reveal>
           <Reveal delay={0.08}>
-            <h2 className="relative mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <h2 className="relative text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
               <SparkDoodle className="absolute -left-8 -top-6 w-8 -scale-x-100 text-ember" />
               Built for the{" "}
               <span className="relative inline-block">
